@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CarouselSlideController;
+use App\Http\Controllers\Admin\BrandController;
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     
@@ -25,6 +26,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Categories
     Route::resource('categories', CategoryController::class);
     Route::post('categories/reorder', [CategoryController::class, 'reorder'])->name('categories.reorder');
+    
+    // Brands
+    Route::resource('brands', BrandController::class);
     
     // Users
     Route::resource('users', UserController::class);

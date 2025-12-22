@@ -275,6 +275,7 @@
                             @endfor
                         </div>
                     </div>
+                    </div>
                 </div>
 
                 <!-- Featured Products Sidebar - Enhanced -->

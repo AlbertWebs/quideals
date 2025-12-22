@@ -165,6 +165,40 @@
         </div>
     </section>
 
+    <!-- Featured Products Section - Enhanced -->
+    <section class="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50 relative">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <div class="inline-block mb-2">
+                    <span class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full text-sm font-bold shadow-lg">
+                        ⭐ FEATURED
+                    </span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600">Featured Products</span>
+                </h2>
+                <p class="text-xl text-gray-600 font-medium">Handpicked premium selections for you</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+                @foreach($featuredProducts as $product)
+                    <div class="transform hover:scale-105 transition-transform duration-300">
+                        <x-product-card :product="$product" />
+                    </div>
+                @endforeach
+            </div>
+
+            @if($featuredProducts->count() > 0)
+                <div class="text-center mt-8 sm:mt-12">
+                    <a href="{{ route('products.index', ['sort' => 'featured']) }}" class="inline-flex items-center px-6 py-3 sm:px-10 sm:py-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-bold rounded-xl hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-lg">
+                        <span>View All Featured</span>
+                        <i class="fas fa-arrow-right ml-2 sm:ml-3 text-sm sm:text-base"></i>
+                    </a>
+                </div>
+            @endif
+        </div>
+    </section>
+
     <!-- Categories Section - Enhanced -->
     <section id="categories" class="py-16 md:py-20 bg-white relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
@@ -176,7 +210,7 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto font-medium">Explore our wide range of home and kitchen essentials</p>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 md:gap-6">
+            <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
                 @foreach($categories->take(12) as $index => $category)
                     <a href="{{ route('products.index', ['category' => $category->slug]) }}" class="group text-center block p-6 md:p-8 rounded-2xl border-3 border-gray-200 hover:border-blue-400 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-gradient-to-br from-white to-gray-50 hover:from-blue-50 hover:to-purple-50">
                         <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 bg-gradient-to-br from-blue-100 via-blue-50 to-purple-100 rounded-full flex items-center justify-center group-hover:from-blue-200 group-hover:via-purple-100 group-hover:to-pink-100 transition-all duration-500 shadow-lg group-hover:shadow-xl transform group-hover:scale-110 group-hover:rotate-6">
@@ -253,7 +287,7 @@
     </section>
 
     <!-- Product Grids Section - Enhanced -->
-    <section class="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50">
+    <section class="hidden md:block py-16 md:py-20 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                 <!-- Top Seller -->
@@ -306,6 +340,39 @@
                         @endforeach
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section - Enhanced -->
+    <section class="py-16 md:py-20 bg-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-5">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Shop by Brand</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto font-medium">Discover products from trusted brands</p>
+            </div>
+
+            <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+                @php
+                    $brands = \App\Models\Brand::active()->ordered()->take(20)->get();
+                @endphp
+                @foreach($brands as $brand)
+                    <a href="{{ route('products.index', ['brand' => $brand->slug]) }}" class="group text-center block p-6 md:p-8 rounded-2xl border-2 border-gray-200 hover:border-blue-400 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-gradient-to-br from-white to-gray-50 hover:from-blue-50 hover:to-purple-50">
+                        @if($brand->logo)
+                            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 bg-white rounded-full flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-blue-100 group-hover:via-purple-100 group-hover:to-pink-100 transition-all duration-500 shadow-lg group-hover:shadow-xl transform group-hover:scale-110 p-2">
+                                <img src="{{ $brand->logo }}" alt="{{ $brand->name }}" class="w-full h-full object-contain">
+                            </div>
+                        @else
+                            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 bg-gradient-to-br from-blue-100 via-blue-50 to-purple-100 rounded-full flex items-center justify-center group-hover:from-blue-200 group-hover:via-purple-100 group-hover:to-pink-100 transition-all duration-500 shadow-lg group-hover:shadow-xl transform group-hover:scale-110 group-hover:rotate-6">
+                                <i class="fas fa-certificate text-3xl md:text-4xl text-blue-600 group-hover:text-purple-600 transition-colors"></i>
+                            </div>
+                        @endif
+                        <p class="text-sm md:text-base font-bold text-gray-800 group-hover:text-blue-600 transition-colors">{{ $brand->name }}</p>
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>

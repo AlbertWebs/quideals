@@ -64,6 +64,12 @@
                         <span class="ml-3">Categories</span>
                     </a>
                     
+                    <a href="{{ route('admin.brands.index') }}" 
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.brands.*') ? 'bg-white/20' : '' }}">
+                        <i class="fas fa-certificate w-5"></i>
+                        <span class="ml-3">Brands</span>
+                    </a>
+                    
                     <a href="{{ route('admin.orders.index') }}" 
                        class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.orders.*') ? 'bg-white/20' : '' }}">
                         <i class="fas fa-shopping-cart w-5"></i>
@@ -206,6 +212,13 @@
                                     <span class="text-sm font-medium text-gray-500">Categories</span>
                                 </div>
                             </li>
+                        @elseif(request()->routeIs('admin.brands.*'))
+                            <li>
+                                <div class="flex items-center">
+                                    <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                                    <span class="text-sm font-medium text-gray-500">Brands</span>
+                                </div>
+                            </li>
                         @elseif(request()->routeIs('admin.orders.*'))
                             <li>
                                 <div class="flex items-center">
@@ -280,6 +293,12 @@
                 <a href="{{ route('admin.categories.index') }}" class="flex flex-col items-center justify-center flex-1 py-2 {{ request()->routeIs('admin.categories.*') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] transition-colors">
                     <i class="fas fa-tags text-xl mb-1"></i>
                     <span class="text-xs font-medium">Categories</span>
+                </a>
+
+                <!-- Brands -->
+                <a href="{{ route('admin.brands.index') }}" class="flex flex-col items-center justify-center flex-1 py-2 {{ request()->routeIs('admin.brands.*') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] transition-colors">
+                    <i class="fas fa-certificate text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Brands</span>
                 </a>
 
                 <!-- Orders -->

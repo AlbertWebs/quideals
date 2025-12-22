@@ -10,8 +10,9 @@
              class="w-[95%] aspect-square object-contain lg:w-[327px] lg:h-[327px]"
              itemprop="image"
              loading="lazy"
-             onerror="this.src='https://via.placeholder.com/300x200/cccccc/ffffff?text=No+Image'; console.log('Image failed to load:', this.src);"
-             onload="console.log('Image loaded successfully:', this.src);">
+             decoding="async"
+             fetchpriority="low"
+             onerror="this.src='https://via.placeholder.com/300x200/cccccc/ffffff?text=No+Image'; console.log('Image failed to load:', this.src);">
         </a>
         
         <!-- Sale Badge -->

@@ -4,19 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::with('category')->active()->inStock();
+        $query = Product::with(['category', 'brand'])->active()->inStock();
         
         // Category filter
         if ($request->filled('category')) {
             $query->whereHas('category', function($q) use ($request) {
                 $q->where('slug', $request->category);
             });
+        }
+        
+        // Brand filter
+        if ($request->filled('brand')) {
+            $brand = Brand::where('slug', $request->brand)->first();
+            if ($brand) {
+                $query->where('brand_id', $brand->id);
+            }
         }
         
         // Search filter
@@ -70,6 +79,9 @@ class ProductsController extends Controller
         // Get all categories for filter sidebar
         $categories = Category::active()->ordered()->get();
         
+        // Get all brands for filter sidebar
+        $brands = Brand::active()->ordered()->get();
+        
         // Get featured products for sidebar
         $featuredProducts = Product::with('category')
             ->active()
@@ -78,7 +90,7 @@ class ProductsController extends Controller
             ->limit(4)
             ->get();
         
-        // Get representative product for category (for OG tags)
+        // Get representative product for category or brand (for OG tags)
         $representativeProduct = null;
         if ($request->filled('category')) {
             $category = Category::where('slug', $request->category)->first();
@@ -87,6 +99,18 @@ class ProductsController extends Controller
                     ->active()
                     ->inStock()
                     ->where('category_id', $category->id)
+                    ->whereNotNull('image')
+                    ->orderBy('is_featured', 'desc')
+                    ->orderBy('rating', 'desc')
+                    ->first();
+            }
+        } elseif ($request->filled('brand')) {
+            $brand = Brand::where('slug', $request->brand)->first();
+            if ($brand) {
+                $representativeProduct = Product::with('brand')
+                    ->active()
+                    ->inStock()
+                    ->where('brand_id', $brand->id)
                     ->whereNotNull('image')
                     ->orderBy('is_featured', 'desc')
                     ->orderBy('rating', 'desc')
@@ -105,6 +129,7 @@ class ProductsController extends Controller
         return view('products.index', compact(
             'products',
             'categories',
+            'brands',
             'featuredProducts',
             'totalProducts',
             'minPrice',

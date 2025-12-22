@@ -61,12 +61,18 @@
                         </label>
                     </div>
 
-                    <div class="hidden">
-                        <label for="brand" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
-                        <input type="text" id="brand" name="brand" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                               value="{{ old('brand', $product->brand ?? 'Speed and Style') }}" placeholder="e.g., Samsung, Apple, HP">
-                        @error('brand')
+                    <div>
+                        <label for="brand_id" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+                        <select id="brand_id" name="brand_id"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Select Brand (Optional)</option>
+                            @foreach($brands as $brand)
+                                <option value="{{ $brand->id }}" {{ old('brand_id', $product->brand_id) == $brand->id ? 'selected' : '' }}>
+                                    {{ $brand->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('brand_id')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
