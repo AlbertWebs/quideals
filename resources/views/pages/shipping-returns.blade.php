@@ -279,14 +279,14 @@ use App\Models\Setting;
         <div class="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Need Help?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+                <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all block">
                     <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                         <i class="fas fa-phone text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Call Us</h3>
                     <p class="text-blue-100 font-semibold">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
                     <p class="text-sm text-blue-200 mt-1">{{ Setting::get('business_hours_weekdays', 'Mon-Fri: 8AM-6PM') }}</p>
-                </div>
+                </a>
                 <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
                     <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                         <i class="fas fa-envelope text-2xl"></i>

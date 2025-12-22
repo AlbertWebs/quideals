@@ -28,7 +28,7 @@ use App\Models\Setting;
                     <h2 class="text-2xl font-semibold text-gray-900 mb-6">Get in Touch</h2>
                     <div class="space-y-6">
                         <!-- Phone -->
-                        <div class="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg bg-gray-50">
+                        <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg bg-gray-50 hover:bg-blue-50 hover:border-blue-300 transition-all">
                             <div class="flex-shrink-0">
                                 <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                                     <i class="fas fa-phone text-blue-600 text-sm"></i>
@@ -36,10 +36,10 @@ use App\Models\Setting;
                             </div>
                             <div>
                                 <h3 class="text-base font-medium text-gray-900">Phone</h3>
-                                <p class="text-gray-600 text-sm">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
+                                <p class="text-gray-600 text-sm hover:text-blue-600">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
                                 <p class="text-xs text-gray-500">{{ Setting::get('business_hours_weekdays', 'Monday - Friday, 8:00 AM - 6:00 PM') }}</p>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Email -->
                         <div class="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg bg-gray-50">

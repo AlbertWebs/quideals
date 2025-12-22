@@ -70,15 +70,15 @@ use App\Models\Setting;
             <!-- Right Side - Enhanced -->
             <div class="flex items-center space-x-4 md:space-x-6">
                 <!-- Desktop Elements -->
-                <div class="hidden lg:flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="hidden lg:flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors cursor-pointer group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center group-hover:from-blue-600 group-hover:to-purple-600 transition-all">
                         <i class="fas fa-phone text-white text-sm"></i>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-xs text-gray-500">Call Us</span>
-                        <span class="text-sm font-semibold text-gray-900">{{ Setting::get('contact_phone', '+254 700 123 456') }}</span>
+                        <span class="text-xs text-gray-500 group-hover:text-blue-600">Call Us</span>
+                        <span class="text-sm font-semibold text-gray-900 group-hover:text-blue-600">{{ Setting::get('contact_phone', '+254 700 123 456') }}</span>
                     </div>
-                </div>
+                </a>
                 
                 <a href="{{ route('wishlist.index') }}" class="hidden md:block relative p-2.5 rounded-full bg-gray-50 hover:bg-red-50 transition-all group">
                     <i class="fas fa-heart text-xl text-gray-600 group-hover:text-red-600 transition-colors"></i>
@@ -335,43 +335,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- Navigation - Enhanced -->
         <div class="p-5 h-full overflow-y-auto bg-gray-50">
             <div class="space-y-6">
-                <!-- Main Navigation -->
-                <div>
-                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 px-2">Navigation</h3>
-                    <div class="space-y-2">
-                        <a href="{{ route('home') }}" class="flex items-center space-x-4 p-4 rounded-xl hover:bg-white transition-all {{ request()->routeIs('home') ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200' : 'bg-white hover:shadow-md' }}">
-                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-home text-white"></i>
-                            </div>
-                            <span class="font-semibold text-gray-800">Home</span>
-                        </a>
-                        <a href="{{ route('products.index') }}" class="flex items-center space-x-4 p-4 rounded-xl hover:bg-white transition-all {{ request()->routeIs('products.*') ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200' : 'bg-white hover:shadow-md' }}">
-                            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-shopping-bag text-white"></i>
-                            </div>
-                            <span class="font-semibold text-gray-800">Products</span>
-                        </a>
-                        <a href="{{ route('pages.about') }}" class="flex items-center space-x-4 p-4 rounded-xl bg-white hover:shadow-md transition-all">
-                            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-info-circle text-white"></i>
-                            </div>
-                            <span class="font-semibold text-gray-800">About</span>
-                        </a>
-                        <a href="{{ route('pages.contact') }}" class="flex items-center space-x-4 p-4 rounded-xl bg-white hover:shadow-md transition-all">
-                            <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-envelope text-white"></i>
-                            </div>
-                            <span class="font-semibold text-gray-800">Contact</span>
-                        </a>
-                        <a href="{{ route('pages.faq') }}" class="flex items-center space-x-4 p-4 rounded-xl bg-white hover:shadow-md transition-all">
-                            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-question-circle text-white"></i>
-                            </div>
-                            <span class="font-semibold text-gray-800">FAQ</span>
-                        </a>
-                    </div>
-                </div>
-
                 <!-- Categories - Enhanced -->
                 <div>
                     <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 px-2">Categories</h3>
@@ -387,56 +350,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
 
-                <!-- Account & Cart - Enhanced -->
-                <div>
-                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 px-2">Account</h3>
-                    <div class="space-y-2">
-                        @auth
-                            <a href="{{ route('dashboard') }}" class="flex items-center space-x-4 p-4 rounded-xl bg-white hover:shadow-md transition-all">
-                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-user text-white"></i>
-                                </div>
-                                <span class="font-semibold text-gray-800">My Account</span>
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}" class="flex items-center space-x-4 p-4 rounded-xl bg-white hover:shadow-md transition-all">
-                                <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-sign-in-alt text-white"></i>
-                                </div>
-                                <span class="font-semibold text-gray-800">Login</span>
-                            </a>
-                        @endauth
-                        <a href="{{ route('cart.index') }}" class="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 hover:shadow-md transition-all">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-shopping-cart text-white"></i>
-                                </div>
-                                <span class="font-semibold text-gray-800">Cart</span>
-                            </div>
-                            <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-bold rounded-full px-3 py-1 cart-count">0</span>
-                        </a>
-                        <a href="{{ route('wishlist.index') }}" class="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-200 hover:shadow-md transition-all">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-pink-500 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-heart text-white"></i>
-                                </div>
-                                <span class="font-semibold text-gray-800">Wishlist</span>
-                            </div>
-                            <span class="bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm font-bold rounded-full px-3 py-1 wishlist-count">0</span>
-                        </a>
-                    </div>
-                </div>
-
                 <!-- Contact Info - Enhanced -->
                 <div>
                     <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 px-2">Contact</h3>
                     <div class="space-y-3">
-                        <div class="flex items-center space-x-4 p-4 rounded-xl bg-white">
+                        <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="flex items-center space-x-4 p-4 rounded-xl bg-white hover:bg-green-50 transition-colors">
                             <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center">
                                 <i class="fas fa-phone text-white"></i>
                             </div>
-                            <span class="font-semibold text-gray-800">{{ Setting::get('contact_phone', '+254 700 123 456') }}</span>
-                        </div>
+                            <span class="font-semibold text-gray-800 hover:text-green-600">{{ Setting::get('contact_phone', '+254 700 123 456') }}</span>
+                        </a>
                         <div class="flex items-center space-x-4 p-4 rounded-xl bg-white">
                             <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
                                 <i class="fas fa-envelope text-white"></i>

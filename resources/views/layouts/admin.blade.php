@@ -188,7 +188,7 @@
             </header>
             
             <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto p-4 sm:p-6">
+            <main class="flex-1 overflow-y-auto overflow-x-hidden p-2 sm:p-4 lg:p-6">
                 <!-- Breadcrumbs -->
                 <nav class="flex mb-6" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">

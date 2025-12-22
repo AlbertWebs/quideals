@@ -53,8 +53,14 @@ use App\Helpers\SocialMediaHelper;
                     <span class="text-sm md:text-2xl">{{ Setting::get('site_name', config('app.name', 'Home & Kitchen Appliances')) }}</span>
                 </h3>
                 <p class="text-gray-400 mb-2 md:mb-4 text-sm md:text-base">{{ Setting::get('contact_address', 'Westlands, Nairobi') }}, {{ Setting::get('contact_city', 'Kenya') }}</p>
-                <p class="text-gray-400 mb-1 md:mb-2 text-sm md:text-base">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
-                <p class="text-gray-400 mb-4 md:mb-6 text-sm md:text-base">{{ Setting::get('contact_email', 'hello@homekitchen.com') }}</p>
+                <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="text-gray-400 hover:text-white mb-1 md:mb-2 text-sm md:text-base transition-colors inline-flex items-center block">
+                    <i class="fas fa-phone mr-2 text-xs"></i>
+                    {{ Setting::get('contact_phone', '+254 700 123 456') }}
+                </a>
+                <a href="mailto:{{ Setting::get('contact_email', 'hello@homekitchen.com') }}" class="text-gray-400 hover:text-white mb-4 md:mb-6 text-sm md:text-base transition-colors inline-flex items-center block">
+                    <i class="fas fa-envelope mr-2 text-xs"></i>
+                    {{ Setting::get('contact_email', 'hello@homekitchen.com') }}
+                </a>
 
                 <!-- Social Media -->
                 <div class="flex space-x-3 md:space-x-4">

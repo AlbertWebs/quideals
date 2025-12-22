@@ -139,16 +139,16 @@ use App\Models\Setting;
                             Get in Touch
                         </h3>
                         <div class="space-y-5">
-                            <div class="flex items-start space-x-4 p-4 bg-white rounded-xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all">
+                            <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="flex items-start space-x-4 p-4 bg-white rounded-xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all">
                                 <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
                                     <i class="fas fa-phone text-white"></i>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-gray-900 mb-1">Phone Support</h4>
-                                    <p class="text-gray-700 font-semibold">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
+                                    <p class="text-gray-700 font-semibold hover:text-blue-600">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
                                     <p class="text-xs text-gray-500 mt-1">{{ Setting::get('business_hours_weekdays', 'Mon-Fri: 8AM-6PM, Sat: 9AM-4PM') }}</p>
                                 </div>
-                            </div>
+                            </a>
 
                             <div class="flex items-start space-x-4 p-4 bg-white rounded-xl border border-gray-100 hover:border-green-200 hover:shadow-md transition-all">
                                 <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
