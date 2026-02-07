@@ -16,16 +16,28 @@ class AdminUserSeeder extends Seeder
         $user = User::first();
         if ($user) {
             $user->update(['is_admin' => true]);
-            $this->command->info('First user is now an admin.');
+            $this->command->info('✅ First user is now an admin.');
+            $this->command->info('📧 Email: ' . $user->email);
         } else {
             // Create a new admin user if no users exist
-            User::create([
+            $admin = User::create([
                 'name' => 'Admin User',
-                'email' => 'admin@speedandstylehub.com',
+                'email' => 'admin@quideals.co.ke',
                 'password' => bcrypt('Password@123'),
                 'is_admin' => true,
             ]);
-            $this->command->info('Admin user created: admin@speedandstylehub.com / Password@123');
+            
+            $this->command->info('');
+            $this->command->info('═══════════════════════════════════════════════════');
+            $this->command->info('  ✅ Admin User Created Successfully!');
+            $this->command->info('═══════════════════════════════════════════════════');
+            $this->command->info('  📧 Email:    admin@quideals.co.ke');
+            $this->command->info('  🔑 Password: Password@123');
+            $this->command->info('  🌐 Login URL: /login');
+            $this->command->info('═══════════════════════════════════════════════════');
+            $this->command->info('');
+            $this->command->warn('⚠️  Please change the default password after first login!');
+            $this->command->info('');
         }
     }
 }

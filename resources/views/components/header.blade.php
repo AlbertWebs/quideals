@@ -25,16 +25,27 @@ use App\Models\Setting;
 <header id="main-header" class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100 safe-area-top transition-all duration-300">
     <div class="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         <div id="header-content" class="flex items-center justify-between py-2.5 sm:py-3 md:py-5 transition-all duration-300">
-            <!-- Logo - Enhanced -->
+            <!-- Logo - Enhanced & Standout -->
             <div class="flex-shrink-0">
-                <a href="{{ route('home') }}" class="flex items-center space-x-2 sm:space-x-3 group">
-                    <div id="header-logo" class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
-                        <i class="fas fa-home text-white text-lg sm:text-xl transition-all duration-300"></i>
+                <a href="{{ route('home') }}" class="flex items-center space-x-3 sm:space-x-4 group">
+                    <div id="header-logo" class="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-2xl group-hover:shadow-blue-500/50 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3">
+                        <!-- Animated glow effect -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 rounded-2xl opacity-75 blur-xl group-hover:opacity-100 group-hover:blur-2xl transition-all duration-300 -z-10 animate-pulse"></div>
+                        <!-- Inner shine effect -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
+                        <!-- Icon with animation -->
+                        <i class="fas fa-home text-white text-xl sm:text-2xl md:text-3xl transition-all duration-300 group-hover:scale-110 relative z-10 drop-shadow-lg"></i>
+                        <!-- Decorative corner accent -->
+                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full opacity-80 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 shadow-lg"></div>
                     </div>
                     <div id="header-site-name" class="hidden sm:block transition-all duration-300">
-                        <span class="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent transition-all duration-300">
+                        <span class="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md">
                             {{ Setting::get('site_name', config('app.name', 'Home & Kitchen')) }}
                         </span>
+                        <!-- Subtitle for extra prominence -->
+                        <div class="hidden md:block text-xs font-bold text-gray-500 uppercase tracking-widest mt-0.5">
+                            Premium Quality
+                        </div>
                     </div>
                 </a>
             </div>
@@ -199,12 +210,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     headerContent.className = headerContent.className.replace(/\bpy-[\d.]+/g, '') + ' py-1.5 sm:py-2';
                 }
                 if (headerLogo) {
-                    headerLogo.className = headerLogo.className.replace(/\b(w|h)-[\d.]+/g, '') + ' w-8 h-8 sm:w-10 sm:h-10';
+                    headerLogo.className = headerLogo.className.replace(/\b(w|h)-[\d.]+/g, '') + ' w-12 h-12 sm:w-14 sm:h-14';
                 }
                 if (headerSiteName) {
                     const span = headerSiteName.querySelector('span');
                     if (span) {
-                        span.className = span.className.replace(/\btext-(xl|2xl|lg|base)/g, '') + ' text-base sm:text-lg';
+                        span.className = span.className.replace(/\btext-(xl|2xl|3xl|4xl|lg|base)/g, '') + ' text-lg sm:text-xl';
+                    }
+                    const subtitle = headerSiteName.querySelector('div');
+                    if (subtitle) {
+                        subtitle.style.display = 'none';
                     }
                 }
                 if (headerNav) {
@@ -229,12 +244,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     headerContent.className = headerContent.className.replace(/\bpy-[\d.]+/g, '') + ' py-2.5 sm:py-3 md:py-5';
                 }
                 if (headerLogo) {
-                    headerLogo.className = headerLogo.className.replace(/\b(w|h)-[\d.]+/g, '') + ' w-10 h-10 sm:w-12 sm:h-12';
+                    headerLogo.className = headerLogo.className.replace(/\b(w|h)-[\d.]+/g, '') + ' w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20';
                 }
                 if (headerSiteName) {
                     const span = headerSiteName.querySelector('span');
                     if (span) {
-                        span.className = span.className.replace(/\btext-(xl|2xl|lg|base)/g, '') + ' text-xl sm:text-2xl';
+                        span.className = span.className.replace(/\btext-(xl|2xl|3xl|4xl|lg|base)/g, '') + ' text-2xl sm:text-3xl md:text-4xl';
+                    }
+                    const subtitle = headerSiteName.querySelector('div');
+                    if (subtitle) {
+                        subtitle.style.display = '';
                     }
                 }
                 if (headerNav) {

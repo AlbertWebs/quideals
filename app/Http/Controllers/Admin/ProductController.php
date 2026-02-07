@@ -60,6 +60,7 @@ class ProductController extends Controller
                 'stock_quantity' => 'required|integer|min:0',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'video' => 'nullable|mimes:mp4,mov,avi,wmv,flv,webm|max:10240',
                 'badge' => 'nullable|string|max:50',
                 'rating' => 'nullable|numeric|min:1|max:5',
                 'reviews_count' => 'nullable|integer|min:0',
@@ -96,6 +97,20 @@ class ProductController extends Controller
                 } catch (Exception $e) {
                     Log::error('Failed to upload product additional images', [
                         'error' => $e->getMessage()
+                    ]);
+                    throw $e;
+                }
+            }
+
+            // Handle video upload
+            if ($request->hasFile('video')) {
+                try {
+                    $validated['video'] = $request->file('video')->store('products/videos', 'public');
+                    Log::info('Product video uploaded successfully', ['path' => $validated['video']]);
+                } catch (Exception $e) {
+                    Log::error('Failed to upload product video', [
+                        'error' => $e->getMessage(),
+                        'file' => $request->file('video')->getClientOriginalName()
                     ]);
                     throw $e;
                 }
@@ -158,6 +173,8 @@ class ProductController extends Controller
                 'stock_quantity' => 'required|integer|min:0',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'video' => 'nullable|mimes:mp4,mov,avi,wmv,flv,webm|max:10240',
+                'delete_video' => 'nullable|boolean',
                 'delete_images' => 'nullable|array',
                 'delete_images.*' => 'nullable|string',
                 'badge' => 'nullable|string|max:50',
@@ -253,6 +270,34 @@ class ProductController extends Controller
             
             // Set the final images array
             $validated['images'] = array_values($currentImages);
+
+            // Handle video deletion
+            if ($request->has('delete_video') && $request->delete_video) {
+                if ($product->video && !str_starts_with($product->video, '/assets/')) {
+                    Storage::disk('public')->delete($product->video);
+                }
+                $validated['video'] = null;
+                Log::info('Product video deleted', ['product_id' => $product->id]);
+            }
+
+            // Handle video upload
+            if ($request->hasFile('video')) {
+                try {
+                    // Delete old video if exists (only if it's a storage file)
+                    if ($product->video && !str_starts_with($product->video, '/assets/')) {
+                        Storage::disk('public')->delete($product->video);
+                    }
+                    $validated['video'] = $request->file('video')->store('products/videos', 'public');
+                    Log::info('Product video updated', ['product_id' => $product->id, 'path' => $validated['video']]);
+                } catch (Exception $e) {
+                    Log::error('Failed to update product video', [
+                        'product_id' => $product->id,
+                        'error' => $e->getMessage(),
+                        'file' => $request->file('video')->getClientOriginalName()
+                    ]);
+                    throw $e;
+                }
+            }
 
             // Process specifications
             if (isset($validated['specifications'])) {
@@ -354,6 +399,23 @@ class ProductController extends Controller
                             'error' => $e->getMessage()
                         ]);
                     }
+                }
+            }
+
+            // Delete product video
+            if ($product->video) {
+                try {
+                    // Only delete from storage if it's a storage file (not a public asset)
+                    if (!str_starts_with($product->video, '/assets/')) {
+                        Storage::disk('public')->delete($product->video);
+                        Log::info('Product video deleted', ['product_id' => $productId, 'video' => $product->video]);
+                    }
+                } catch (Exception $e) {
+                    Log::error('Failed to delete product video', [
+                        'product_id' => $productId,
+                        'video' => $product->video,
+                        'error' => $e->getMessage()
+                    ]);
                 }
             }
             

@@ -15,9 +15,9 @@
         </a>
     </div>
 
-    <!-- Brands Table -->
+    <!-- Brands Table - Desktop -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div class="overflow-x-auto">
+        <div class="hidden md:block overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
@@ -77,6 +77,65 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+        
+        <!-- Brands Cards - Mobile -->
+        <div class="md:hidden divide-y divide-gray-200">
+            @forelse($brands as $brand)
+                <div class="p-4 bg-white">
+                    <div class="flex items-start space-x-3 mb-3">
+                        @if($brand->logo)
+                            <img src="{{ $brand->logo }}" alt="{{ $brand->name }}" class="w-16 h-16 object-contain flex-shrink-0">
+                        @endif
+                        <div class="flex-1 min-w-0">
+                            <div class="text-base font-medium text-gray-900 mb-1">{{ $brand->name }}</div>
+                            @if($brand->description)
+                                <div class="text-sm text-gray-500 line-clamp-2">{{ $brand->description }}</div>
+                            @endif
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                        <div>
+                            <span class="text-gray-500">Products:</span>
+                            <span class="font-medium text-gray-900 ml-1">{{ $brand->products_count }}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">Sort Order:</span>
+                            <span class="font-medium text-gray-900 ml-1">{{ $brand->sort_order ?? 0 }}</span>
+                        </div>
+                        <div class="col-span-2">
+                            <span class="text-gray-500">Status:</span>
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ml-1 {{ $brand->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                {{ $brand->is_active ? 'Active' : 'Inactive' }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 pt-3 border-t border-gray-100">
+                        <a href="{{ route('admin.brands.edit', $brand) }}" 
+                           class="flex-1 min-w-[70px] text-center text-xs px-3 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 active:bg-blue-200 rounded-lg font-medium transition-colors">
+                            Edit
+                        </a>
+                        <a href="{{ route('admin.brands.show', $brand) }}" 
+                           class="flex-1 min-w-[70px] text-center text-xs px-3 py-2 bg-green-50 text-green-600 hover:bg-green-100 active:bg-green-200 rounded-lg font-medium transition-colors">
+                            View
+                        </a>
+                        <form method="POST" action="{{ route('admin.brands.destroy', $brand) }}" class="flex-1 min-w-[70px]">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this brand?')"
+                                    class="w-full text-xs px-3 py-2 bg-red-50 text-red-600 hover:bg-red-100 active:bg-red-200 rounded-lg font-medium transition-colors">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @empty
+                <div class="p-6 text-center text-gray-500 text-sm">
+                    No brands found.
+                </div>
+            @endforelse
         </div>
         
         <!-- Pagination -->

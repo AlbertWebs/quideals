@@ -22,6 +22,7 @@ class Product extends Model
         'old_price',
         'image',
         'images',
+        'video',
         'badge',
         'rating',
         'reviews_count',
@@ -185,5 +186,20 @@ class Product extends Model
         return array_filter($this->images, function($image) {
             return is_string($image) && !empty(trim($image));
         });
+    }
+
+    public function getVideoUrlAttribute()
+    {
+        if (!$this->video) {
+            return null;
+        }
+        
+        // Check if the video path starts with a slash (public assets)
+        if (str_starts_with($this->video, '/')) {
+            return $this->video; // Return as-is for public assets
+        }
+        
+        // For storage videos, use asset helper
+        return asset('storage/' . $this->video);
     }
 }

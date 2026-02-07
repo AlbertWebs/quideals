@@ -5,19 +5,19 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex justify-between items-center">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Create Product</h1>
-            <p class="text-gray-600">Add a new product to your store</p>
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Create Product</h1>
+            <p class="text-sm sm:text-base text-gray-600">Add a new product to your store</p>
         </div>
         <a href="{{ route('admin.products.index') }}"
-           class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-            Back to Products
+           class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
+            <i class="fas fa-arrow-left mr-2"></i>Back to Products
         </a>
     </div>
 
     <!-- Create Form -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
         <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
@@ -249,13 +249,49 @@
                     <!-- Image Preview Container -->
                     <div id="image-preview-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4"></div>
                 </div>
+
+                <!-- Product Video -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-medium text-gray-700">Product Video (Optional)</label>
+                    
+                    <!-- Video Upload Area -->
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <!-- Preview Area -->
+                        <div id="video-preview" class="flex-shrink-0 w-full sm:w-auto">
+                            <div class="w-full sm:w-48 h-32 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer" onclick="document.getElementById('video').click()">
+                                <div class="text-center p-4">
+                                    <i class="fas fa-video text-3xl text-gray-400 mb-2"></i>
+                                    <p class="text-xs text-gray-500">Click to upload video</p>
+                                </div>
+                            </div>
+                            <video id="video-preview-player" class="hidden w-full sm:w-48 h-32 rounded-lg object-cover border-2 border-gray-300" controls></video>
+                        </div>
+
+                        <!-- Upload Info -->
+                        <div class="flex-1 w-full sm:w-auto">
+                            <input type="file" id="video" name="video" accept="video/*" class="hidden">
+                            <div class="space-y-2">
+                                <p class="text-sm text-gray-600">Upload a product demonstration video</p>
+                                <p class="text-xs text-gray-500">MP4, MOV, AVI, WMV, FLV, WEBM up to 10MB</p>
+                                <p class="text-xs text-gray-500">This video will be displayed on the product page</p>
+                            </div>
+                        </div>
+                    </div>
+                    @error('video')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
 
             <!-- Submit Button -->
-            <div class="flex justify-end">
+            <div class="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t border-gray-200">
+                <a href="{{ route('admin.products.index') }}" 
+                   class="w-full sm:w-auto text-center bg-gray-200 text-gray-700 px-6 py-2.5 rounded-lg hover:bg-gray-300 transition-colors text-sm sm:text-base">
+                    Cancel
+                </a>
                 <button type="submit"
-                        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    Create Product
+                        class="w-full sm:w-auto bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-sm sm:text-base font-medium">
+                    <i class="fas fa-save mr-2"></i>Create Product
                 </button>
             </div>
         </form>
@@ -270,6 +306,45 @@
 <script src="{{ asset('assets/js/product-images.js') }}"></script>
 <script>
 let specificationIndex = 1;
+
+// Video preview functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const videoInput = document.getElementById('video');
+    const videoPreview = document.getElementById('video-preview');
+    const videoPreviewPlayer = document.getElementById('video-preview-player');
+    const videoPreviewPlaceholder = videoPreview.querySelector('div');
+
+    if (videoInput) {
+        videoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Validate file type
+                const validTypes = ['video/mp4', 'video/mov', 'video/avi', 'video/wmv', 'video/flv', 'video/webm'];
+                if (!validTypes.includes(file.type) && !file.name.match(/\.(mp4|mov|avi|wmv|flv|webm)$/i)) {
+                    alert('Please select a valid video file (MP4, MOV, AVI, WMV, FLV, WEBM)');
+                    videoInput.value = '';
+                    return;
+                }
+
+                // Validate file size (10MB)
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('Video file size must be less than 10MB');
+                    videoInput.value = '';
+                    return;
+                }
+
+                // Create preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    videoPreviewPlayer.src = e.target.result;
+                    videoPreviewPlaceholder.classList.add('hidden');
+                    videoPreviewPlayer.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+});
 
 function addSpecificationRow() {
     const container = document.getElementById('specifications-container');
