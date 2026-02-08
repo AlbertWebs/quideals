@@ -86,6 +86,12 @@
                         <span class="ml-3">Categories</span>
                     </a>
                     
+                    <a href="{{ route('admin.subcategories.index') }}" 
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.subcategories.*') ? 'bg-white/20' : '' }}">
+                        <i class="fas fa-layer-group w-5"></i>
+                        <span class="ml-3">Subcategories</span>
+                    </a>
+                    
                     <a href="{{ route('admin.brands.index') }}" 
                        class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.brands.*') ? 'bg-white/20' : '' }}">
                         <i class="fas fa-certificate w-5"></i>

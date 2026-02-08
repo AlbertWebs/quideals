@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\FaqController;
@@ -26,6 +27,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Categories
     Route::resource('categories', CategoryController::class);
     Route::post('categories/reorder', [CategoryController::class, 'reorder'])->name('categories.reorder');
+    
+    // Subcategories
+    Route::resource('subcategories', SubcategoryController::class);
     
     // Brands
     Route::resource('brands', BrandController::class);

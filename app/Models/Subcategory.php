@@ -4,16 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Category extends Model
+class Subcategory extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'category_id',
         'name',
         'slug',
-        'icon',
         'description',
+        'icon',
         'is_active',
         'sort_order'
     ];
@@ -22,14 +25,14 @@ class Category extends Model
         'is_active' => 'boolean',
     ];
 
-    public function products()
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Category::class);
     }
 
-    public function subcategories()
+    public function products(): HasMany
     {
-        return $this->hasMany(Subcategory::class)->orderBy('sort_order');
+        return $this->hasMany(Product::class);
     }
 
     public function scopeActive($query)

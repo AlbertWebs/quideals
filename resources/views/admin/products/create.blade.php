@@ -50,6 +50,24 @@
                         @enderror
                     </div>
 
+                    <div>
+                        <label for="subcategory_id" class="block text-sm font-medium text-gray-700 mb-1">Subcategory (Optional)</label>
+                        <select id="subcategory_id" name="subcategory_id"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Select Subcategory</option>
+                            @foreach($subcategories as $subcategory)
+                                <option value="{{ $subcategory->id }}" 
+                                        data-category-id="{{ $subcategory->category_id }}"
+                                        {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
+                                    {{ $subcategory->category->name }} - {{ $subcategory->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('subcategory_id')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div class="flex items-center space-x-4">
                         <label class="flex items-center">
                             <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}
@@ -306,6 +324,47 @@
 <script src="{{ asset('assets/js/product-images.js') }}"></script>
 <script>
 let specificationIndex = 1;
+
+// Subcategory filtering based on category selection
+document.addEventListener('DOMContentLoaded', function() {
+    const categorySelect = document.getElementById('category_id');
+    const subcategorySelect = document.getElementById('subcategory_id');
+    
+    if (categorySelect && subcategorySelect) {
+        categorySelect.addEventListener('change', function() {
+            const selectedCategoryId = this.value;
+            const options = subcategorySelect.querySelectorAll('option');
+            
+            // Show/hide subcategories based on selected category
+            options.forEach(option => {
+                if (option.value === '') {
+                    option.style.display = 'block'; // Always show "Select Subcategory"
+                } else {
+                    const categoryId = option.getAttribute('data-category-id');
+                    if (categoryId === selectedCategoryId) {
+                        option.style.display = 'block';
+                    } else {
+                        option.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Reset subcategory selection if it doesn't belong to selected category
+            const selectedSubcategory = subcategorySelect.value;
+            if (selectedSubcategory) {
+                const selectedOption = subcategorySelect.querySelector(`option[value="${selectedSubcategory}"]`);
+                if (selectedOption && selectedOption.getAttribute('data-category-id') !== selectedCategoryId) {
+                    subcategorySelect.value = '';
+                }
+            }
+        });
+        
+        // Trigger on page load if category is already selected
+        if (categorySelect.value) {
+            categorySelect.dispatchEvent(new Event('change'));
+        }
+    }
+});
 
 // Video preview functionality
 document.addEventListener('DOMContentLoaded', function() {

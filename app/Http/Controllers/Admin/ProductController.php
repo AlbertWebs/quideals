@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -43,8 +44,9 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $subcategories = Subcategory::active()->ordered()->get();
         $brands = Brand::active()->ordered()->get();
-        return view('admin.products.create', compact('categories', 'brands'));
+        return view('admin.products.create', compact('categories', 'subcategories', 'brands'));
     }
 
     public function store(Request $request)
@@ -53,6 +55,7 @@ class ProductController extends Controller
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'category_id' => 'required|exists:categories,id',
+                'subcategory_id' => 'nullable|exists:subcategories,id',
                 'description' => 'required|string',
                 'brand' => 'nullable|string|max:100',
                 'price' => 'required|numeric|min:0',
@@ -155,8 +158,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
+        $subcategories = Subcategory::active()->ordered()->get();
         $brands = Brand::active()->ordered()->get();
-        return view('admin.products.edit', compact('product', 'categories', 'brands'));
+        return view('admin.products.edit', compact('product', 'categories', 'subcategories', 'brands'));
     }
 
     public function update(Request $request, Product $product)
@@ -165,6 +169,7 @@ class ProductController extends Controller
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'category_id' => 'required|exists:categories,id',
+                'subcategory_id' => 'nullable|exists:subcategories,id',
                 'brand_id' => 'nullable|exists:brands,id',
                 'description' => 'required|string',
                 'brand' => 'nullable|string|max:100',
