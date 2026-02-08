@@ -5,19 +5,19 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex justify-between items-center">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">{{ $category->name }}</h1>
-            <p class="text-gray-600">Category details and products</p>
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900">{{ $category->name }}</h1>
+            <p class="text-sm sm:text-base text-gray-600">Category details and products</p>
         </div>
-        <div class="flex space-x-2">
-            <a href="{{ route('admin.categories.edit', $category) }}" 
-               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                Edit Category
+        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <a href="{{ route('admin.categories.edit', $category->id) }}" 
+               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base text-center">
+                <i class="fas fa-edit mr-2"></i>Edit Category
             </a>
             <a href="{{ route('admin.categories.index') }}" 
-               class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                Back to Categories
+               class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm sm:text-base text-center">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Categories
             </a>
         </div>
     </div>
@@ -151,11 +151,11 @@
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Actions</h2>
                 <div class="space-y-2">
-                    <a href="{{ route('admin.categories.edit', $category) }}" 
+                    <a href="{{ route('admin.categories.edit', $category->id) }}" 
                        class="block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                         Edit Category
                     </a>
-                    <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" class="inline">
+                    <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('Are you sure you want to delete this category? This will also affect all products in this category.')"

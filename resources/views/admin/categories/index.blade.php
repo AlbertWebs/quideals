@@ -56,11 +56,11 @@
                                 {{ $category->sort_order ?? 0 }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a href="{{ route('admin.categories.edit', $category) }}" 
+                                <a href="{{ route('admin.categories.edit', $category->id) }}" 
                                    class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
-                                <a href="{{ route('admin.categories.show', $category) }}" 
+                                <a href="{{ route('admin.categories.show', $category->id) }}" 
                                    class="text-green-600 hover:text-green-900 mr-3">View</a>
-                                <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" class="inline">
+                                <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure you want to delete this category?')"
@@ -113,15 +113,15 @@
                     </div>
                     
                     <div class="flex flex-wrap gap-2 pt-3 border-t border-gray-100">
-                        <a href="{{ route('admin.categories.edit', $category) }}" 
+                        <a href="{{ route('admin.categories.edit', $category->id) }}" 
                            class="flex-1 min-w-[70px] text-center text-xs px-3 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 active:bg-blue-200 rounded-lg font-medium transition-colors">
                             Edit
                         </a>
-                        <a href="{{ route('admin.categories.show', $category) }}" 
+                        <a href="{{ route('admin.categories.show', $category->id) }}" 
                            class="flex-1 min-w-[70px] text-center text-xs px-3 py-2 bg-green-50 text-green-600 hover:bg-green-100 active:bg-green-200 rounded-lg font-medium transition-colors">
                             View
                         </a>
-                        <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" class="flex-1 min-w-[70px]">
+                        <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" class="flex-1 min-w-[70px]">
                             @csrf
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Are you sure you want to delete this category?')"

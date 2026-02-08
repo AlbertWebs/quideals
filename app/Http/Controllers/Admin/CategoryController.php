@@ -37,19 +37,22 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
 
-    public function show(Category $category)
+    public function show($id)
     {
-        $category->load('products');
+        $category = Category::with('products')->findOrFail($id);
         return view('admin.categories.show', compact('category'));
     }
 
-    public function edit(Category $category)
+    public function edit($id)
     {
+        $category = Category::findOrFail($id);
         return view('admin.categories.edit', compact('category'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
+        $category = Category::findOrFail($id);
+        
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -65,8 +68,10 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }
 
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        $category = Category::findOrFail($id);
+        
         // Check if category has products
         if ($category->products()->count() > 0) {
             return back()->with('error', 'Cannot delete category with existing products.');
