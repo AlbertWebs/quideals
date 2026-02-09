@@ -190,6 +190,13 @@ use Illuminate\Support\Str;
                     <p class="text-gray-500 mt-1 md:mt-2 text-xs md:text-base">{{ $product->category->name }}</p>
                 </div>
 
+                <!-- Short Description -->
+                @if($product->short_description)
+                    <div class="pt-2 md:pt-3 border-t border-gray-200">
+                        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">{{ $product->short_description }}</p>
+                    </div>
+                @endif
+
                 <!-- Rating - Compact on Mobile -->
                 <div class="flex items-center flex-wrap gap-1.5">
                     <div class="flex items-center">

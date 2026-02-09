@@ -35,6 +35,17 @@
                     </div>
 
                     <div>
+                        <label for="short_description" class="block text-sm font-medium text-gray-700 mb-1">Short Description</label>
+                        <textarea id="short_description" name="short_description" rows="3" maxlength="500"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                  placeholder="Brief product summary (max 500 characters)...">{{ old('short_description') }}</textarea>
+                        <p class="text-xs text-gray-500 mt-1">A brief summary that appears in product listings and at the top of product pages</p>
+                        @error('short_description')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
                         <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Category *</label>
                         <select id="category_id" name="category_id" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
