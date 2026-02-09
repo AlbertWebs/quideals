@@ -278,14 +278,6 @@ use Illuminate\Support\Str;
                     </div>
                 </div>
 
-                <!-- Description -->
-                <div class="pt-3 md:pt-4 border-t border-gray-200">
-                    <h3 class="text-sm md:text-lg font-medium text-gray-900 mb-1.5 md:mb-2">Description</h3>
-                    <div class="text-xs md:text-base text-gray-600 leading-relaxed prose prose-sm max-w-none">
-                        {!! html_entity_decode($product->description, ENT_QUOTES, 'UTF-8') !!}
-                    </div>
-                </div>
-
                 <!-- Quick Info - Compact on Mobile -->
                 <div class="grid grid-cols-2 gap-2 md:gap-4 pt-3 md:pt-4 border-t border-gray-200">
                     <div class="text-center p-2 md:p-3 bg-gray-50 rounded-lg md:rounded-xl">
@@ -311,6 +303,18 @@ use Illuminate\Support\Str;
                                 <span class="text-gray-600 text-xs md:text-base text-right">{{ $value }}</span>
                             </div>
                         @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <!-- Description -->
+        @if($product->description)
+            <div class="mt-6 md:mt-12">
+                <h2 class="text-lg md:text-2xl font-bold text-gray-900 mb-3 md:mb-6">Description</h2>
+                <div class="bg-white rounded-lg border border-gray-200 p-4 md:p-6">
+                    <div class="prose prose-sm md:prose-base max-w-none text-gray-700 leading-relaxed">
+                        {!! html_entity_decode($product->description, ENT_QUOTES, 'UTF-8') !!}
                     </div>
                 </div>
             </div>
