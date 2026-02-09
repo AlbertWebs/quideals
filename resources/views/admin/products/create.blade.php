@@ -177,14 +177,29 @@
 
             <!-- Description -->
             <div>
-                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description *</label>
-                <textarea id="description" name="description" rows="10" required
-                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                          placeholder="Enter product description...">{{ old('description') }}</textarea>
+                <div class="flex items-center justify-between mb-1">
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description *</label>
+                    <button type="button" id="toggleEditorMode" 
+                            class="text-xs text-blue-600 hover:text-blue-800 font-medium px-3 py-1 border border-blue-300 rounded hover:bg-blue-50 transition-colors">
+                        <span id="editorModeText">Switch to HTML</span>
+                    </button>
+                </div>
+                <div id="ckeditor-container">
+                    <textarea id="description" name="description" rows="10" required
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              placeholder="Enter product description (HTML allowed)...">{{ old('description') }}</textarea>
+                </div>
+                <div id="raw-html-container" class="hidden">
+                    <textarea id="description-raw" rows="15" 
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+                              placeholder="Paste your HTML code here...">{{ old('description') }}</textarea>
+                </div>
                 @error('description')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
-                <p class="text-xs text-gray-500 mt-1">Use the editor above to format your description with HTML (bold, lists, links, etc.)</p>
+                <p class="text-xs text-gray-500 mt-1">
+                    <span id="editorHelpText">Use the visual editor or switch to HTML mode to paste raw HTML code.</span>
+                </p>
             </div>
 
             <!-- Specifications -->
@@ -351,17 +366,30 @@
 <script>
 let specificationIndex = 1;
 
-// Initialize CKEditor for description
+// Initialize CKEditor for description with HTML support
+let descriptionEditor = null;
+let isRawMode = false;
+
 document.addEventListener('DOMContentLoaded', function() {
+    const descriptionTextarea = document.querySelector('#description');
+    const rawTextarea = document.querySelector('#description-raw');
+    const ckeditorContainer = document.getElementById('ckeditor-container');
+    const rawContainer = document.getElementById('raw-html-container');
+    const toggleButton = document.getElementById('toggleEditorMode');
+    const modeText = document.getElementById('editorModeText');
+    const helpText = document.getElementById('editorHelpText');
+
+    // Initialize CKEditor
     ClassicEditor
-        .create(document.querySelector('#description'), {
+        .create(descriptionTextarea, {
             toolbar: {
                 items: [
                     'heading', '|',
-                    'bold', 'italic', 'link', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', '|',
+                    'link', 'blockQuote', 'codeBlock', '|',
                     'bulletedList', 'numberedList', '|',
                     'outdent', 'indent', '|',
-                    'blockQuote', 'insertTable', '|',
+                    'insertTable', '|',
                     'undo', 'redo'
                 ]
             },
@@ -373,14 +401,88 @@ document.addEventListener('DOMContentLoaded', function() {
                     { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
                     { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
                 ]
+            },
+            htmlSupport: {
+                allow: [
+                    {
+                        name: /.*/,
+                        attributes: true,
+                        classes: true,
+                        styles: true
+                    }
+                ]
+            },
+            link: {
+                decorators: {
+                    openInNewTab: {
+                        mode: 'manual',
+                        label: 'Open in a new tab',
+                        attributes: {
+                            target: '_blank',
+                            rel: 'noopener noreferrer'
+                        }
+                    }
+                }
             }
         })
         .then(editor => {
+            descriptionEditor = editor;
             console.log('CKEditor initialized successfully', editor);
+            window.descriptionEditor = editor;
         })
         .catch(error => {
             console.error('Error initializing CKEditor:', error);
         });
+
+    // Toggle between visual editor and raw HTML
+    if (toggleButton) {
+        toggleButton.addEventListener('click', function() {
+            isRawMode = !isRawMode;
+            
+            if (isRawMode) {
+                // Switch to raw HTML mode
+                if (descriptionEditor) {
+                    const htmlContent = descriptionEditor.getData();
+                    rawTextarea.value = htmlContent;
+                }
+                ckeditorContainer.classList.add('hidden');
+                rawContainer.classList.remove('hidden');
+                modeText.textContent = 'Switch to Visual Editor';
+                helpText.textContent = 'Paste your HTML code directly. All HTML tags will be preserved.';
+            } else {
+                // Switch to visual editor mode
+                if (descriptionEditor) {
+                    descriptionEditor.setData(rawTextarea.value);
+                } else {
+                    descriptionTextarea.value = rawTextarea.value;
+                }
+                rawContainer.classList.add('hidden');
+                ckeditorContainer.classList.remove('hidden');
+                modeText.textContent = 'Switch to HTML';
+                helpText.textContent = 'Use the visual editor or switch to HTML mode to paste raw HTML code.';
+            }
+        });
+    }
+
+    // Sync raw HTML textarea with form submission
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            if (isRawMode) {
+                // Copy raw HTML to the description field (which will be hidden but still submitted)
+                if (descriptionEditor) {
+                    // Update the editor's data so it gets submitted
+                    descriptionEditor.setData(rawTextarea.value);
+                } else {
+                    // Directly update the textarea
+                    descriptionTextarea.value = rawTextarea.value;
+                }
+            } else if (descriptionEditor) {
+                // Ensure editor data is synced (this happens automatically, but just to be sure)
+                descriptionTextarea.value = descriptionEditor.getData();
+            }
+        });
+    }
 });
 
 // Subcategory filtering based on category selection
