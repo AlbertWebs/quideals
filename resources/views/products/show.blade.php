@@ -4,10 +4,10 @@
 use Illuminate\Support\Str;
 @endphp
 
-@section('title', $product->name . ' - ' . $product->category->name . ' | Speed and Style Hub Kenya')
-@section('description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices. Fast delivery and excellent customer service from Speed and Style Hub.')
-@section('keywords', $product->name . ', ' . $product->category->name . ', Fashion and Personal Care Products Kenya, Speed and Style Hub, buy online Kenya')
-@section('og_title', $product->name . ' - ' . $product->category->name . ' | Speed and Style Hub')
+@section('title', $product->name . ' - ' . $product->category->name . ' | Quideals')
+@section('description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices. Fast delivery and excellent customer service from Quideals.')
+@section('keywords', $product->name . ', ' . $product->category->name . ', Home & Kitchen Appliances Kenya, Quideals, buy online Kenya')
+@section('og_title', $product->name . ' - ' . $product->category->name . ' | Quideals')
 @section('og_description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices.')
 @section('og_type', 'product')
 @section('og_image', $product->main_image_url)
@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 @section('og_price_amount', $product->price)
 @section('og_price_currency', 'KES')
 @section('og_product_availability', $product->stock > 0 ? 'in stock' : 'out of stock')
-@section('twitter_title', $product->name . ' - ' . $product->category->name . ' | Speed and Style Hub')
+@section('twitter_title', $product->name . ' - ' . $product->category->name . ' | Quideals')
 @section('twitter_description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices.')
 @section('twitter_image', $product->main_image_url)
 
@@ -37,7 +37,7 @@ use Illuminate\Support\Str;
     "category": "' . addslashes($product->category->name) . '",
     "brand": {
         "@type": "Brand",
-        "name": "' . addslashes($product->brand ?? 'Speed and Style Hub') . '"
+        "name": "' . addslashes(is_object($product->brand) ? ($product->brand->name ?? 'Quideals') : ($product->brand ?? 'Quideals')) . '"
     },
     "offers": {
         "@type": "Offer",
@@ -47,7 +47,7 @@ use Illuminate\Support\Str;
         "url": "' . request()->url() . '",
         "seller": {
             "@type": "Organization",
-            "name": "Speed and Style Hub"
+            "name": "Quideals"
         }
     }
 }
@@ -180,7 +180,31 @@ use Illuminate\Support\Str;
             <div class="space-y-3 md:space-y-6">
                 <div>
                     <h1 class="text-xl md:text-3xl font-bold text-gray-900 leading-tight">{{ $product->name }}</h1>
-                    <p class="text-gray-500 mt-1 md:mt-2 text-xs md:text-base">{{ $product->category->name }}</p>
+                    <div class="flex items-center flex-wrap gap-2 mt-1 md:mt-2">
+                        <p class="text-gray-500 text-xs md:text-base">{{ $product->category->name }}</p>
+                        @php
+                            $brandName = null;
+                            // Check if brand relationship is loaded and is an object
+                            if ($product->relationLoaded('brand')) {
+                                $brandRelation = $product->getRelation('brand');
+                                if ($brandRelation && is_object($brandRelation)) {
+                                    $brandName = $brandRelation->name;
+                                }
+                            }
+                            // If relationship not loaded or not available, check if brand is a string field
+                            if (!$brandName && $product->brand) {
+                                if (is_string($product->brand) && !empty($product->brand)) {
+                                    $brandName = $product->brand;
+                                } elseif (is_object($product->brand) && isset($product->brand->name)) {
+                                    $brandName = $product->brand->name;
+                                }
+                            }
+                        @endphp
+                        @if($brandName)
+                            <span class="text-gray-400 text-xs md:text-base">•</span>
+                            <span class="text-gray-600 text-xs md:text-base font-medium">{{ $brandName }}</span>
+                        @endif
+                    </div>
                 </div>
 
                 <!-- Short Description -->
@@ -210,9 +234,6 @@ use Illuminate\Support\Str;
                             <span class="text-xs md:text-sm font-semibold">Out of Stock</span>
                         </div>
                     @endif
-                    @if($product->reviews_count > 0)
-                        <span class="text-[10px] md:text-sm text-gray-500">({{ $product->reviews_count }} reviews)</span>
-                    @endif
                 </div>
 
                 <!-- Price - Scaled Down on Mobile -->
@@ -231,42 +252,33 @@ use Illuminate\Support\Str;
                     </div>
                 @endif
 
-                <!-- Stock Status - Compact -->
-                <div class="flex items-center">
-                    @if($product->stock_quantity > 0)
-                        <div class="flex items-center text-green-600">
-                            <svg class="w-3.5 h-3.5 md:w-5 md:h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-xs md:text-base font-medium">In Stock</span>
+                <!-- Quantity Selection and Add to Cart - Mobile -->
+                <div class="md:hidden space-y-3">
+                    <div class="flex items-center gap-2 bg-gray-50 p-3 rounded-lg">
+                        <label class="text-xs font-medium text-gray-700 whitespace-nowrap">Qty:</label>
+                        <div class="flex items-center border-2 border-gray-300 rounded-lg bg-white shadow-sm">
+                            <button type="button" onclick="updateQuantity(-1)" class="px-2.5 py-2 text-gray-700 active:bg-gray-100 transition-colors text-sm font-bold">-</button>
+                            <input type="number" id="quantity" value="1" min="1" max="{{ $product->stock_quantity }}" class="w-12 text-center border-0 focus:ring-0 text-sm font-bold text-gray-900 bg-white" readonly>
+                            <button type="button" onclick="updateQuantity(1)" class="px-2.5 py-2 text-gray-700 active:bg-gray-100 transition-colors text-sm font-bold">+</button>
                         </div>
-                    @else
-                        <div class="flex items-center text-red-600">
-                            <svg class="w-3.5 h-3.5 md:w-5 md:h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-xs md:text-base font-medium">Out of Stock</span>
-                        </div>
-                    @endif
-                </div>
-
-                <!-- Quantity Selection and Add to Cart - Mobile (Single Row) -->
-                <div class="md:hidden flex items-center gap-2 bg-gray-50 p-3 rounded-lg">
-                    <label class="text-xs font-medium text-gray-700 whitespace-nowrap">Qty:</label>
-                    <div class="flex items-center border-2 border-gray-300 rounded-lg bg-white shadow-sm">
-                        <button type="button" onclick="updateQuantity(-1)" class="px-2.5 py-2 text-gray-700 active:bg-gray-100 transition-colors text-sm font-bold">-</button>
-                        <input type="number" id="quantity" value="1" min="1" max="{{ $product->stock_quantity }}" class="w-12 text-center border-0 focus:ring-0 text-sm font-bold text-gray-900 bg-white" readonly>
-                        <button type="button" onclick="updateQuantity(1)" class="px-2.5 py-2 text-gray-700 active:bg-gray-100 transition-colors text-sm font-bold">+</button>
+                        <button onclick="toggleWishlist({{ $product->id }}, '{{ $product->name }}')"
+                                class="w-11 h-11 border-2 border-gray-300 rounded-lg flex items-center justify-center active:bg-gray-50 transition-colors wishlist-btn flex-shrink-0 bg-white">
+                            <i class="fas fa-heart text-gray-400 text-sm"></i>
+                        </button>
                     </div>
-                    <button onclick="toggleWishlist({{ $product->id }}, '{{ $product->name }}')"
-                            class="w-11 h-11 border-2 border-gray-300 rounded-lg flex items-center justify-center active:bg-gray-50 transition-colors wishlist-btn flex-shrink-0 bg-white">
-                        <i class="fas fa-heart text-gray-400 text-sm"></i>
-                    </button>
-                    <button onclick="addToCartWithQuantity({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->main_image_url }}', 'quantity')"
-                            class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2.5 rounded-lg font-bold text-xs active:scale-95 transition-all shadow-lg">
-                        <i class="fas fa-shopping-cart mr-1"></i>
-                        Add to Cart
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="addToCartWithQuantity({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->main_image_url }}', 'quantity')"
+                                class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2.5 rounded-lg font-bold text-xs active:scale-95 transition-all shadow-lg">
+                            <i class="fas fa-shopping-cart mr-1"></i>
+                            Add to Cart
+                        </button>
+                        <a href="#" 
+                           onclick="buyNowWhatsApp({{ $product->id }}, '{{ addslashes($product->name) }}', {{ $product->price }}, '{{ $product->formatted_price }}')"
+                           class="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-2.5 rounded-lg font-bold text-xs active:scale-95 transition-all shadow-lg flex items-center justify-center">
+                            <i class="fab fa-whatsapp mr-1 text-lg"></i>
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Quantity Selection and Action Buttons - Desktop -->
@@ -282,8 +294,16 @@ use Illuminate\Support\Str;
                     <div class="flex space-x-4">
                         <button onclick="addToCartWithQuantity({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->main_image_url }}', 'quantity-desktop')"
                                 class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg">
+                            <i class="fas fa-shopping-cart mr-2"></i>
                             Add to Cart
                         </button>
+                        <a href="#" 
+                           onclick="buyNowWhatsApp({{ $product->id }}, '{{ addslashes($product->name) }}', {{ $product->price }}, '{{ $product->formatted_price }}', 'quantity-desktop')"
+                           target="_blank"
+                           class="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all shadow-lg flex items-center justify-center">
+                            <i class="fab fa-whatsapp mr-2 text-lg"></i>
+                            Buy Now
+                        </a>
                         <button onclick="toggleWishlist({{ $product->id }}, '{{ $product->name }}')"
                                 class="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center hover:border-gray-400 transition-colors wishlist-btn">
                             <i class="fas fa-heart text-gray-400"></i>
@@ -292,14 +312,10 @@ use Illuminate\Support\Str;
                 </div>
 
                 <!-- Quick Info - Compact on Mobile -->
-                <div class="grid grid-cols-2 gap-2 md:gap-4 pt-3 md:pt-4 border-t border-gray-200">
-                    <div class="text-center p-2 md:p-3 bg-gray-50 rounded-lg md:rounded-xl">
-                        <div class="text-lg md:text-2xl font-bold text-gray-900">{{ $product->stock_quantity }}</div>
-                        <div class="text-[10px] md:text-sm text-gray-500 mt-0.5 md:mt-1">In Stock</div>
-                    </div>
-                    <div class="text-center p-2 md:p-3 bg-gray-50 rounded-lg md:rounded-xl">
-                        <div class="text-lg md:text-2xl font-bold text-gray-900">{{ $product->reviews_count }}</div>
-                        <div class="text-[10px] md:text-sm text-gray-500 mt-0.5 md:mt-1">Reviews</div>
+                <div class="pt-3 md:pt-4 border-t border-gray-200">
+                    <div class="text-center p-3 md:p-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg md:rounded-xl border border-gray-200">
+                        <div class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{{ $product->stock_quantity }}</div>
+                        <div class="text-xs md:text-sm text-gray-600 font-medium">Items Available in Stock</div>
                     </div>
                 </div>
             </div>
@@ -324,8 +340,14 @@ use Illuminate\Support\Str;
         <!-- Description -->
         @if($product->description)
             <div class="mt-6 md:mt-12">
-                <h2 class="text-lg md:text-2xl font-bold text-gray-900 mb-3 md:mb-6">Description</h2>
-                <div class="bg-white rounded-lg border border-gray-200 p-4 md:p-6">
+                <div class="flex items-center justify-between mb-4 md:mb-6">
+                    <h2 class="text-lg md:text-2xl font-bold text-gray-900">Product Description</h2>
+                    <div class="hidden md:flex items-center space-x-2 text-sm text-gray-500">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Detailed information</span>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl border-2 border-gray-200 shadow-sm p-5 md:p-8 hover:shadow-md transition-shadow duration-300">
                     <div class="product-description prose prose-sm md:prose-base max-w-none text-gray-700 leading-relaxed">
                         {!! html_entity_decode($product->description, ENT_QUOTES, 'UTF-8') !!}
                     </div>
@@ -856,6 +878,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Make updateMainImage globally accessible immediately
     window.updateMainImage = updateMainImage;
+    
+    // WhatsApp Buy Now function
+    window.buyNowWhatsApp = function(productId, productName, productPrice, formattedPrice, quantityInputId = 'quantity') {
+        const quantityInput = document.getElementById(quantityInputId);
+        const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+        const totalPrice = productPrice * quantity;
+        const formattedTotalPrice = new Intl.NumberFormat('en-KE', {
+            style: 'currency',
+            currency: 'KES',
+            minimumFractionDigits: 0
+        }).format(totalPrice);
+        
+        const message = `Hi! I want to buy:\n\n*${productName}*\nQuantity: ${quantity}\nPrice: ${formattedPrice} each\nTotal: ${formattedTotalPrice}\n\nProduct URL: ${window.location.href}`;
+        const whatsappUrl = `https://wa.me/254799071107?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    };
     
     // Global function for onclick handlers - must be accessible from inline onclick
     window.updateProductImage = function(index) {

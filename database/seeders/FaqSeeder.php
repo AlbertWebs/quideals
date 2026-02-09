@@ -16,8 +16,8 @@ class FaqSeeder extends Seeder
         $faqs = [
             // General Questions
             [
-                'question' => 'What is Speed and Style Hub?',
-                'answer' => 'Speed and Style Hub is Kenya\'s premier destination for fashion, beauty, and lifestyle products. We offer a wide range of products including women\'s and men\'s fashion, skincare, makeup, accessories, and fragrances from top brands at competitive prices.',
+                'question' => 'What is Quideals?',
+                'answer' => 'Quideals is Kenya\'s premier destination for home and kitchen appliances. We offer a wide range of quality products including kitchen appliances, home decor, kitchenware, and cookware from top brands at competitive prices.',
                 'category' => 'general',
                 'order' => 1,
                 'is_active' => true

@@ -113,7 +113,7 @@ class ContactSettingsSeeder extends Seeder
             // Footer Settings
             [
                 'key' => 'site_name',
-                'value' => 'Speed and Style Hub',
+                'value' => 'Quideals',
                 'type' => 'text',
                 'group' => 'general',
                 'label' => 'Site Name',
@@ -201,7 +201,7 @@ class ContactSettingsSeeder extends Seeder
             ],
             [
                 'key' => 'footer_copyright',
-                'value' => '© 2025 Speed and Style Hub. Designed & Developed by <a href="https://designekta.com" target="_blank" class="text-white hover:text-pink-400 transition-colors">Designekta Studios</a>.',
+                'value' => '© 2025 Quideals. Designed & Developed by <a href="https://designekta.com" target="_blank" class="text-white hover:text-pink-400 transition-colors">Designekta Studios</a>.',
                 'type' => 'textarea',
                 'group' => 'footer',
                 'label' => 'Copyright Text',

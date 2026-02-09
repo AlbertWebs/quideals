@@ -5,7 +5,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Page Header -->
         <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">About Speed and Style Hub</h1>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">About Quideals</h1>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">
                 We are Kenya’s ultimate destination for fashion-forward styles, beauty essentials, and curated elegance—empowering confidence through fashion and self-care.
             </p>
@@ -17,7 +17,7 @@
                 <div>
                     <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
                     <p class="text-gray-600 mb-4">
-                        Founded in 2020, Speed and Style Hub began with a simple mission: to redefine fashion and beauty in Kenya by blending style, quality, and affordability. What started as a small boutique has flourished into a beloved lifestyle brand.
+                        Founded in 2020, Quideals began with a simple mission: to provide quality home and kitchen appliances in Kenya by blending style, quality, and affordability. What started as a small business has flourished into a beloved brand.
                     </p>
                     <p class="text-gray-600 mb-4">
                         We believe fashion is an expression of identity. That's why we handpick each piece—from bold statement outfits to subtle beauty staples—ensuring it meets our standards for comfort, confidence, and charm.
@@ -103,7 +103,7 @@
 
         <!-- Why Choose Us -->
         <div>
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Why Choose Speed and Style Hub?</h2>
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Why Choose Quideals?</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="text-center">
                     <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">

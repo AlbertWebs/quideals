@@ -1,7 +1,7 @@
 {
-  "name": "Speed and Style Hub - Fashion & Beauty",
-  "short_name": "Speed & Style",
-  "description": "Your ultimate destination for stylish clothing and premium beauty products. Discover the latest fashion trends and self-care essentials.",
+  "name": "Quideals - Home & Kitchen Appliances",
+  "short_name": "Quideals",
+  "description": "Your ultimate destination for quality home and kitchen appliances. Discover premium products at competitive prices.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

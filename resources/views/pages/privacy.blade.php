@@ -21,7 +21,7 @@ use App\Models\Setting;
             <div class="p-8">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">Introduction</h2>
                 <p class="text-gray-600 mb-4">
-                    At Speed and Style Hub, we are committed to protecting your privacy and ensuring the security of your personal information.
+                    At Quideals, we are committed to protecting your privacy and ensuring the security of your personal information.
                     This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website,
                     use our services, or interact with us in any way.
                 </p>
