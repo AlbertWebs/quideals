@@ -124,14 +124,14 @@
                             </div>
                             <div class="flex flex-col items-start">
                                 <span class="font-bold text-lg">Filters</span>
-                                @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'rating', 'sort']))
-                                    <span class="text-xs opacity-90">{{ count(array_filter(request()->only(['search', 'category', 'min_price', 'max_price', 'rating', 'sort']))) }} active</span>
+                                @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))
+                                    <span class="text-xs opacity-90">{{ count(array_filter(request()->only(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))) }} active</span>
                                 @else
                                     <span class="text-xs opacity-90">Tap to filter</span>
                                 @endif
                             </div>
-                            @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'rating', 'sort']))
-                                <span class="bg-white text-blue-600 text-xs font-bold rounded-full px-3 py-1 ml-2">{{ count(array_filter(request()->only(['search', 'category', 'min_price', 'max_price', 'rating', 'sort']))) }}</span>
+                            @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))
+                                <span class="bg-white text-blue-600 text-xs font-bold rounded-full px-3 py-1 ml-2">{{ count(array_filter(request()->only(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))) }}</span>
                             @endif
                         </div>
                         <i class="fas fa-chevron-down text-white text-lg transition-transform duration-300" id="filter-toggle-icon"></i>
@@ -162,7 +162,7 @@
                                 <i class="fas fa-filter text-blue-600 mr-2"></i>
                                 Filters
                             </h3>
-                            @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'rating', 'sort']))
+                            @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))
                                 <a href="{{ route('products.index') }}" class="text-xs text-red-600 hover:text-red-700 font-semibold">
                                     Clear All
                                 </a>
@@ -170,7 +170,7 @@
                         </div>
                         
                         <!-- Mobile Clear All Button -->
-                        @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'rating', 'sort']))
+                        @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))
                             <div class="lg:hidden mb-4">
                                 <a href="{{ route('products.index') }}" class="w-full flex items-center justify-center px-4 py-3 bg-red-50 border-2 border-red-200 text-red-600 rounded-xl font-semibold transition-all active:scale-95">
                                     <i class="fas fa-times-circle mr-2"></i>
@@ -248,31 +248,37 @@
                         </form>
                     </div>
 
-                    <!-- Rating Filter - Enhanced -->
+                    <!-- Stock Availability Filter -->
                     <div class="mb-6">
                         <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
-                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                            Rating
+                            <i class="fas fa-box text-blue-500 mr-2"></i>
+                            Stock Availability
                         </label>
                         <div class="space-y-2">
-                            @for($i = 5; $i >= 1; $i--)
-                                <a href="{{ route('products.index', ['rating' => $i] + request()->except('rating')) }}"
-                                   class="flex items-center justify-between p-4 rounded-xl transition-all active:scale-95 {{ request('rating') == $i ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300' : 'bg-gray-50 active:bg-gray-100' }}">
-                                    <div class="flex items-center">
-                                        <div class="flex items-center mr-3">
-                                            @for($star = 1; $star <= 5; $star++)
-                                                <svg class="w-5 h-5 {{ $star <= $i ? 'text-yellow-400' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                                </svg>
-                                            @endfor
-                                        </div>
-                                        <span class="text-base font-semibold {{ request('rating') == $i ? 'text-yellow-700' : 'text-gray-700' }}">{{ $i }}+ Stars</span>
-                                    </div>
-                                    @if(request('rating') == $i)
-                                        <i class="fas fa-check-circle text-yellow-600 text-lg"></i>
-                                    @endif
-                                </a>
-                            @endfor
+                            <a href="{{ route('products.index', ['stock' => 'in_stock'] + request()->except('stock')) }}"
+                               class="flex items-center justify-between p-4 rounded-xl transition-all active:scale-95 {{ request('stock') == 'in_stock' ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300' : 'bg-gray-50 active:bg-gray-100' }}">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span class="text-base font-semibold {{ request('stock') == 'in_stock' ? 'text-green-700' : 'text-gray-700' }}">In Stock</span>
+                                </div>
+                                @if(request('stock') == 'in_stock')
+                                    <i class="fas fa-check-circle text-green-600 text-lg"></i>
+                                @endif
+                            </a>
+                            <a href="{{ route('products.index', ['stock' => 'out_of_stock'] + request()->except('stock')) }}"
+                               class="flex items-center justify-between p-4 rounded-xl transition-all active:scale-95 {{ request('stock') == 'out_of_stock' ? 'bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-300' : 'bg-gray-50 active:bg-gray-100' }}">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span class="text-base font-semibold {{ request('stock') == 'out_of_stock' ? 'text-red-700' : 'text-gray-700' }}">Out of Stock</span>
+                                </div>
+                                @if(request('stock') == 'out_of_stock')
+                                    <i class="fas fa-check-circle text-red-600 text-lg"></i>
+                                @endif
+                            </a>
                         </div>
                     </div>
                     </div>
@@ -339,7 +345,7 @@
                             <option value="latest" {{ request('sort', 'latest') == 'latest' ? 'selected' : '' }}>Latest</option>
                             <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Price: Low to High</option>
                             <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Price: High to Low</option>
-                            <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>Highest Rated</option>
+                            <option value="stock" {{ request('sort') == 'stock' ? 'selected' : '' }}>Stock: High to Low</option>
                             <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Most Popular</option>
                             <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Name A-Z</option>
                         </select>

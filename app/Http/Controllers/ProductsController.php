@@ -48,9 +48,13 @@ class ProductsController extends Controller
             $query->where('price', '<=', $request->max_price);
         }
         
-        // Rating filter
-        if ($request->filled('rating')) {
-            $query->where('rating', '>=', $request->rating);
+        // Stock availability filter
+        if ($request->filled('stock')) {
+            if ($request->stock === 'in_stock') {
+                $query->where('stock_quantity', '>', 0);
+            } elseif ($request->stock === 'out_of_stock') {
+                $query->where('stock_quantity', '<=', 0);
+            }
         }
         
         // Sort products
@@ -62,11 +66,11 @@ class ProductsController extends Controller
             case 'price_high':
                 $query->orderBy('price', 'desc');
                 break;
-            case 'rating':
-                $query->orderBy('rating', 'desc')->orderBy('reviews_count', 'desc');
-                break;
             case 'popular':
                 $query->orderBy('reviews_count', 'desc');
+                break;
+            case 'stock':
+                $query->orderBy('stock_quantity', 'desc');
                 break;
             case 'name':
                 $query->orderBy('name', 'asc');
@@ -101,7 +105,7 @@ class ProductsController extends Controller
                     ->where('category_id', $category->id)
                     ->whereNotNull('image')
                     ->orderBy('is_featured', 'desc')
-                    ->orderBy('rating', 'desc')
+                    ->orderBy('stock_quantity', 'desc')
                     ->first();
             }
         } elseif ($request->filled('brand')) {
@@ -113,7 +117,7 @@ class ProductsController extends Controller
                     ->where('brand_id', $brand->id)
                     ->whereNotNull('image')
                     ->orderBy('is_featured', 'desc')
-                    ->orderBy('rating', 'desc')
+                    ->orderBy('stock_quantity', 'desc')
                     ->first();
             }
         }

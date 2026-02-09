@@ -49,13 +49,6 @@ use Illuminate\Support\Str;
             "@type": "Organization",
             "name": "Speed and Style Hub"
         }
-    },
-    "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "' . $product->rating . '",
-        "reviewCount": "' . $product->reviews_count . '",
-        "bestRating": "5",
-        "worstRating": "1"
     }
 }
 </script>' !!}
@@ -197,16 +190,29 @@ use Illuminate\Support\Str;
                     </div>
                 @endif
 
-                <!-- Rating - Compact on Mobile -->
-                <div class="flex items-center flex-wrap gap-1.5">
-                    <div class="flex items-center">
-                        @for($i = 1; $i <= 5; $i++)
-                            <svg class="w-3 h-3 md:w-5 md:h-5 {{ $i <= $product->rating ? 'text-yellow-400' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                <!-- Stock Status - Prominent Display -->
+                <div class="flex items-center flex-wrap gap-2">
+                    @if($product->stock_quantity > 0)
+                        <div class="flex items-center text-green-600 bg-green-50 px-3 py-1.5 rounded-full">
+                            <svg class="w-4 h-4 md:w-5 md:h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                        @endfor
-                    </div>
-                    <span class="text-[10px] md:text-sm text-gray-500">{{ $product->rating }} ({{ $product->reviews_count }})</span>
+                            <span class="text-xs md:text-sm font-semibold">In Stock</span>
+                            @if($product->stock_quantity < 10)
+                                <span class="text-xs md:text-sm text-orange-600 ml-2">({{ $product->stock_quantity }} left)</span>
+                            @endif
+                        </div>
+                    @else
+                        <div class="flex items-center text-red-600 bg-red-50 px-3 py-1.5 rounded-full">
+                            <svg class="w-4 h-4 md:w-5 md:h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-xs md:text-sm font-semibold">Out of Stock</span>
+                        </div>
+                    @endif
+                    @if($product->reviews_count > 0)
+                        <span class="text-[10px] md:text-sm text-gray-500">({{ $product->reviews_count }} reviews)</span>
+                    @endif
                 </div>
 
                 <!-- Price - Scaled Down on Mobile -->
@@ -288,8 +294,8 @@ use Illuminate\Support\Str;
                 <!-- Quick Info - Compact on Mobile -->
                 <div class="grid grid-cols-2 gap-2 md:gap-4 pt-3 md:pt-4 border-t border-gray-200">
                     <div class="text-center p-2 md:p-3 bg-gray-50 rounded-lg md:rounded-xl">
-                        <div class="text-lg md:text-2xl font-bold text-gray-900">{{ $product->rating }}</div>
-                        <div class="text-[10px] md:text-sm text-gray-500 mt-0.5 md:mt-1">Rating</div>
+                        <div class="text-lg md:text-2xl font-bold text-gray-900">{{ $product->stock_quantity }}</div>
+                        <div class="text-[10px] md:text-sm text-gray-500 mt-0.5 md:mt-1">In Stock</div>
                     </div>
                     <div class="text-center p-2 md:p-3 bg-gray-50 rounded-lg md:rounded-xl">
                         <div class="text-lg md:text-2xl font-bold text-gray-900">{{ $product->reviews_count }}</div>
@@ -320,7 +326,7 @@ use Illuminate\Support\Str;
             <div class="mt-6 md:mt-12">
                 <h2 class="text-lg md:text-2xl font-bold text-gray-900 mb-3 md:mb-6">Description</h2>
                 <div class="bg-white rounded-lg border border-gray-200 p-4 md:p-6">
-                    <div class="prose prose-sm md:prose-base max-w-none text-gray-700 leading-relaxed">
+                    <div class="product-description prose prose-sm md:prose-base max-w-none text-gray-700 leading-relaxed">
                         {!! html_entity_decode($product->description, ENT_QUOTES, 'UTF-8') !!}
                     </div>
                 </div>
@@ -468,6 +474,96 @@ input[type="number"] {
     .scroll-left-btn,
     .scroll-right-btn {
         display: none !important;
+    }
+}
+
+/* Enhanced spacing for product description */
+.product-description p {
+    margin-bottom: 1.25rem !important;
+    margin-top: 0 !important;
+}
+
+.product-description p:first-child {
+    margin-top: 0 !important;
+}
+
+.product-description p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.product-description h1,
+.product-description h2,
+.product-description h3,
+.product-description h4,
+.product-description h5,
+.product-description h6 {
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.product-description h1:first-child,
+.product-description h2:first-child,
+.product-description h3:first-child,
+.product-description h4:first-child,
+.product-description h5:first-child,
+.product-description h6:first-child {
+    margin-top: 0 !important;
+}
+
+.product-description ul,
+.product-description ol {
+    margin-top: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
+    padding-left: 1.5rem !important;
+}
+
+.product-description li {
+    margin-bottom: 0.75rem !important;
+}
+
+.product-description li:last-child {
+    margin-bottom: 0 !important;
+}
+
+.product-description blockquote {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    padding-left: 1.5rem !important;
+    border-left: 4px solid #e5e7eb;
+}
+
+.product-description hr {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.product-description > * + * {
+    margin-top: 1.25rem !important;
+}
+
+@media (min-width: 768px) {
+    .product-description p {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .product-description h1,
+    .product-description h2,
+    .product-description h3,
+    .product-description h4,
+    .product-description h5,
+    .product-description h6 {
+        margin-top: 2.5rem !important;
+        margin-bottom: 1.25rem !important;
+    }
+    
+    .product-description ul,
+    .product-description ol {
+        margin-top: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .product-description > * + * {
+        margin-top: 1.5rem !important;
     }
 }
 </style>
