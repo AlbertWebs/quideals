@@ -281,7 +281,9 @@ use Illuminate\Support\Str;
                 <!-- Description -->
                 <div class="pt-3 md:pt-4 border-t border-gray-200">
                     <h3 class="text-sm md:text-lg font-medium text-gray-900 mb-1.5 md:mb-2">Description</h3>
-                    <p class="text-xs md:text-base text-gray-600 leading-relaxed">{{ $product->description }}</p>
+                    <div class="text-xs md:text-base text-gray-600 leading-relaxed prose prose-sm max-w-none">
+                        {!! html_entity_decode($product->description, ENT_QUOTES, 'UTF-8') !!}
+                    </div>
                 </div>
 
                 <!-- Quick Info - Compact on Mobile -->

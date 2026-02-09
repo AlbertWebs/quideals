@@ -72,7 +72,7 @@
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Description</h2>
                 <div class="prose max-w-none">
-                    <p class="text-gray-700">{{ $product->description }}</p>
+                    <div class="text-gray-700">{!! html_entity_decode($product->description, ENT_QUOTES, 'UTF-8') !!}</div>
                 </div>
             </div>
 

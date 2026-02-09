@@ -171,12 +171,13 @@
             <!-- Description -->
             <div>
                 <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description *</label>
-                <textarea id="description" name="description" rows="4" required 
+                <textarea id="description" name="description" rows="10" required 
                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           placeholder="Enter product description...">{{ old('description', $product->description) }}</textarea>
                 @error('description')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
+                <p class="text-xs text-gray-500 mt-1">Use the editor above to format your description with HTML (bold, lists, links, etc.)</p>
             </div>
 
             <!-- Specifications -->
@@ -414,12 +415,58 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/product-images.css') }}">
+<style>
+    .ck-editor__editable {
+        min-height: 300px;
+    }
+    @media (max-width: 640px) {
+        .ck-editor__editable {
+            min-height: 250px;
+        }
+    }
+    .ck-content {
+        font-size: 14px;
+    }
+</style>
 @endpush
 
 @push('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
 <script src="{{ asset('assets/js/product-images.js') }}"></script>
 <script>
 let specificationIndex = {{ $product->specifications ? count($product->specifications) : 1 }};
+
+// Initialize CKEditor for description
+document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+        .create(document.querySelector('#description'), {
+            toolbar: {
+                items: [
+                    'heading', '|',
+                    'bold', 'italic', 'link', '|',
+                    'bulletedList', 'numberedList', '|',
+                    'outdent', 'indent', '|',
+                    'blockQuote', 'insertTable', '|',
+                    'undo', 'redo'
+                ]
+            },
+            language: 'en',
+            heading: {
+                options: [
+                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                    { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
+                ]
+            }
+        })
+        .then(editor => {
+            console.log('CKEditor initialized successfully', editor);
+        })
+        .catch(error => {
+            console.error('Error initializing CKEditor:', error);
+        });
+});
 
 // Subcategory filtering based on category selection
 document.addEventListener('DOMContentLoaded', function() {
