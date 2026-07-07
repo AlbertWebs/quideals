@@ -389,6 +389,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.getElementById('toggleEditorMode');
     const modeText = document.getElementById('editorModeText');
     const helpText = document.getElementById('editorHelpText');
+    if (descriptionTextarea) {
+        descriptionTextarea.removeAttribute('required');
+    }
 
     // Initialize CKEditor
     ClassicEditor
