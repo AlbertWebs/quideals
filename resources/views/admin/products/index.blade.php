@@ -3,7 +3,7 @@
 @section('title', 'Products')
 
 @section('content')
-    <div class="space-y-3 sm:space-y-4 lg:space-y-6">
+    <div class="space-y-3 sm:space-y-4 lg:space-y-6 overflow-x-hidden">
         <!-- Header -->
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
             <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Products</h1>
@@ -98,8 +98,8 @@
                 </div>
 
                 <!-- Products Table - Desktop -->
-                <div class="hidden md:block w-full">
-                    <table class="w-full divide-y divide-gray-200">
+                <div class="hidden md:block w-full overflow-x-auto">
+                    <table class="w-full min-w-[980px] divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-3 lg:px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
