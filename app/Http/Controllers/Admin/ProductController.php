@@ -56,6 +56,7 @@ class ProductController extends Controller
                 'name' => 'required|string|max:255',
                 'category_id' => 'required|exists:categories,id',
                 'subcategory_id' => 'nullable|exists:subcategories,id',
+                'brand_id' => 'nullable|exists:brands,id',
                 'short_description' => 'nullable|string|max:500',
                 'description' => 'required|string',
                 'brand' => 'nullable|string|max:100',
@@ -74,6 +75,14 @@ class ProductController extends Controller
             ]);
 
             $validated['slug'] = Str::slug($validated['name']);
+
+            // Keep legacy `brand` text column synced when a brand is selected.
+            if (!empty($validated['brand_id'])) {
+                $selectedBrand = Brand::find($validated['brand_id']);
+                if ($selectedBrand) {
+                    $validated['brand'] = $selectedBrand->name;
+                }
+            }
 
             // Handle main image upload
             if ($request->hasFile('image')) {
@@ -147,7 +156,14 @@ class ProductController extends Controller
                 'trace' => $e->getTraceAsString(),
                 'input' => $request->except(['image', 'images'])
             ]);
-            return redirect()->back()->withInput()->with('error', 'Failed to create product. Please try again.');
+            $message = app()->hasDebugModeEnabled()
+                ? 'Failed to create product: ' . $e->getMessage()
+                : 'Failed to create product. Please try again.';
+
+            return redirect()->back()
+                ->withInput()
+                ->with('error', $message)
+                ->withErrors(['product_create' => $message]);
         }
     }
 

@@ -11,7 +11,7 @@ class ProductsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::with(['category', 'brand'])->active()->inStock();
+        $query = Product::with('category')->active()->inStock();
         
         // Category filter
         if ($request->filled('category')) {
@@ -144,7 +144,7 @@ class ProductsController extends Controller
     
     public function show($slug)
     {
-        $product = Product::with(['category', 'brand'])
+        $product = Product::with('category')
             ->active()
             ->where('slug', $slug)
             ->firstOrFail();

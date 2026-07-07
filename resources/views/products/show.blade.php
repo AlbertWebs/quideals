@@ -37,7 +37,7 @@ use Illuminate\Support\Str;
     "category": "' . addslashes($product->category->name) . '",
     "brand": {
         "@type": "Brand",
-        "name": "' . addslashes(is_object($product->brand) ? ($product->brand->name ?? 'Quideals') : ($product->brand ?? 'Quideals')) . '"
+        "name": "' . addslashes($product->getAttribute('brand') ?: 'Quideals') . '"
     },
     "offers": {
         "@type": "Offer",
@@ -183,22 +183,7 @@ use Illuminate\Support\Str;
                     <div class="flex items-center flex-wrap gap-2 mt-1 md:mt-2">
                         <p class="text-gray-500 text-xs md:text-base">{{ $product->category->name }}</p>
                         @php
-                            $brandName = null;
-                            // Check if brand relationship is loaded and is an object
-                            if ($product->relationLoaded('brand')) {
-                                $brandRelation = $product->getRelation('brand');
-                                if ($brandRelation && is_object($brandRelation)) {
-                                    $brandName = $brandRelation->name;
-                                }
-                            }
-                            // If relationship not loaded or not available, check if brand is a string field
-                            if (!$brandName && $product->brand) {
-                                if (is_string($product->brand) && !empty($product->brand)) {
-                                    $brandName = $product->brand;
-                                } elseif (is_object($product->brand) && isset($product->brand->name)) {
-                                    $brandName = $product->brand->name;
-                                }
-                            }
+                            $brandName = $product->getAttribute('brand');
                         @endphp
                         @if($brandName)
                             <span class="text-gray-400 text-xs md:text-base">•</span>

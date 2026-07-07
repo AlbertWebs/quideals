@@ -18,6 +18,17 @@
 
     <!-- Create Form -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+        @if($errors->any())
+            <div class="mb-6 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-red-700">
+                <p class="font-semibold">Please fix the following errors:</p>
+                <ul class="mt-2 list-disc pl-5 text-sm space-y-1">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
