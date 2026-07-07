@@ -51,6 +51,24 @@
             </form>
         </div>
 
+        <!-- Results Summary -->
+        <div class="bg-white rounded-lg shadow px-3 sm:px-4 lg:px-6 py-3">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <div class="text-sm text-gray-700">
+                    Showing
+                    <span class="font-semibold">{{ $products->firstItem() ?? 0 }}</span>
+                    -
+                    <span class="font-semibold">{{ $products->lastItem() ?? 0 }}</span>
+                    of
+                    <span class="font-semibold">{{ $products->total() }}</span>
+                    products
+                </div>
+                <div class="text-xs text-gray-500">
+                    Page {{ $products->currentPage() }} of {{ $products->lastPage() }}
+                </div>
+            </div>
+        </div>
+
         <!-- Bulk Actions -->
         <form method="POST" action="{{ route('admin.products.bulk-action') }}" id="bulk-action-form">
             @csrf
@@ -222,11 +240,34 @@
         </form>
 
         <!-- Pagination -->
-        <div class="mt-4 sm:mt-6">
-            <div class="flex flex-wrap justify-center items-center gap-2">
-                {{ $products->links() }}
+        @if($products->hasPages())
+            <div class="mt-4 sm:mt-6 bg-white rounded-lg shadow px-3 sm:px-4 lg:px-6 py-4">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div class="text-sm text-gray-600">
+                        Results {{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }} of {{ $products->total() }}
+                    </div>
+
+                    <nav class="flex items-center gap-1.5 flex-wrap" aria-label="Pagination">
+                        <a href="{{ $products->onFirstPage() ? '#' : $products->previousPageUrl() }}"
+                           class="px-3 py-1.5 rounded-lg border text-sm {{ $products->onFirstPage() ? 'pointer-events-none text-gray-400 border-gray-200 bg-gray-50' : 'text-gray-700 border-gray-300 hover:bg-gray-50' }}">
+                            Previous
+                        </a>
+
+                        @foreach($products->getUrlRange(max(1, $products->currentPage() - 2), min($products->lastPage(), $products->currentPage() + 2)) as $page => $url)
+                            <a href="{{ $url }}"
+                               class="px-3 py-1.5 rounded-lg border text-sm {{ $page === $products->currentPage() ? 'bg-blue-600 text-white border-blue-600' : 'text-gray-700 border-gray-300 hover:bg-gray-50' }}">
+                                {{ $page }}
+                            </a>
+                        @endforeach
+
+                        <a href="{{ $products->hasMorePages() ? $products->nextPageUrl() : '#' }}"
+                           class="px-3 py-1.5 rounded-lg border text-sm {{ !$products->hasMorePages() ? 'pointer-events-none text-gray-400 border-gray-200 bg-gray-50' : 'text-gray-700 border-gray-300 hover:bg-gray-50' }}">
+                            Next
+                        </a>
+                    </nav>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 
     <script>

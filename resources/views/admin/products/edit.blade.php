@@ -18,7 +18,7 @@
 
     <!-- Edit Form -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
-        <form action="{{ route('admin.products.update', $product) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form action="{{ route('admin.products.update', $product) }}" method="POST" enctype="multipart/form-data" class="space-y-6" novalidate>
             @csrf
             @method('PUT')
             <!-- Hidden field to ensure proper form encoding -->

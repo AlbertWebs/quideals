@@ -35,7 +35,7 @@ class ProductController extends Controller
             $query->where('is_active', $request->status);
         }
 
-        $products = $query->latest()->paginate(15);
+        $products = $query->latest()->paginate(15)->withQueryString();
         $categories = Category::all();
 
         return view('admin.products.index', compact('products', 'categories'));

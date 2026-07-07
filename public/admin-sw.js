@@ -1,5 +1,5 @@
 // Admin Panel Service Worker
-const CACHE_NAME = 'admin-panel-v1';
+const CACHE_NAME = 'admin-panel-v2';
 const urlsToCache = [
   '/admin',
   '/admin/dashboard',
@@ -103,8 +103,8 @@ function syncOfflineForms() {
 self.addEventListener('push', function(event) {
   const options = {
     body: event.data ? event.data.text() : 'New update available',
-    icon: '/images/icon-192x192.png',
-    badge: '/images/icon-96x96.png',
+    icon: '/images/placeholder-product.png',
+    badge: '/images/placeholder-product.png',
     vibrate: [200, 100, 200],
     tag: 'admin-notification'
   };

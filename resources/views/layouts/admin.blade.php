@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="{{ asset('admin-manifest.json') }}">
+    <link rel="manifest" href="{{ asset('admin-manifest.json') }}?v=20260707-2">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
