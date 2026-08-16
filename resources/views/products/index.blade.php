@@ -288,7 +288,7 @@
                 <div class="mt-6 lg:mt-8 hidden lg:block">
                     <div class="bg-gradient-to-br from-white to-slate-50 rounded-2xl shadow-xl border-2 border-gray-100 p-6">
                         <h3 class="text-lg font-bold mb-6 flex items-center text-gray-900">
-                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                            <i class="fas fa-star text-brand-green mr-2"></i>
                             Featured Products
                         </h3>
                         <div class="space-y-4">

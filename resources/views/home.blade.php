@@ -66,100 +66,106 @@
 @endsection
 
 @section('content')
-    <!-- Hero Section - Enhanced & Eye-Catching -->
-    <section class="relative bg-gradient-to-br from-brand-green-light via-white to-slate-50 py-16 md:py-24 lg:py-32 overflow-hidden">
-        <!-- Animated Background Elements -->
-        <div class="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10"></div>
-        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-green-soft rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div class="absolute top-0 left-0 w-96 h-96 bg-brand-green-soft rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-lime/40 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
-        
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <!-- Left Content -->
-                <div class="text-center lg:text-left space-y-8 animate-fade-in-up">
-                    <div class="inline-block animate-bounce-subtle">
-                        <span class="inline-flex items-center px-5 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-brand-green to-brand-deep-green text-white shadow-lg shadow-brand-green border-2 border-white/20">
-                            <i class="fas fa-home mr-2 text-lg"></i>
-                            Premium Home & Kitchen Essentials
-                        </span>
-                    </div>
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-brand-navy leading-tight tracking-tight">
-                        Transform Your Home
-                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-lime via-brand-green to-brand-deep-green mt-3 animate-gradient">
-                            With Quality Appliances
-                        </span>
-                    </h1>
-                    <p class="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                        Discover premium kitchen appliances, cookware, and home essentials designed to elevate your everyday living experience.
+    <!-- Hero Section -->
+    @php
+        $heroProduct = $featuredProducts->first() ?? $trendingProducts->first();
+        $heroCategories = $categories->take(4);
+    @endphp
+    <section class="relative bg-[#F8FAFC] py-12 md:py-20 lg:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 lg:items-stretch">
+                <div class="lg:col-span-6 text-center lg:text-left flex flex-col justify-center">
+                    <p class="inline-flex items-center gap-2 mb-5 text-xs sm:text-sm font-semibold tracking-wide uppercase text-brand-navy">
+                        <span class="inline-block w-2 h-2 rounded-full bg-brand-green"></span>
+                        Kenya’s home & kitchen deals
                     </p>
-                    <div class="flex flex-row gap-2 sm:gap-5 justify-center lg:justify-start">
-                        <a href="{{ route('products.index') }}" class="group flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 sm:px-10 sm:py-5 bg-gradient-to-r from-brand-green to-brand-deep-green text-white font-bold rounded-xl hover:from-brand-deep-green hover:to-brand-deep-green transition-all duration-300 shadow-xl shadow-brand-green hover:shadow-2xl hover:shadow-brand-green transform hover:-translate-y-0.5 hover:scale-105 text-xs sm:text-lg">
-                            <span>Shop Now</span>
-                            <i class="fas fa-arrow-right ml-1.5 sm:ml-3 group-hover:translate-x-1 transition-transform text-xs sm:text-base"></i>
+                    <h1 class="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-brand-navy leading-[1.12] tracking-tight">
+                        Better prices on the appliances you actually need
+                    </h1>
+                    <p class="mt-5 text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Shop cookware, kitchen gadgets, and home essentials with clear deals, trusted brands, and fast delivery.
+                    </p>
+
+                    <form action="{{ route('products.index') }}" method="GET" class="mt-7 flex w-full max-w-xl mx-auto lg:mx-0 overflow-hidden rounded-xl border border-gray-200 bg-white focus-within:border-brand-green">
+                        <input type="text"
+                               name="search"
+                               value="{{ request('search') }}"
+                               placeholder="Search products, brands, or deals..."
+                               class="flex-1 min-w-0 px-4 py-3.5 text-sm text-brand-navy border-0 outline-none focus:ring-0">
+                        <button type="submit" class="px-5 bg-brand-green text-white hover:bg-brand-deep-green transition-colors">
+                            <i class="fas fa-search"></i>
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </form>
+
+                    <div class="mt-6 flex flex-row gap-3 justify-center lg:justify-start">
+                        <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center px-6 py-3 bg-brand-green text-white font-semibold rounded-xl hover:bg-brand-deep-green transition-colors text-sm sm:text-base">
+                            Explore deals
+                            <i class="fas fa-arrow-right ml-2 text-xs"></i>
                         </a>
-                        <a href="#categories" class="group flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 sm:px-10 sm:py-5 bg-white text-brand-navy font-bold rounded-xl border-2 sm:border-3 border-brand-green hover:bg-brand-green-light transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-xs sm:text-lg">
-                            <span class="hidden sm:inline">Browse Categories</span>
-                            <span class="sm:hidden">Browse</span>
-                            <i class="fas fa-chevron-down ml-1.5 sm:ml-3 group-hover:translate-y-1 transition-transform text-xs sm:text-base"></i>
+                        <a href="#categories" class="inline-flex items-center justify-center px-6 py-3 bg-white text-brand-navy font-semibold rounded-xl border border-gray-200 hover:border-brand-green hover:bg-brand-green-light transition-colors text-sm sm:text-base">
+                            Browse categories
                         </a>
                     </div>
-                    <!-- Trust Indicators - Enhanced -->
-                    <div class="hidden md:flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-6">
-                        <div class="flex items-center space-x-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full shadow-md hover:shadow-lg transition-shadow">
-                            <div class="w-10 h-10 bg-brand-green-light rounded-full flex items-center justify-center">
-                                <i class="fas fa-shipping-fast text-brand-green text-lg"></i>
-                            </div>
-                            <span class="text-base font-semibold text-gray-800">Free Shipping</span>
+
+                    <div class="mt-8 grid grid-cols-3 max-w-md mx-auto lg:mx-0 divide-x divide-gray-200">
+                        <div class="pr-4">
+                            <p class="text-xl sm:text-2xl font-extrabold text-brand-navy">{{ $categories->count() }}+</p>
+                            <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Categories</p>
                         </div>
-                        <div class="flex items-center space-x-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full shadow-md hover:shadow-lg transition-shadow">
-                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-shield-alt text-green-600 text-lg"></i>
-                            </div>
-                            <span class="text-base font-semibold text-gray-800">Quality Guaranteed</span>
+                        <div class="px-4">
+                            <p class="text-xl sm:text-2xl font-extrabold text-brand-navy">Free</p>
+                            <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Delivery*</p>
                         </div>
-                        <div class="flex items-center space-x-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full shadow-md hover:shadow-lg transition-shadow">
-                            <div class="w-10 h-10 bg-brand-green-light rounded-full flex items-center justify-center">
-                                <i class="fas fa-headset text-brand-navy text-lg"></i>
-                            </div>
-                            <span class="text-base font-semibold text-gray-800">24/7 Support</span>
+                        <div class="pl-4">
+                            <p class="text-xl sm:text-2xl font-extrabold text-brand-navy">24/7</p>
+                            <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Support</p>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Right Image/Visual - Enhanced -->
-                <div class="relative hidden lg:block animate-fade-in-right">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-gradient-to-r from-brand-lime via-brand-green to-brand-deep-green rounded-3xl transform rotate-6 opacity-30 blur-2xl animate-pulse-slow"></div>
-                        <div class="relative bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-10 border-2 border-white/50 transform hover:scale-105 transition-transform duration-500">
-                            <div class="grid grid-cols-2 gap-6">
-                                <div class="bg-gradient-to-br from-brand-green-light via-white to-brand-green-soft rounded-2xl p-8 flex flex-col items-center justify-center space-y-3 transform hover:scale-110 transition-transform duration-300 shadow-lg hover:shadow-xl border-2 border-brand-green-soft">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-full flex items-center justify-center shadow-lg">
-                                        <i class="fas fa-blender text-white text-3xl"></i>
-                                    </div>
-                                    <span class="text-base font-bold text-gray-800">Kitchen</span>
+
+                <div class="lg:col-span-6 flex">
+                    @if($heroProduct)
+                        <div class="relative w-full bg-brand-navy rounded-3xl p-3 sm:p-4">
+                            <span class="absolute -top-3 left-5 z-10 inline-flex items-center px-3 py-1 rounded-full bg-brand-lime text-brand-navy text-xs font-bold">
+                                Featured deal
+                            </span>
+                            <a href="{{ route('products.show', $heroProduct->slug) }}" class="flex h-full w-full flex-col sm:flex-row bg-white rounded-2xl overflow-hidden">
+                                <div class="sm:w-[46%] bg-slate-50 flex items-center justify-center p-4 sm:p-5 min-h-[160px] sm:min-h-0">
+                                    <img src="{{ $heroProduct->main_image_url }}"
+                                         alt="{{ $heroProduct->name }}"
+                                         class="max-h-36 sm:max-h-48 w-auto object-contain">
                                 </div>
-                                <div class="bg-gradient-to-br from-brand-green-light via-white to-brand-green-soft rounded-2xl p-8 flex flex-col items-center justify-center space-y-3 transform hover:scale-110 transition-transform duration-300 shadow-lg hover:shadow-xl border-2 border-slate-200">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-brand-navy to-[#002C55] rounded-full flex items-center justify-center shadow-lg">
-                                        <i class="fas fa-couch text-white text-3xl"></i>
+                                <div class="flex-1 p-4 sm:p-5 flex flex-col justify-center text-left">
+                                    @if($heroProduct->category)
+                                        <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">{{ $heroProduct->category->name }}</p>
+                                    @endif
+                                    <h2 class="text-base sm:text-lg font-bold text-brand-navy line-clamp-2">{{ $heroProduct->name }}</h2>
+                                    <div class="mt-2 flex items-end gap-2">
+                                        <span class="text-xl font-extrabold text-brand-green">{{ $heroProduct->formatted_price }}</span>
+                                        @if($heroProduct->old_price)
+                                            <span class="text-sm text-gray-500 line-through">{{ $heroProduct->formatted_old_price }}</span>
+                                        @endif
                                     </div>
-                                    <span class="text-base font-bold text-gray-800">Home</span>
+                                    <span class="mt-4 inline-flex items-center text-sm font-semibold text-brand-navy">
+                                        View deal
+                                        <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                                    </span>
                                 </div>
-                                <div class="bg-gradient-to-br from-green-100 via-green-50 to-green-100 rounded-2xl p-8 flex flex-col items-center justify-center space-y-3 transform hover:scale-110 transition-transform duration-300 shadow-lg hover:shadow-xl border-2 border-green-200">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg">
-                                        <i class="fas fa-fire text-white text-3xl"></i>
-                                    </div>
-                                    <span class="text-base font-bold text-gray-800">Appliances</span>
-                                </div>
-                                <div class="bg-gradient-to-br from-orange-100 via-orange-50 to-orange-100 rounded-2xl p-8 flex flex-col items-center justify-center space-y-3 transform hover:scale-110 transition-transform duration-300 shadow-lg hover:shadow-xl border-2 border-orange-200">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
-                                        <i class="fas fa-utensils text-white text-3xl"></i>
-                                    </div>
-                                    <span class="text-base font-bold text-gray-800">Cookware</span>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </div>
+                    @else
+                        <div class="grid grid-cols-2 gap-3">
+                            @foreach($heroCategories as $category)
+                                <a href="{{ route('products.index', ['category' => $category->slug]) }}" class="bg-white rounded-2xl border border-gray-200 p-6 text-center hover:border-brand-green/45 transition-colors">
+                                    <div class="mx-auto mb-3 w-12 h-12 rounded-full bg-brand-green-light flex items-center justify-center text-brand-navy">
+                                        <i class="{{ $category->icon }} text-lg"></i>
+                                    </div>
+                                    <span class="text-sm font-bold text-brand-navy">{{ $category->name }}</span>
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -169,13 +175,8 @@
     <section class="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50 relative">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <div class="inline-block mb-2">
-                    <span class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full text-sm font-bold shadow-lg">
-                        ⭐ FEATURED
-                    </span>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600">Featured Products</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-brand-navy mb-2">
+                    Featured Products
                 </h2>
                 <p class="text-xl text-gray-600 font-medium">Handpicked premium selections for you</p>
             </div>
@@ -190,7 +191,7 @@
 
             @if($featuredProducts->count() > 0)
                 <div class="text-center mt-8 sm:mt-12">
-                    <a href="{{ route('products.index', ['sort' => 'featured']) }}" class="inline-flex items-center px-6 py-3 sm:px-10 sm:py-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-bold rounded-xl hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-lg">
+                    <a href="{{ route('products.index', ['sort' => 'featured']) }}" class="inline-flex items-center px-6 py-3 sm:px-10 sm:py-4 bg-brand-green text-white font-bold rounded-xl hover:bg-brand-deep-green transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-lg">
                         <span>View All Featured</span>
                         <i class="fas fa-arrow-right ml-2 sm:ml-3 text-sm sm:text-base"></i>
                     </a>
@@ -310,7 +311,7 @@
                 <!-- Featured Products -->
                 <div class="bg-white rounded-2xl border-2 border-gray-200 p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
                     <h3 class="text-2xl font-bold mb-8 text-gray-900 flex items-center">
-                        <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mr-3 shadow-lg">
+                        <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center mr-3 shadow-lg">
                             <i class="fas fa-star text-white text-xl"></i>
                         </div>
                         Featured Products
