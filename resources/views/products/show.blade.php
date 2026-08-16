@@ -132,7 +132,7 @@ use Illuminate\Support\Str;
                             @foreach($product->all_images_urls as $index => $imageUrl)
                                 <img src="{{ $imageUrl }}"
                                      alt="{{ $product->name }} - Image {{ $index + 1 }}"
-                                     class="flex-shrink-0 w-20 h-20 object-cover rounded cursor-pointer border-2 {{ $index === 0 ? 'border-blue-500' : 'border-transparent hover:border-gray-300' }} thumbnail-image"
+                                     class="flex-shrink-0 w-20 h-20 object-cover rounded cursor-pointer border-2 {{ $index === 0 ? 'border-brand-green' : 'border-transparent hover:border-gray-300' }} thumbnail-image"
                                      data-image="{{ $imageUrl }}"
                                      style="width: 80px; height: 80px; min-width: 80px; max-width: 80px;">
                             @endforeach
@@ -157,7 +157,7 @@ use Illuminate\Support\Str;
                     <div class="md:hidden mt-3">
                         <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-2 justify-center" id="mobileThumbnailContainer">
                             @foreach($product->all_images_urls as $index => $imageUrl)
-                                <button type="button" class="mobile-thumbnail flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all cursor-pointer {{ $index === 0 ? 'border-blue-600 shadow-md' : 'border-gray-300' }}" data-index="{{ $index }}" onclick="window.updateProductImage && window.updateProductImage({{ $index }}); return false;">
+                                <button type="button" class="mobile-thumbnail flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all cursor-pointer {{ $index === 0 ? 'border-brand-green shadow-md' : 'border-gray-300' }}" data-index="{{ $index }}" onclick="window.updateProductImage && window.updateProductImage({{ $index }}); return false;">
                                     <img src="{{ $imageUrl }}"
                                          alt="{{ $product->name }} - Image {{ $index + 1 }}"
                                          class="w-full h-full object-cover pointer-events-none"
@@ -170,7 +170,7 @@ use Illuminate\Support\Str;
                     <!-- Mobile Image Swiper Dots (Alternative) - Hidden on mobile -->
                     <div class="hidden md:flex justify-center space-x-1.5 mt-2">
                         @foreach($product->all_images_urls as $index => $imageUrl)
-                            <button class="image-dot w-1.5 h-1.5 rounded-full transition-all {{ $index === 0 ? 'bg-blue-600 w-5' : 'bg-gray-300' }}" data-index="{{ $index }}"></button>
+                            <button class="image-dot w-1.5 h-1.5 rounded-full transition-all {{ $index === 0 ? 'bg-brand-green w-5' : 'bg-gray-300' }}" data-index="{{ $index }}"></button>
                         @endforeach
                     </div>
                 @endif
@@ -232,7 +232,7 @@ use Illuminate\Support\Str;
 
                 <!-- Badge -->
                 @if($product->badge)
-                    <div class="inline-flex items-center px-2 py-1 rounded-full text-[10px] md:text-sm font-medium bg-blue-100 text-blue-800">
+                    <div class="inline-flex items-center px-2 py-1 rounded-full text-[10px] md:text-sm font-medium bg-brand-green-light text-brand-navy">
                         {{ $product->badge }}
                     </div>
                 @endif
@@ -253,7 +253,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="flex gap-2">
                         <button onclick="addToCartWithQuantity({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->main_image_url }}', 'quantity')"
-                                class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2.5 rounded-lg font-bold text-xs active:scale-95 transition-all shadow-lg">
+                                class="flex-1 bg-gradient-to-r from-brand-green to-brand-deep-green text-white px-3 py-2.5 rounded-lg font-bold text-xs active:scale-95 transition-all shadow-lg">
                             <i class="fas fa-shopping-cart mr-1"></i>
                             Add to Cart
                         </button>
@@ -278,7 +278,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="flex space-x-4">
                         <button onclick="addToCartWithQuantity({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->main_image_url }}', 'quantity-desktop')"
-                                class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg">
+                                class="flex-1 bg-gradient-to-r from-brand-green to-brand-deep-green text-white px-6 py-3 rounded-lg font-semibold hover:from-brand-deep-green hover:to-brand-deep-green transition-all shadow-lg">
                             <i class="fas fa-shopping-cart mr-2"></i>
                             Add to Cart
                         </button>
@@ -332,7 +332,7 @@ use Illuminate\Support\Str;
                         <span>Detailed information</span>
                     </div>
                 </div>
-                <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl border-2 border-gray-200 shadow-sm p-5 md:p-8 hover:shadow-md transition-shadow duration-300">
+                <div class="bg-gradient-to-br from-white to-slate-50 rounded-xl border-2 border-gray-200 shadow-sm p-5 md:p-8 hover:shadow-md transition-shadow duration-300">
                     <div class="product-description prose prose-sm md:prose-base max-w-none text-gray-700 leading-relaxed">
                         {!! html_entity_decode($product->description, ENT_QUOTES, 'UTF-8') !!}
                     </div>
@@ -462,7 +462,7 @@ input[type="number"] {
 }
 
 .mobile-thumbnail:focus {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid #43C900;
     outline-offset: 2px;
 }
 
@@ -629,9 +629,9 @@ document.addEventListener('DOMContentLoaded', function() {
             imageDots.forEach((dot, i) => {
                 if (i === index) {
                     dot.classList.remove('bg-gray-300', 'w-1.5');
-                    dot.classList.add('bg-blue-600', 'w-5');
+                    dot.classList.add('bg-brand-green', 'w-5');
                 } else {
-                    dot.classList.remove('bg-blue-600', 'w-5');
+                    dot.classList.remove('bg-brand-green', 'w-5');
                     dot.classList.add('bg-gray-300', 'w-1.5');
                 }
             });
@@ -641,9 +641,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.mobile-thumbnail').forEach((thumb, i) => {
             if (i === index) {
                 thumb.classList.remove('border-gray-300');
-                thumb.classList.add('border-blue-600', 'shadow-md');
+                thumb.classList.add('border-brand-green', 'shadow-md');
             } else {
-                thumb.classList.remove('border-blue-600', 'shadow-md');
+                thumb.classList.remove('border-brand-green', 'shadow-md');
                 thumb.classList.add('border-gray-300');
             }
         });
@@ -652,9 +652,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.thumbnail-image').forEach((thumb, i) => {
             if (i === index) {
                 thumb.classList.remove('border-transparent', 'hover:border-gray-300');
-                thumb.classList.add('border-blue-500');
+                thumb.classList.add('border-brand-green');
             } else {
-                thumb.classList.remove('border-blue-500');
+                thumb.classList.remove('border-brand-green');
                 thumb.classList.add('border-transparent', 'hover:border-gray-300');
             }
         });

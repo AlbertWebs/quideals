@@ -12,7 +12,7 @@
         </div>
         <div class="flex gap-2">
             <a href="{{ route('admin.brands.edit', $brand) }}" 
-               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+               class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                 Edit Brand
             </a>
             <a href="{{ route('admin.brands.index') }}" 
@@ -84,7 +84,7 @@
                         @foreach($brand->products as $product)
                             <tr>
                                 <td class="px-6 py-4">
-                                    <a href="{{ route('admin.products.edit', $product) }}" class="text-blue-600 hover:text-blue-900">
+                                    <a href="{{ route('admin.products.edit', $product) }}" class="text-brand-green hover:text-brand-navy">
                                         {{ $product->name }}
                                     </a>
                                 </td>

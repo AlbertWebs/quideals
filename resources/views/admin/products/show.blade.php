@@ -12,7 +12,7 @@
         </div>
         <div class="flex space-x-2">
             <a href="{{ route('admin.products.edit', $product) }}" 
-               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+               class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                 Edit Product
             </a>
             <a href="{{ route('admin.products.index') }}" 
@@ -129,7 +129,7 @@
                     @if($product->badge)
                         <div>
                             <p class="text-sm text-gray-600">Badge</p>
-                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-brand-green-light text-brand-navy">
                                 {{ $product->badge }}
                             </span>
                         </div>
@@ -165,7 +165,7 @@
 
                     <div>
                         <p class="text-sm text-gray-600">Featured</p>
-                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {{ $product->is_featured ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-800' }}">
+                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {{ $product->is_featured ? 'bg-brand-green-light text-brand-navy' : 'bg-gray-100 text-gray-800' }}">
                             {{ $product->is_featured ? 'Yes' : 'No' }}
                         </span>
                     </div>
@@ -203,7 +203,7 @@
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Actions</h2>
                 <div class="space-y-2">
                     <a href="{{ route('admin.products.edit', $product) }}" 
-                       class="block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                       class="block w-full text-center bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                         Edit Product
                     </a>
                     <form method="POST" action="{{ route('admin.products.destroy', $product) }}" class="inline">

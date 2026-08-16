@@ -65,27 +65,27 @@ use App\Models\Setting;
             <div class="p-8">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">How We Use Your Information</h2>
                 <div class="space-y-4">
-                    <div class="border-l-4 border-blue-600 pl-4">
+                    <div class="border-l-4 border-brand-green pl-4">
                         <h3 class="font-semibold text-gray-900">Processing Orders</h3>
                         <p class="text-gray-600">To process and fulfill your orders, handle payments, and provide customer support.</p>
                     </div>
 
-                    <div class="border-l-4 border-blue-600 pl-4">
+                    <div class="border-l-4 border-brand-green pl-4">
                         <h3 class="font-semibold text-gray-900">Communication</h3>
                         <p class="text-gray-600">To send order confirmations, shipping updates, and respond to your inquiries.</p>
                     </div>
 
-                    <div class="border-l-4 border-blue-600 pl-4">
+                    <div class="border-l-4 border-brand-green pl-4">
                         <h3 class="font-semibold text-gray-900">Improving Services</h3>
                         <p class="text-gray-600">To analyze usage patterns and improve our website, products, and services.</p>
                     </div>
 
-                    <div class="border-l-4 border-blue-600 pl-4">
+                    <div class="border-l-4 border-brand-green pl-4">
                         <h3 class="font-semibold text-gray-900">Marketing</h3>
                         <p class="text-gray-600">To send promotional offers and newsletters (with your consent).</p>
                     </div>
 
-                    <div class="border-l-4 border-blue-600 pl-4">
+                    <div class="border-l-4 border-brand-green pl-4">
                         <h3 class="font-semibold text-gray-900">Legal Compliance</h3>
                         <p class="text-gray-600">To comply with legal obligations and protect our rights and safety.</p>
                     </div>
@@ -105,12 +105,12 @@ use App\Models\Setting;
                         <p class="text-gray-600">We may share information with trusted third-party service providers who assist us in operating our website, processing payments, and delivering products.</p>
                     </div>
 
-                    <div class="border-l-4 border-blue-500 pl-4">
+                    <div class="border-l-4 border-brand-green pl-4">
                         <h3 class="font-semibold text-gray-900">Legal Requirements</h3>
                         <p class="text-gray-600">We may disclose information when required by law or to protect our rights, property, or safety.</p>
                     </div>
 
-                    <div class="border-l-4 border-purple-500 pl-4">
+                    <div class="border-l-4 border-brand-green pl-4">
                         <h3 class="font-semibold text-gray-900">Business Transfers</h3>
                         <p class="text-gray-600">In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of the transaction.</p>
                     </div>
@@ -237,22 +237,22 @@ use App\Models\Setting;
             </div>
 
             <!-- Contact Information -->
-            <div class="bg-blue-900 p-8 text-white">
+            <div class="bg-brand-navy p-8 text-white">
                 <h2 class="text-2xl font-bold text-center mb-6">Contact Us</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="text-center">
                         <h3 class="text-lg font-semibold mb-2">Privacy Questions</h3>
-                        <p class="text-blue-200">privacy@Speedandstylehub.com</p>
-                        <p class="text-sm text-blue-300">For privacy-related inquiries</p>
+                        <p class="text-white/70">privacy@Speedandstylehub.com</p>
+                        <p class="text-sm text-white/60">For privacy-related inquiries</p>
                     </div>
                     <div class="text-center">
                         <h3 class="text-lg font-semibold mb-2">General Support</h3>
-                        <p class="text-blue-200">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
-                        <p class="text-sm text-blue-300">For general questions</p>
+                        <p class="text-white/70">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
+                        <p class="text-sm text-white/60">For general questions</p>
                     </div>
                 </div>
                 <div class="mt-6 text-center">
-                    <p class="text-blue-200">
+                    <p class="text-white/70">
                         <strong>Address:</strong> {{ Setting::get('contact_address', 'Westlands, Nairobi') }}, {{ Setting::get('contact_city', 'Kenya') }}
                     </p>
                 </div>

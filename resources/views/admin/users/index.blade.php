@@ -10,7 +10,7 @@
             <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Users</h1>
             <p class="text-sm sm:text-base text-gray-600">Manage user accounts and permissions</p>
         </div>
-        <a href="{{ route('admin.users.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
+        <a href="{{ route('admin.users.create') }}" class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
             <i class="fas fa-plus mr-2"></i>New User
         </a>
     </div>
@@ -22,13 +22,13 @@
                 <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search</label>
                 <input type="text" name="search" id="search" value="{{ request('search') }}" 
                        placeholder="Name or email"
-                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
             </div>
             
             <div>
                 <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
                 <select name="role" id="role" 
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     <option value="">All Roles</option>
                     <option value="user" {{ request('role') == 'user' ? 'selected' : '' }}>User</option>
                     <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
@@ -36,7 +36,7 @@
             </div>
             
             <div class="flex items-end">
-                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <button type="submit" class="w-full bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                     Filter
                 </button>
             </div>
@@ -61,7 +61,7 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-3">
+                                    <div class="w-10 h-10 bg-brand-green rounded-full flex items-center justify-center mr-3">
                                         <span class="text-white text-sm font-semibold">{{ substr($user->name, 0, 1) }}</span>
                                     </div>
                                     <div>
@@ -71,7 +71,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {{ $user->is_admin ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-800' }}">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {{ $user->is_admin ? 'bg-brand-green-light text-brand-navy' : 'bg-gray-100 text-gray-800' }}">
                                     {{ $user->is_admin ? 'Admin' : 'User' }}
                                 </span>
                             </td>
@@ -85,7 +85,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <a href="{{ route('admin.users.edit', $user) }}" 
-                                   class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                   class="text-brand-green hover:text-brand-navy mr-3">Edit</a>
                                 <a href="{{ route('admin.users.show', $user) }}" 
                                    class="text-green-600 hover:text-green-900 mr-3">View</a>
                                 @if($user->id !== auth()->id())

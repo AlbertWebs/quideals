@@ -15,7 +15,7 @@
         <!-- FAQ Categories -->
         <div class="mb-12">
             <div class="flex flex-wrap justify-center gap-3">
-                <button class="faq-category px-5 py-2.5 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors duration-200 text-sm" data-category="general">
+                <button class="faq-category px-5 py-2.5 bg-brand-green text-white rounded-md font-medium hover:bg-brand-deep-green transition-colors duration-200 text-sm" data-category="general">
                     General
                 </button>
                 <button class="faq-category px-5 py-2.5 bg-gray-200 text-gray-700 rounded-md font-medium hover:bg-gray-300 transition-colors duration-200 text-sm" data-category="ordering">
@@ -80,16 +80,16 @@
         </div>
 
         <!-- Contact Section -->
-        <div class="mt-16 bg-blue-900 rounded-lg p-8 text-white text-center">
+        <div class="mt-16 bg-brand-navy rounded-lg p-8 text-white text-center">
             <h2 class="text-3xl font-bold mb-4">Still Have Questions?</h2>
-            <p class="text-blue-200 mb-6">
+            <p class="text-white/70 mb-6">
                 Can't find the answer you're looking for? Our support team is here to help!
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('pages.contact') }}" class="bg-white text-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                <a href="{{ route('pages.contact') }}" class="bg-white text-brand-navy px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
                     Contact Us
                 </a>
-                <a href="{{ route('pages.technical-support') }}" class="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-900 transition-colors">
+                <a href="{{ route('pages.technical-support') }}" class="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-brand-navy transition-colors">
                     Technical Support
                 </a>
             </div>
@@ -109,11 +109,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Update button styles
             categoryButtons.forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.remove('bg-brand-green', 'text-white');
                 btn.classList.add('bg-gray-200', 'text-gray-700');
             });
             this.classList.remove('bg-gray-200', 'text-gray-700');
-            this.classList.add('bg-blue-600', 'text-white');
+            this.classList.add('bg-brand-green', 'text-white');
             
             // Show/hide sections
             faqSections.forEach(section => {

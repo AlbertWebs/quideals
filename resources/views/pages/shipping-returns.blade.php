@@ -13,11 +13,11 @@ use App\Models\Setting;
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Page Header -->
         <div class="text-center mb-12 md:mb-16">
-            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl mb-6 shadow-lg">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-2xl mb-6 shadow-lg">
                 <i class="fas fa-shipping-fast text-white text-3xl"></i>
             </div>
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Shipping & Returns</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-deep-green">Shipping & Returns</span>
             </h1>
             <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                 We want you to be completely satisfied with your home and kitchen appliance purchase. Learn about our shipping options,
@@ -28,14 +28,14 @@ use App\Models\Setting;
         <!-- Shipping Information -->
         <div class="mb-16 md:mb-20">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Shipping Information</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-deep-green">Shipping Information</span>
             </h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
                 <!-- Shipping Options -->
                 <div class="space-y-6">
-                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 md:p-8 shadow-lg">
+                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-slate-50 p-6 md:p-8 shadow-lg">
                         <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                            <i class="fas fa-truck text-blue-600 mr-3"></i>
+                            <i class="fas fa-truck text-brand-green mr-3"></i>
                             Shipping Options
                         </h3>
                         <div class="space-y-4">
@@ -44,12 +44,12 @@ use App\Models\Setting;
                                 <p class="text-gray-700 font-semibold">{{ Setting::get('footer_free_delivery_text', 'On orders over KES 5,000') }}</p>
                                 <p class="text-sm text-gray-600 mt-1">3-5 business days</p>
                             </div>
-                            <div class="border-l-4 border-blue-500 pl-5 pr-4 py-3 bg-blue-50 rounded-r-lg hover:shadow-md transition-all">
+                            <div class="border-l-4 border-brand-green pl-5 pr-4 py-3 bg-brand-green-light rounded-r-lg hover:shadow-md transition-all">
                                 <h4 class="font-bold text-gray-900 mb-1">Express Delivery</h4>
                                 <p class="text-gray-700 font-semibold">KES 1,500</p>
                                 <p class="text-sm text-gray-600 mt-1">1-2 business days</p>
                             </div>
-                            <div class="border-l-4 border-purple-500 pl-5 pr-4 py-3 bg-purple-50 rounded-r-lg hover:shadow-md transition-all">
+                            <div class="border-l-4 border-brand-green pl-5 pr-4 py-3 bg-brand-green-light rounded-r-lg hover:shadow-md transition-all">
                                 <h4 class="font-bold text-gray-900 mb-1">Same Day Delivery</h4>
                                 <p class="text-gray-700 font-semibold">KES 3,000</p>
                                 <p class="text-sm text-gray-600 mt-1">Nairobi only, order before 2 PM</p>
@@ -57,9 +57,9 @@ use App\Models\Setting;
                         </div>
                     </div>
 
-                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 md:p-8 shadow-lg">
+                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-slate-50 p-6 md:p-8 shadow-lg">
                         <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                            <i class="fas fa-map-marker-alt text-purple-600 mr-3"></i>
+                            <i class="fas fa-map-marker-alt text-brand-navy mr-3"></i>
                             Delivery Areas
                         </h3>
                         <div class="space-y-4">
@@ -85,35 +85,35 @@ use App\Models\Setting;
 
                 <!-- Delivery Process -->
                 <div class="space-y-6">
-                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 md:p-8 shadow-lg">
+                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-slate-50 p-6 md:p-8 shadow-lg">
                         <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 flex items-center">
                             <i class="fas fa-route text-green-600 mr-3"></i>
                             How Delivery Works
                         </h3>
                         <div class="space-y-5">
                             <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-all">
-                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">1</div>
+                                <div class="w-10 h-10 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-full flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">1</div>
                                 <div>
                                     <h4 class="font-bold text-gray-900 mb-1">Order Confirmation</h4>
                                     <p class="text-gray-600 text-sm">You'll receive an email confirmation with tracking details</p>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-all">
-                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">2</div>
+                                <div class="w-10 h-10 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-full flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">2</div>
                                 <div>
                                     <h4 class="font-bold text-gray-900 mb-1">Processing</h4>
                                     <p class="text-gray-600 text-sm">We'll prepare your appliance order and arrange delivery</p>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-all">
-                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">3</div>
+                                <div class="w-10 h-10 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-full flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">3</div>
                                 <div>
                                     <h4 class="font-bold text-gray-900 mb-1">Shipping</h4>
                                     <p class="text-gray-600 text-sm">Your package will be shipped via our trusted courier partners</p>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-all">
-                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">4</div>
+                                <div class="w-10 h-10 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-full flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">4</div>
                                 <div>
                                     <h4 class="font-bold text-gray-900 mb-1">Delivery</h4>
                                     <p class="text-gray-600 text-sm">You'll receive a call before delivery to confirm location and schedule</p>
@@ -122,7 +122,7 @@ use App\Models\Setting;
                         </div>
                     </div>
 
-                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 md:p-8 shadow-lg">
+                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-slate-50 p-6 md:p-8 shadow-lg">
                         <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 flex items-center">
                             <i class="fas fa-info-circle text-orange-600 mr-3"></i>
                             Important Notes
@@ -153,12 +153,12 @@ use App\Models\Setting;
         <!-- Returns Information -->
         <div class="mb-16 md:mb-20">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Returns & Refunds</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-deep-green">Returns & Refunds</span>
             </h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
                 <!-- Return Policy -->
                 <div class="space-y-6">
-                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 md:p-8 shadow-lg">
+                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-slate-50 p-6 md:p-8 shadow-lg">
                         <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 flex items-center">
                             <i class="fas fa-undo text-red-600 mr-3"></i>
                             Return Policy
@@ -169,12 +169,12 @@ use App\Models\Setting;
                                 <p class="text-gray-700 font-semibold">{{ Setting::get('footer_easy_returns_text', '15-day return window') }}</p>
                                 <p class="text-sm text-gray-600 mt-1">Must be in original condition with all packaging</p>
                             </div>
-                            <div class="border-l-4 border-blue-500 pl-5 pr-4 py-3 bg-blue-50 rounded-r-lg hover:shadow-md transition-all">
+                            <div class="border-l-4 border-brand-green pl-5 pr-4 py-3 bg-brand-green-light rounded-r-lg hover:shadow-md transition-all">
                                 <h4 class="font-bold text-gray-900 mb-1">Free Returns</h4>
                                 <p class="text-gray-700 font-semibold">We cover return shipping costs</p>
                                 <p class="text-sm text-gray-600 mt-1">For defective items or wrong products</p>
                             </div>
-                            <div class="border-l-4 border-purple-500 pl-5 pr-4 py-3 bg-purple-50 rounded-r-lg hover:shadow-md transition-all">
+                            <div class="border-l-4 border-brand-green pl-5 pr-4 py-3 bg-brand-green-light rounded-r-lg hover:shadow-md transition-all">
                                 <h4 class="font-bold text-gray-900 mb-1">Refund Processing</h4>
                                 <p class="text-gray-700 font-semibold">Refunds processed within 5-7 business days</p>
                                 <p class="text-sm text-gray-600 mt-1">Original payment method</p>
@@ -182,7 +182,7 @@ use App\Models\Setting;
                         </div>
                     </div>
 
-                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 md:p-8 shadow-lg">
+                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-slate-50 p-6 md:p-8 shadow-lg">
                         <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 flex items-center">
                             <i class="fas fa-check-circle text-green-600 mr-3"></i>
                             What Can Be Returned
@@ -210,7 +210,7 @@ use App\Models\Setting;
 
                 <!-- Return Process -->
                 <div class="space-y-6">
-                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 md:p-8 shadow-lg">
+                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-slate-50 p-6 md:p-8 shadow-lg">
                         <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 flex items-center">
                             <i class="fas fa-arrow-left text-red-600 mr-3"></i>
                             How to Return
@@ -247,7 +247,7 @@ use App\Models\Setting;
                         </div>
                     </div>
 
-                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 md:p-8 shadow-lg">
+                    <div class="border-2 border-gray-200 rounded-xl bg-gradient-to-br from-white to-slate-50 p-6 md:p-8 shadow-lg">
                         <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 flex items-center">
                             <i class="fas fa-ban text-red-600 mr-3"></i>
                             Non-Returnable Items
@@ -276,7 +276,7 @@ use App\Models\Setting;
         </div>
 
         <!-- Contact Information -->
-        <div class="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
+        <div class="bg-gradient-to-r from-brand-navy via-[#002C55] to-brand-navy rounded-2xl p-8 md:p-12 text-white shadow-2xl">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Need Help?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all block">
@@ -284,24 +284,24 @@ use App\Models\Setting;
                         <i class="fas fa-phone text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Call Us</h3>
-                    <p class="text-blue-100 font-semibold">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
-                    <p class="text-sm text-blue-200 mt-1">{{ Setting::get('business_hours_weekdays', 'Mon-Fri: 8AM-6PM') }}</p>
+                    <p class="text-white/80 font-semibold">{{ Setting::get('contact_phone', '+254 700 123 456') }}</p>
+                    <p class="text-sm text-white/70 mt-1">{{ Setting::get('business_hours_weekdays', 'Mon-Fri: 8AM-6PM') }}</p>
                 </a>
                 <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
                     <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                         <i class="fas fa-envelope text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Email Us</h3>
-                    <p class="text-blue-100 font-semibold">{{ Setting::get('contact_email', 'support@quideals.com') }}</p>
-                    <p class="text-sm text-blue-200 mt-1">24-hour response</p>
+                    <p class="text-white/80 font-semibold">{{ Setting::get('contact_email', 'support@quideals.com') }}</p>
+                    <p class="text-sm text-white/70 mt-1">24-hour response</p>
                 </div>
                 <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
                     <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                         <i class="fas fa-comments text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Live Chat</h3>
-                    <p class="text-blue-100 font-semibold">Available on website</p>
-                    <p class="text-sm text-blue-200 mt-1">Instant support</p>
+                    <p class="text-white/80 font-semibold">Available on website</p>
+                    <p class="text-sm text-white/70 mt-1">Instant support</p>
                 </div>
             </div>
         </div>

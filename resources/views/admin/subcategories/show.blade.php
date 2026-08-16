@@ -12,7 +12,7 @@
         </div>
         <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
             <a href="{{ route('admin.subcategories.edit', $subcategory->id) }}" 
-               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base text-center">
+               class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors text-sm sm:text-base text-center">
                 <i class="fas fa-edit mr-2"></i>Edit Subcategory
             </a>
             <a href="{{ route('admin.subcategories.index') }}" 
@@ -35,7 +35,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-600">Parent Category</p>
-                        <p class="font-medium text-blue-600">{{ $subcategory->category->name }}</p>
+                        <p class="font-medium text-brand-green">{{ $subcategory->category->name }}</p>
                     </div>
                     <div>
                         <p class="text-sm text-gray-600">Slug</p>
@@ -127,7 +127,7 @@
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Actions</h2>
                 <div class="space-y-2">
                     <a href="{{ route('admin.subcategories.edit', $subcategory->id) }}" 
-                       class="block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                       class="block w-full text-center bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                         Edit Subcategory
                     </a>
                     <form method="POST" action="{{ route('admin.subcategories.destroy', $subcategory->id) }}" class="inline">

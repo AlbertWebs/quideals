@@ -12,7 +12,7 @@
         </div>
         <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
             <a href="{{ route('admin.categories.edit', $category->id) }}" 
-               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base text-center">
+               class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors text-sm sm:text-base text-center">
                 <i class="fas fa-edit mr-2"></i>Edit Category
             </a>
             <a href="{{ route('admin.categories.index') }}" 
@@ -152,7 +152,7 @@
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Actions</h2>
                 <div class="space-y-2">
                     <a href="{{ route('admin.categories.edit', $category->id) }}" 
-                       class="block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                       class="block w-full text-center bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                         Edit Category
                     </a>
                     <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" class="inline">

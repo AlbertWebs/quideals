@@ -4,7 +4,7 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold text-gray-900">Edit Slide</h1>
-        <a href="{{ route('admin.carousel-slides.index') }}" class="text-blue-600 hover:text-blue-800">
+        <a href="{{ route('admin.carousel-slides.index') }}" class="text-brand-green hover:text-brand-navy">
             <i class="fas fa-arrow-left mr-2"></i>Back to Slides
         </a>
     </div>
@@ -21,7 +21,7 @@
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Slide Title *</label>
                         <input type="text" id="title" name="title" value="{{ old('title', $carouselSlide->title) }}" required 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                         @error('title')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -31,7 +31,7 @@
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description *</label>
                         <textarea id="description" name="description" rows="4" required 
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('description', $carouselSlide->description) }}</textarea>
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">{{ old('description', $carouselSlide->description) }}</textarea>
                         @error('description')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -42,7 +42,7 @@
                         <label for="button_text" class="block text-sm font-medium text-gray-700 mb-2">Button Text</label>
                         <input type="text" id="button_text" name="button_text" value="{{ old('button_text', $carouselSlide->button_text) }}" 
                                placeholder="e.g., Shop Now, Learn More"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                         @error('button_text')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -53,7 +53,7 @@
                         <label for="button_link" class="block text-sm font-medium text-gray-700 mb-2">Button Link</label>
                         <input type="text" id="button_link" name="button_link" value="{{ old('button_link', $carouselSlide->button_link) }}" 
                                placeholder="e.g., /products, https://example.com"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                         @error('button_link')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -98,7 +98,7 @@
                     <div>
                         <label for="background_color" class="block text-sm font-medium text-gray-700 mb-2">Background Color *</label>
                         <select id="background_color" name="background_color" required 
-                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                             <option value="">Select a color</option>
                             <option value="blue" {{ old('background_color', $carouselSlide->background_color) == 'blue' ? 'selected' : '' }}>Blue</option>
                             <option value="green" {{ old('background_color', $carouselSlide->background_color) == 'green' ? 'selected' : '' }}>Green</option>
@@ -119,7 +119,7 @@
                         <label for="order" class="block text-sm font-medium text-gray-700 mb-2">Display Order</label>
                         <input type="number" id="order" name="order" value="{{ old('order', $carouselSlide->order) }}" min="0" 
                                placeholder="Leave empty for auto-assignment"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                         @error('order')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -129,7 +129,7 @@
                     <div>
                         <label class="flex items-center">
                             <input type="checkbox" name="is_active" value="1" {{ old('is_active', $carouselSlide->is_active) ? 'checked' : '' }}
-                                   class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                   class="rounded border-gray-300 text-brand-green shadow-sm focus:border-brand-green focus:ring focus:ring-brand-green/30 focus:ring-opacity-50">
                             <span class="ml-2 text-sm text-gray-700">Active (display on homepage)</span>
                         </label>
                     </div>
@@ -165,7 +165,7 @@
                    class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                     Cancel
                 </a>
-                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <button type="submit" class="px-6 py-2 bg-brand-green text-white rounded-lg hover:bg-brand-deep-green transition-colors">
                     Update Slide
                 </button>
             </div>
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const colorClasses = {
                 'blue': 'from-blue-100 to-blue-200',
                 'green': 'from-green-100 to-green-200',
-                'purple': 'from-purple-100 to-purple-200',
+                'purple': 'from-purple-100 to-brand-green-soft',
                 'red': 'from-red-100 to-red-200',
                 'yellow': 'from-yellow-100 to-yellow-200',
                 'pink': 'from-pink-100 to-pink-200',

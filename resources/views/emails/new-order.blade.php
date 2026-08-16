@@ -14,7 +14,7 @@
             padding: 20px;
         }
         .header {
-            background-color: #7b2c2c;
+            background-color: #001B3D;
             color: white;
             padding: 20px;
             text-align: center;
@@ -30,7 +30,7 @@
             padding: 15px;
             margin: 15px 0;
             border-radius: 5px;
-            border-left: 4px solid #7b2c2c;
+            border-left: 4px solid #001B3D;
         }
         .item {
             display: flex;
@@ -44,10 +44,10 @@
         .total {
             font-weight: bold;
             font-size: 18px;
-            color: #7b2c2c;
+            color: #001B3D;
         }
         .customer-info {
-            background-color: #e8f4fd;
+            background-color: #F3FFE8;
             padding: 15px;
             margin: 15px 0;
             border-radius: 5px;

@@ -19,7 +19,7 @@
                 <div class="lg:col-span-2">
                     <label for="question" class="block text-sm font-medium text-gray-700 mb-2">Question *</label>
                     <input type="text" id="question" name="question" value="{{ old('question', $faq->question) }}" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('question') border-red-500 @enderror"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green @error('question') border-red-500 @enderror"
                         placeholder="Enter the question...">
                     @error('question')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -30,7 +30,7 @@
                 <div>
                     <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category *</label>
                     <select id="category" name="category" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('category') border-red-500 @enderror">
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green @error('category') border-red-500 @enderror">
                         <option value="">Select a category</option>
                         @foreach($categories as $key => $name)
                             <option value="{{ $key }}" {{ old('category', $faq->category) == $key ? 'selected' : '' }}>
@@ -47,7 +47,7 @@
                 <div>
                     <label for="order" class="block text-sm font-medium text-gray-700 mb-2">Display Order</label>
                     <input type="number" id="order" name="order" value="{{ old('order', $faq->order) }}" min="0"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('order') border-red-500 @enderror"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green @error('order') border-red-500 @enderror"
                         placeholder="0">
                     @error('order')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -59,7 +59,7 @@
                 <div class="lg:col-span-2">
                     <label class="flex items-center">
                         <input type="checkbox" name="is_active" value="1" {{ old('is_active', $faq->is_active) ? 'checked' : '' }}
-                            class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            class="rounded border-gray-300 text-brand-green shadow-sm focus:border-brand-green focus:ring focus:ring-brand-green/30 focus:ring-opacity-50">
                         <span class="ml-2 text-sm text-gray-700">Active (visible to customers)</span>
                     </label>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="lg:col-span-2">
                     <label for="answer" class="block text-sm font-medium text-gray-700 mb-2">Answer *</label>
                     <textarea id="answer" name="answer" rows="6" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('answer') border-red-500 @enderror"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green @error('answer') border-red-500 @enderror"
                         placeholder="Enter the answer...">{{ old('answer', $faq->answer) }}</textarea>
                     @error('answer')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -80,7 +80,7 @@
                 <a href="{{ route('admin.faqs.index') }}" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
                     Cancel
                 </a>
-                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <button type="submit" class="bg-brand-green text-white px-6 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                     <i class="fas fa-save mr-2"></i>Update FAQ
                 </button>
             </div>

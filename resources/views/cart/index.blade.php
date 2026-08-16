@@ -191,15 +191,15 @@ use App\Models\Setting;
                         </form>
 
                         <!-- Payment Info -->
-                        <div class="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                        <div class="mt-4 p-3 bg-brand-green-light rounded-lg border border-brand-green-soft">
                             <div class="flex items-start gap-2 mb-2">
-                                <i class="fas fa-info-circle text-blue-600 mt-0.5"></i>
-                                <h4 class="text-xs font-semibold text-blue-900">Payment & Delivery</h4>
+                                <i class="fas fa-info-circle text-brand-green mt-0.5"></i>
+                                <h4 class="text-xs font-semibold text-brand-navy">Payment & Delivery</h4>
                             </div>
-                            <p class="text-xs text-blue-800 mb-1">
+                            <p class="text-xs text-brand-navy mb-1">
                                 💵 Cash on delivery • 📱 Mobile money accepted
                             </p>
-                            <p class="text-xs text-blue-700">
+                            <p class="text-xs text-brand-navy">
                                 Delivery fees calculated based on location
                             </p>
                         </div>
@@ -215,7 +215,7 @@ use App\Models\Setting;
                 <h3 class="mt-2 text-sm font-medium text-gray-900">Your basket is empty</h3>
                 <p class="mt-1 text-sm text-gray-500">Start shopping to add items to your basket.</p>
                 <div class="mt-6">
-                    <a href="{{ route('products.index') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                    <a href="{{ route('products.index') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-green hover:bg-brand-deep-green">
                         Continue Shopping
                     </a>
                 </div>

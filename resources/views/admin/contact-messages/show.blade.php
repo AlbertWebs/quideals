@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-auto px-6 py-8">
     <div class="mb-6">
-        <a href="{{ route('admin.contact-messages.index') }}" class="text-blue-600 hover:text-blue-800 mb-4 inline-flex items-center">
+        <a href="{{ route('admin.contact-messages.index') }}" class="text-brand-green hover:text-brand-navy mb-4 inline-flex items-center">
             <i class="fas fa-arrow-left mr-2"></i>
             Back to Messages
         </a>
@@ -44,8 +44,8 @@
                     <form action="{{ route('admin.contact-messages.update-notes', $contactMessage) }}" method="POST">
                         @csrf
                         @method('PATCH')
-                        <textarea name="admin_notes" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Add notes about this message...">{{ $contactMessage->admin_notes }}</textarea>
-                        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <textarea name="admin_notes" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green" placeholder="Add notes about this message...">{{ $contactMessage->admin_notes }}</textarea>
+                        <button type="submit" class="mt-2 bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                             Save Notes
                         </button>
                     </form>
@@ -108,12 +108,12 @@
                             @method('PATCH')
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Update Status</label>
-                                <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                                     <option value="unread" {{ $contactMessage->status === 'unread' ? 'selected' : '' }}>Unread</option>
                                     <option value="read" {{ $contactMessage->status === 'read' ? 'selected' : '' }}>Read</option>
                                     <option value="replied" {{ $contactMessage->status === 'replied' ? 'selected' : '' }}>Replied</option>
                                 </select>
-                                <button type="submit" class="mt-2 w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                <button type="submit" class="mt-2 w-full bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                                     Update Status
                                 </button>
                             </div>

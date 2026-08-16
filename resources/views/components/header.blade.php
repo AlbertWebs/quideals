@@ -3,7 +3,7 @@ use App\Models\Setting;
 @endphp
 
 <!-- Top Header Bar - Enhanced -->
-<div class="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 py-2.5 hidden md:block relative overflow-hidden">
+<div class="bg-gradient-to-r from-brand-navy via-[#002C55] to-brand-navy py-2.5 hidden md:block relative overflow-hidden">
     <div class="absolute inset-0 bg-black/5"></div>
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="flex justify-between items-center text-sm">
@@ -28,33 +28,20 @@ use App\Models\Setting;
             <!-- Logo - Enhanced & Standout -->
             <div class="flex-shrink-0">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 sm:space-x-4 group">
-                    <div id="header-logo" class="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-2xl group-hover:shadow-blue-500/50 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3">
-                        <!-- Animated glow effect -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 rounded-2xl opacity-75 blur-xl group-hover:opacity-100 group-hover:blur-2xl transition-all duration-300 -z-10 animate-pulse"></div>
-                        <!-- Inner shine effect -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
-                        <!-- Icon with animation -->
-                        <i class="fas fa-home text-white text-xl sm:text-2xl md:text-3xl transition-all duration-300 group-hover:scale-110 relative z-10 drop-shadow-lg"></i>
-                        <!-- Decorative corner accent -->
-                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full opacity-80 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 shadow-lg"></div>
-                    </div>
-                    <div id="header-site-name" class="hidden sm:block transition-all duration-300">
-                        <span class="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md">
-                            {{ Setting::get('site_name', config('app.name', 'Home & Kitchen')) }}
+                    <img id="header-logo" src="{{ \App\Models\Setting::logoUrl() }}" alt="{{ Setting::get('site_name', 'Qui Deals') }}" class="h-10 sm:h-12 md:h-14 w-auto max-w-[180px] sm:max-w-[220px] md:max-w-[260px] object-contain transition-all duration-300">
+                    <div id="header-site-name" class="hidden">
+                        <span class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-navy">
+                            {{ Setting::get('site_name', config('app.name', 'Qui Deals')) }}
                         </span>
-                        <!-- Subtitle for extra prominence -->
-                        <div class="hidden md:block text-xs font-bold text-gray-500 uppercase tracking-widest mt-0.5">
-                            Premium Quality
-                        </div>
                     </div>
                 </a>
             </div>
 
             <!-- Center Search - Enhanced -->
             <div id="header-search" class="flex-1 max-w-2xl mx-4 md:mx-8 hidden md:block transition-all duration-300">
-                <form action="{{ route('products.index') }}" method="GET" class="flex shadow-xl rounded-xl overflow-hidden border-2 border-gray-200 hover:border-blue-300 transition-all">
-                    <div class="relative min-w-[180px]">
-                        <select name="category" class="header-search-input bg-gradient-to-br from-gray-50 to-gray-100 border-r-2 border-gray-300 text-gray-900 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-3 pl-4 pr-10 appearance-none cursor-pointer hover:from-gray-100 hover:to-gray-200 transition-all rounded-l-xl">
+                <form action="{{ route('products.index') }}" method="GET" class="header-search-form flex items-stretch rounded-xl overflow-hidden border border-gray-200 bg-white hover:border-brand-green/45 focus-within:border-brand-green transition-all">
+                    <div class="relative min-w-[180px] shrink-0 border-r border-gray-200 bg-slate-50">
+                        <select name="category" class="header-search-input h-full w-full bg-transparent text-brand-navy text-sm px-4 py-3 pl-4 pr-10 appearance-none cursor-pointer">
                             <option value="">All Categories</option>
                             @foreach(\App\Models\Category::active()->get() as $category)
                                 <option value="{{ $category->slug }}" {{ request('category') == $category->slug ? 'selected' : '' }}>
@@ -62,17 +49,14 @@ use App\Models\Setting;
                                 </option>
                             @endforeach
                         </select>
-                        <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none text-sm"></i>
+                        <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs"></i>
                     </div>
-                    <div class="relative flex-1 flex items-center bg-white">
-                        <input type="text" name="search" value="{{ request('search') }}" 
-                               class="header-search-input bg-white text-gray-900 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-3 border-0 outline-none transition-all duration-300" 
+                    <div class="relative flex-1 flex items-center bg-white min-w-0">
+                        <input type="text" name="search" value="{{ request('search') }}"
+                               class="header-search-input h-full w-full bg-white text-brand-navy text-sm px-4 py-3"
                                placeholder="Search for products...">
-                        <button type="submit" class="absolute right-3 text-gray-400 hover:text-blue-600 transition-colors">
-                            <i class="fas fa-search text-lg"></i>
-                        </button>
                     </div>
-                    <button type="submit" class="header-search-btn bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 hover:from-blue-700 hover:to-purple-700 transition-all font-semibold rounded-r-xl shadow-lg hover:shadow-xl">
+                    <button type="submit" class="header-search-btn bg-brand-green text-white px-5 hover:bg-brand-deep-green transition-colors font-semibold shrink-0">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
@@ -81,13 +65,13 @@ use App\Models\Setting;
             <!-- Right Side - Enhanced -->
             <div class="flex items-center space-x-4 md:space-x-6">
                 <!-- Desktop Elements -->
-                <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="hidden lg:flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors cursor-pointer group">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center group-hover:from-blue-600 group-hover:to-purple-600 transition-all">
+                <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="hidden lg:flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-50 hover:bg-brand-green-light transition-colors cursor-pointer group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-full flex items-center justify-center group-hover:from-brand-deep-green group-hover:to-brand-deep-green transition-all">
                         <i class="fas fa-phone text-white text-sm"></i>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-xs text-gray-500 group-hover:text-blue-600">Call Us</span>
-                        <span class="text-sm font-semibold text-gray-900 group-hover:text-blue-600">{{ Setting::get('contact_phone', '+254 700 123 456') }}</span>
+                        <span class="text-xs text-gray-500 group-hover:text-brand-deep-green">Call Us</span>
+                        <span class="text-sm font-semibold text-gray-900 group-hover:text-brand-deep-green">{{ Setting::get('contact_phone', '+254 700 123 456') }}</span>
                     </div>
                 </a>
                 
@@ -98,9 +82,9 @@ use App\Models\Setting;
 
                 <!-- Basket with Dropdown - Enhanced -->
                 <div class="relative group hidden md:block">
-                    <a href="{{ route('cart.index') }}" class="flex items-center space-x-3 relative p-2.5 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 transition-all border-2 border-transparent hover:border-blue-200">
+                    <a href="{{ route('cart.index') }}" class="flex items-center space-x-3 relative p-2.5 rounded-xl bg-gradient-to-br from-brand-green-light to-brand-green-soft hover:from-brand-green-soft hover:to-brand-green-light transition-all border-2 border-transparent hover:border-brand-green/45">
                         <div class="relative">
-                            <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                            <div class="w-10 h-10 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-full flex items-center justify-center shadow-lg">
                                 <i class="fas fa-shopping-basket text-white"></i>
                             </div>
                             <span class="absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-lg cart-count">0</span>
@@ -113,9 +97,9 @@ use App\Models\Setting;
 
                     <!-- Basket Dropdown - Enhanced -->
                     <div class="absolute right-0 top-full mt-3 w-96 bg-white border-2 border-gray-200 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform group-hover:translate-y-0 translate-y-2">
-                        <div class="p-5 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-2xl">
+                        <div class="p-5 border-b border-gray-200 bg-gradient-to-r from-brand-green-light to-brand-green-soft rounded-t-2xl">
                             <h3 class="text-lg font-bold text-gray-900 flex items-center">
-                                <i class="fas fa-shopping-basket text-blue-600 mr-2"></i>
+                                <i class="fas fa-shopping-basket text-brand-green mr-2"></i>
                                 Shopping Basket
                             </h3>
                         </div>
@@ -130,7 +114,7 @@ use App\Models\Setting;
                                 <span class="text-base font-semibold text-gray-700">Total:</span>
                                 <span class="text-xl font-bold text-gray-900 cart-dropdown-total">KES 0.00</span>
                             </div>
-                            <a href="{{ route('cart.index') }}" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-xl text-center block hover:from-blue-700 hover:to-purple-700 transition-all font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            <a href="{{ route('cart.index') }}" class="w-full bg-gradient-to-r from-brand-green to-brand-deep-green text-white py-3 px-4 rounded-xl text-center block hover:from-brand-deep-green hover:to-brand-deep-green transition-all font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                 View Basket
                             </a>
                         </div>
@@ -143,7 +127,7 @@ use App\Models\Setting;
                 </button>
 
                 <!-- Mobile Search Button - Compact -->
-                <button id="mobile-search-button" class="md:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white active:from-blue-700 active:to-purple-700 transition-all shadow-md">
+                <button id="mobile-search-button" class="md:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-r from-brand-green to-brand-deep-green text-white active:from-brand-deep-green active:to-brand-deep-green transition-all shadow-md">
                     <i class="fas fa-search text-base"></i>
                 </button>
             </div>
@@ -151,7 +135,7 @@ use App\Models\Setting;
     </div>
 
     <!-- Navigation Menu - Enhanced & Standout -->
-    <nav id="header-nav" class="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 hidden md:block shadow-xl relative overflow-hidden transition-all duration-300">
+    <nav id="header-nav" class="bg-gradient-to-r from-brand-navy via-[#002C55] to-brand-navy hidden md:block shadow-xl relative overflow-hidden transition-all duration-300">
         <!-- Animated background effect -->
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -210,7 +194,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     headerContent.className = headerContent.className.replace(/\bpy-[\d.]+/g, '') + ' py-1.5 sm:py-2';
                 }
                 if (headerLogo) {
-                    headerLogo.className = headerLogo.className.replace(/\b(w|h)-[\d.]+/g, '') + ' w-12 h-12 sm:w-14 sm:h-14';
+                    headerLogo.classList.remove('h-10', 'sm:h-12', 'md:h-14');
+                    headerLogo.classList.add('h-8', 'sm:h-9', 'md:h-10');
                 }
                 if (headerSiteName) {
                     const span = headerSiteName.querySelector('span');
@@ -244,7 +229,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     headerContent.className = headerContent.className.replace(/\bpy-[\d.]+/g, '') + ' py-2.5 sm:py-3 md:py-5';
                 }
                 if (headerLogo) {
-                    headerLogo.className = headerLogo.className.replace(/\b(w|h)-[\d.]+/g, '') + ' w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20';
+                    headerLogo.classList.remove('h-8', 'sm:h-9', 'md:h-10');
+                    headerLogo.classList.add('h-10', 'sm:h-12', 'md:h-14');
                 }
                 if (headerSiteName) {
                     const span = headerSiteName.querySelector('span');
@@ -323,9 +309,9 @@ document.addEventListener('DOMContentLoaded', function() {
             </button>
             <form action="{{ route('products.index') }}" method="GET" class="flex-1 flex shadow-lg rounded-xl overflow-hidden">
                 <input type="text" name="search" value="{{ request('search') }}" 
-                       class="flex-1 px-4 py-3 border-0 focus:ring-2 focus:ring-blue-500 bg-gray-50" 
+                       class="flex-1 px-4 py-3 border-0 focus:ring-2 focus:ring-brand-green/30 bg-gray-50" 
                        placeholder="Search products...">
-                <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 transition-all font-semibold">
+                <button type="submit" class="px-6 py-3 bg-gradient-to-r from-brand-green to-brand-deep-green text-white hover:from-brand-deep-green hover:to-brand-deep-green transition-all font-semibold">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
@@ -341,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Drawer Content -->
     <div class="absolute right-0 top-0 h-full w-80 md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300">
         <!-- Header - Enhanced -->
-        <div class="flex items-center justify-between p-5 border-b-2 border-gray-200 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div class="flex items-center justify-between p-5 border-b-2 border-gray-200 bg-brand-navy">
             <h2 class="text-xl font-bold text-white flex items-center">
                 <i class="fas fa-bars mr-2"></i>
                 Menu
@@ -359,9 +345,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 px-2">Categories</h3>
                     <div class="grid grid-cols-2 gap-3">
                         @foreach(\App\Models\Category::active()->take(8)->get() as $category)
-                            <a href="{{ route('products.index', ['category' => $category->slug]) }}" class="flex flex-col items-center p-4 rounded-xl bg-white hover:shadow-lg transition-all border-2 border-transparent hover:border-blue-200 transform hover:-translate-y-1">
-                                <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mb-2">
-                                    <i class="{{ $category->icon }} text-blue-600 text-lg"></i>
+                            <a href="{{ route('products.index', ['category' => $category->slug]) }}" class="flex flex-col items-center p-4 rounded-xl bg-white hover:shadow-lg transition-all border-2 border-transparent hover:border-brand-green/45 transform hover:-translate-y-1">
+                                <div class="w-12 h-12 bg-gradient-to-br from-brand-green-light to-brand-green-soft rounded-full flex items-center justify-center mb-2">
+                                    <i class="{{ $category->icon }} text-brand-green text-lg"></i>
                                 </div>
                                 <span class="text-xs font-semibold text-gray-800 text-center">{{ $category->name }}</span>
                             </a>
@@ -374,13 +360,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 px-2">Contact</h3>
                     <div class="space-y-3">
                         <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="flex items-center space-x-4 p-4 rounded-xl bg-white hover:bg-green-50 transition-colors">
-                            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center">
+                            <div class="w-10 h-10 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-lg flex items-center justify-center">
                                 <i class="fas fa-phone text-white"></i>
                             </div>
                             <span class="font-semibold text-gray-800 hover:text-green-600">{{ Setting::get('contact_phone', '+254 700 123 456') }}</span>
                         </a>
                         <div class="flex items-center space-x-4 p-4 rounded-xl bg-white">
-                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                            <div class="w-10 h-10 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-lg flex items-center justify-center">
                                 <i class="fas fa-envelope text-white"></i>
                             </div>
                             <span class="font-semibold text-gray-800 text-sm">{{ Setting::get('contact_email', 'hello@homekitchen.com') }}</span>

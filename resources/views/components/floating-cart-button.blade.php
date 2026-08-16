@@ -1,6 +1,6 @@
 <!-- Floating Cart Button - Mobile Only -->
 <a href="{{ route('cart.index') }}" 
-   class="fixed bottom-20 right-4 md:hidden z-[9998] bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all transform hover:scale-110 active:scale-95 w-14 h-14 flex items-center justify-center group floating-cart-btn"
+   class="fixed bottom-20 right-4 md:hidden z-[9998] bg-gradient-to-r from-brand-green to-brand-deep-green text-white rounded-full shadow-2xl hover:shadow-3xl transition-all transform hover:scale-110 active:scale-95 w-14 h-14 flex items-center justify-center group floating-cart-btn"
    style="display: none;">
     <div class="relative">
         <i class="fas fa-shopping-cart text-xl"></i>

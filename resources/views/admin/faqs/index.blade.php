@@ -4,7 +4,7 @@
 <div class="container mx-auto px-4 py-8">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <h1 class="text-xl sm:text-3xl font-bold text-gray-900">Manage FAQs</h1>
-        <a href="{{ route('admin.faqs.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
+        <a href="{{ route('admin.faqs.create') }}" class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
             <i class="fas fa-plus mr-2"></i>Add New FAQ
         </a>
     </div>
@@ -23,11 +23,11 @@
                 'technical' => 'Technical'
             ];
             $categoryColors = [
-                'general' => 'bg-blue-100 text-blue-600',
+                'general' => 'bg-brand-green-light text-brand-green',
                 'ordering' => 'bg-green-100 text-green-600',
                 'shipping' => 'bg-yellow-100 text-yellow-600',
                 'returns' => 'bg-red-100 text-red-600',
-                'technical' => 'bg-purple-100 text-purple-600'
+                'technical' => 'bg-brand-green-light text-brand-navy'
             ];
         @endphp
         
@@ -77,11 +77,11 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                    @if($faq->category === 'general') bg-blue-100 text-blue-800
+                                    @if($faq->category === 'general') bg-brand-green-light text-brand-navy
                                     @elseif($faq->category === 'ordering') bg-green-100 text-green-800
                                     @elseif($faq->category === 'shipping') bg-yellow-100 text-yellow-800
                                     @elseif($faq->category === 'returns') bg-red-100 text-red-800
-                                    @else bg-purple-100 text-purple-800
+                                    @else bg-brand-green-light text-brand-navy
                                     @endif">
                                     {{ ucfirst($faq->category) }}
                                 </span>
@@ -94,7 +94,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <div class="flex space-x-2">
-                                    <a href="{{ route('admin.faqs.edit', $faq) }}" class="text-blue-600 hover:text-blue-900">
+                                    <a href="{{ route('admin.faqs.edit', $faq) }}" class="text-brand-green hover:text-brand-navy">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form action="{{ route('admin.faqs.toggle-status', $faq) }}" method="POST" class="inline">
@@ -117,7 +117,7 @@
                     @empty
                         <tr>
                             <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                                No FAQs found. <a href="{{ route('admin.faqs.create') }}" class="text-blue-600 hover:text-blue-900">Create your first FAQ</a>
+                                No FAQs found. <a href="{{ route('admin.faqs.create') }}" class="text-brand-green hover:text-brand-navy">Create your first FAQ</a>
                             </td>
                         </tr>
                     @endforelse

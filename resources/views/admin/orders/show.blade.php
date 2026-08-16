@@ -116,14 +116,14 @@
                     <form method="POST" action="{{ route('admin.orders.update-status', $order) }}" class="flex space-x-2">
                         @csrf
                         @method('PATCH')
-                        <select name="status" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <select name="status" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                             <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
                             <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
                             <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
                             <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
                             <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                         </select>
-                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <button type="submit" class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                             Update
                         </button>
                     </form>
@@ -135,7 +135,7 @@
                     <form method="POST" action="{{ route('admin.orders.update-payment-status', $order) }}" class="flex space-x-2">
                         @csrf
                         @method('PATCH')
-                        <select name="payment_status" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <select name="payment_status" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                             <option value="pending" {{ $order->payment_status == 'pending' ? 'selected' : '' }}>Pending</option>
                             <option value="paid" {{ $order->payment_status == 'paid' ? 'selected' : '' }}>Paid</option>
                             <option value="failed" {{ $order->payment_status == 'failed' ? 'selected' : '' }}>Failed</option>

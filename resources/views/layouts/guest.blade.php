@@ -19,7 +19,7 @@
         
         <style>
             body {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #001B3D 0%, #002C55 100%);
             }
         </style>
     </head>
@@ -27,7 +27,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 px-4 sm:px-6">
             <div class="mb-6 sm:mb-8">
                 <a href="/" class="block">
-                    <x-application-logo class="w-16 h-16 sm:w-20 sm:h-20 fill-current text-white mx-auto" />
+                    <img src="{{ \App\Models\Setting::logoUrl('light') }}" alt="{{ \App\Models\Setting::get('site_name', 'Qui Deals') }}" class="h-12 sm:h-14 w-auto mx-auto">
                 </a>
             </div>
 

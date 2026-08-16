@@ -5,10 +5,10 @@
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold text-gray-900">Slide Details</h1>
         <div class="flex space-x-3">
-            <a href="{{ route('admin.carousel-slides.edit', $carouselSlide) }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <a href="{{ route('admin.carousel-slides.edit', $carouselSlide) }}" class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                 <i class="fas fa-edit mr-2"></i>Edit
             </a>
-            <a href="{{ route('admin.carousel-slides.index') }}" class="text-blue-600 hover:text-blue-800">
+            <a href="{{ route('admin.carousel-slides.index') }}" class="text-brand-green hover:text-brand-navy">
                 <i class="fas fa-arrow-left mr-2"></i>Back to Slides
             </a>
         </div>
@@ -63,7 +63,7 @@
                 @if($carouselSlide->button_link)
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Button Link</label>
-                        <a href="{{ $carouselSlide->button_link }}" target="_blank" class="text-blue-600 hover:text-blue-800">
+                        <a href="{{ $carouselSlide->button_link }}" target="_blank" class="text-brand-green hover:text-brand-navy">
                             {{ $carouselSlide->button_link }}
                         </a>
                     </div>
@@ -117,7 +117,7 @@
         <h2 class="text-xl font-semibold text-gray-900 mb-4">Actions</h2>
         <div class="flex flex-wrap gap-3">
             <a href="{{ route('admin.carousel-slides.edit', $carouselSlide) }}" 
-               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+               class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                 <i class="fas fa-edit mr-2"></i>Edit Slide
             </a>
             

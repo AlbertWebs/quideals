@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CarouselSlideController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\PasswordController;
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     
@@ -58,9 +59,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::patch('carousel-slides/{carouselSlide}/toggle-status', [CarouselSlideController::class, 'toggleStatus'])->name('carousel-slides.toggle-status');
     Route::post('carousel-slides/reorder', [CarouselSlideController::class, 'updateOrder'])->name('carousel-slides.reorder');
     
+    // Account password
+    Route::get('password', [PasswordController::class, 'edit'])->name('password.edit');
+    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+
     // Settings
     Route::get('settings', [SettingController::class, 'index'])->name('settings');
     Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::post('settings/logo', [SettingController::class, 'updateLogo'])->name('settings.logo');
     Route::get('settings/contact', [SettingController::class, 'contact'])->name('settings.contact');
     Route::get('settings/social', [SettingController::class, 'social'])->name('settings.social');
 }); 

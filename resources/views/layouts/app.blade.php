@@ -17,7 +17,7 @@
     <meta property="og:description" content="@yield('og_description', 'Shop premium home and kitchen appliances in Kenya. Discover quality cookware, kitchen gadgets, home essentials and more.')">
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="@yield('og_url', request()->url())">
-    <meta property="og:image" content="@yield('og_image', asset('images/logo.svg'))">
+    <meta property="og:image" content="@yield('og_image', \App\Models\Setting::logoUrl())">
     <meta property="og:image:width" content="@yield('og_image_width', '1200')">
     <meta property="og:image:height" content="@yield('og_image_height', '630')">
     <meta property="og:image:alt" content="@yield('og_image_alt', config('app.name', 'Home & Kitchen Appliances'))">
@@ -33,7 +33,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('twitter_title', config('app.name', 'Home & Kitchen Appliances'))">
     <meta name="twitter:description" content="@yield('twitter_description', 'Shop premium home and kitchen appliances in Kenya. Discover quality cookware, kitchen gadgets, home essentials and more.')">
-    <meta name="twitter:image" content="@yield('twitter_image', asset('images/logo.svg'))">
+    <meta name="twitter:image" content="@yield('twitter_image', \App\Models\Setting::logoUrl())">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ request()->url() }}">
@@ -46,7 +46,7 @@
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">
-    <meta name="theme-color" content="#1e40af">
+    <meta name="theme-color" content="#001B3D">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Home & Kitchen">

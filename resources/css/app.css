@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --brand-navy: #001B3D;
+    --brand-green: #43C900;
+    --brand-lime: #9BE600;
+    --brand-deep-green: #00A52A;
+    --brand-white: #FFFFFF;
+    --brand-green-light: #F3FFE8;
+    --brand-green-soft: #E8FFD3;
+    --brand-gradient: linear-gradient(135deg, #9BE600 0%, #43C900 50%, #00A52A 100%);
+    --text-primary: #001B3D;
+    --text-secondary: #4B5563;
+    --text-muted: #6B7280;
+    --border-light: #E5E7EB;
+    --surface-light: #F8FAFC;
+}
+
+@layer components {
+    .btn-brand {
+        @apply bg-brand-green text-white font-semibold transition-all duration-200 hover:bg-brand-deep-green focus:outline-none focus:ring-2 focus:ring-brand-green/30;
+    }
+
+    .btn-brand-navy {
+        @apply bg-brand-navy text-white font-semibold transition-all duration-200 hover:bg-[#002C55] focus:outline-none focus:ring-2 focus:ring-brand-green/30;
+    }
+
+    .btn-brand-outline {
+        @apply border border-brand-green bg-transparent text-brand-navy font-semibold transition-all duration-200 hover:bg-brand-green-light focus:outline-none focus:ring-2 focus:ring-brand-green/30;
+    }
+}
+
 /* Global Font Family */
 @layer base {
     * {
@@ -52,7 +82,7 @@
 }
 
 .carousel-dot.active {
-    background-color: #1f2937;
+    background-color: #43C900;
     background-opacity: 1;
     transform: scale(1.1);
 }
@@ -239,7 +269,7 @@ input[type="range"] {
 }
 
 input[type="range"]::-webkit-slider-track {
-    background: linear-gradient(to right, #3b82f6, #a855f7);
+    background: linear-gradient(to right, #43C900, #00A52A);
     height: 8px;
     border-radius: 4px;
 }
@@ -247,7 +277,7 @@ input[type="range"]::-webkit-slider-track {
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background: linear-gradient(to bottom, #3b82f6, #a855f7);
+    background: linear-gradient(to bottom, #43C900, #00A52A);
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -263,14 +293,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 input[type="range"]::-moz-range-track {
-    background: linear-gradient(to right, #3b82f6, #a855f7);
+    background: linear-gradient(to right, #43C900, #00A52A);
     height: 8px;
     border-radius: 4px;
     border: none;
 }
 
 input[type="range"]::-moz-range-thumb {
-    background: linear-gradient(to bottom, #3b82f6, #a855f7);
+    background: linear-gradient(to bottom, #43C900, #00A52A);
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -478,6 +508,21 @@ header.header-scrolled #header-nav {
 .header-search-input,
 .header-search-btn {
     transition: all 0.3s ease-out;
+}
+
+.header-search-form select,
+.header-search-form input {
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+}
+
+.header-search-form select:focus,
+.header-search-form input:focus {
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 /* App-like mobile experience */

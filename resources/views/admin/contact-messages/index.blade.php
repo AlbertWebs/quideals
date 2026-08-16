@@ -7,7 +7,7 @@
         <div class="flex space-x-4 w-full sm:w-auto">
             <form action="{{ route('admin.contact-messages.mark-all-read') }}" method="POST" class="inline w-full sm:w-auto">
                 @csrf
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto text-sm sm:text-base">
+                <button type="submit" class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors w-full sm:w-auto text-sm sm:text-base">
                     <i class="fas fa-check-double mr-2"></i>Mark All as Read
                 </button>
             </form>
@@ -93,7 +93,7 @@
                             {{ $message->created_at->format('M d, Y H:i') }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="{{ route('admin.contact-messages.show', $message) }}" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
+                            <a href="{{ route('admin.contact-messages.show', $message) }}" class="text-brand-green hover:text-brand-navy mr-3">View</a>
                             <form action="{{ route('admin.contact-messages.destroy', $message) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')

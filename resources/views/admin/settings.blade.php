@@ -22,41 +22,41 @@
                 <div>
                     <label for="site_name" class="block text-sm font-medium text-gray-700 mb-1">Site Name</label>
                     <input type="text" id="site_name" name="site_name" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('site_name', config('app.name')) }}">
                 </div>
 
                 <div>
                     <label for="site_description" class="block text-sm font-medium text-gray-700 mb-1">Site Description</label>
                     <textarea id="site_description" name="site_description" rows="3" 
-                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                               placeholder="Enter site description...">{{ old('site_description') }}</textarea>
                 </div>
 
                 <div>
                     <label for="admin_email" class="block text-sm font-medium text-gray-700 mb-1">Admin Email</label>
                     <input type="email" id="admin_email" name="admin_email" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('admin_email', config('mail.admin_email', 'admin@example.com')) }}">
                 </div>
 
                 <div>
                     <label for="contact_email" class="block text-sm font-medium text-gray-700 mb-1">Contact Email</label>
                     <input type="email" id="contact_email" name="contact_email" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('contact_email') }}">
                 </div>
 
                 <div>
                     <label for="contact_phone" class="block text-sm font-medium text-gray-700 mb-1">Contact Phone</label>
                     <input type="text" id="contact_phone" name="contact_phone" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('contact_phone') }}">
                 </div>
 
                 <div class="flex justify-end">
                     <button type="submit" 
-                            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            class="bg-brand-green text-white px-6 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                         Save General Settings
                     </button>
                 </div>
@@ -72,35 +72,35 @@
                 <div>
                     <label for="mail_host" class="block text-sm font-medium text-gray-700 mb-1">SMTP Host</label>
                     <input type="text" id="mail_host" name="mail_host" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('mail_host', config('mail.mailers.smtp.host')) }}">
                 </div>
 
                 <div>
                     <label for="mail_port" class="block text-sm font-medium text-gray-700 mb-1">SMTP Port</label>
                     <input type="number" id="mail_port" name="mail_port" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('mail_port', config('mail.mailers.smtp.port')) }}">
                 </div>
 
                 <div>
                     <label for="mail_username" class="block text-sm font-medium text-gray-700 mb-1">SMTP Username</label>
                     <input type="text" id="mail_username" name="mail_username" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('mail_username', config('mail.mailers.smtp.username')) }}">
                 </div>
 
                 <div>
                     <label for="mail_password" class="block text-sm font-medium text-gray-700 mb-1">SMTP Password</label>
                     <input type="password" id="mail_password" name="mail_password" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('mail_password') }}">
                 </div>
 
                 <div>
                     <label for="mail_encryption" class="block text-sm font-medium text-gray-700 mb-1">Encryption</label>
                     <select id="mail_encryption" name="mail_encryption" 
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                         <option value="tls" {{ old('mail_encryption', config('mail.mailers.smtp.encryption')) == 'tls' ? 'selected' : '' }}>TLS</option>
                         <option value="ssl" {{ old('mail_encryption', config('mail.mailers.smtp.encryption')) == 'ssl' ? 'selected' : '' }}>SSL</option>
                         <option value="" {{ old('mail_encryption', config('mail.mailers.smtp.encryption')) == '' ? 'selected' : '' }}>None</option>
@@ -125,14 +125,14 @@
                 <div>
                     <label for="order_prefix" class="block text-sm font-medium text-gray-700 mb-1">Order Number Prefix</label>
                     <input type="text" id="order_prefix" name="order_prefix" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('order_prefix', 'ORD') }}">
                 </div>
 
                 <div>
                     <label for="currency" class="block text-sm font-medium text-gray-700 mb-1">Currency</label>
                     <select id="currency" name="currency" 
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                         <option value="KES" {{ old('currency') == 'KES' ? 'selected' : '' }}>Kenyan Shilling (KES)</option>
                         <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>US Dollar (USD)</option>
                         <option value="EUR" {{ old('currency') == 'EUR' ? 'selected' : '' }}>Euro (EUR)</option>
@@ -142,14 +142,14 @@
                 <div>
                     <label for="tax_rate" class="block text-sm font-medium text-gray-700 mb-1">Tax Rate (%)</label>
                     <input type="number" id="tax_rate" name="tax_rate" step="0.01" min="0" max="100" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('tax_rate', 0) }}">
                 </div>
 
                 <div>
                     <label for="shipping_cost" class="block text-sm font-medium text-gray-700 mb-1">Default Shipping Cost</label>
                     <input type="number" id="shipping_cost" name="shipping_cost" step="0.01" min="0" 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                            value="{{ old('shipping_cost', 0) }}">
                 </div>
 

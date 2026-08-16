@@ -28,7 +28,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Category Name *</label>
                         <input type="text" id="name" name="name" required 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('name', $category->name) }}" placeholder="Enter category name">
                         @error('name')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -38,7 +38,7 @@
                     <div>
                         <label for="icon" class="block text-sm font-medium text-gray-700 mb-1">Icon (Font Awesome)</label>
                         <input type="text" id="icon" name="icon" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('icon', $category->icon) }}" placeholder="e.g., fas fa-mobile-alt">
                         <p class="text-sm text-gray-500 mt-1">Font Awesome icon class (optional)</p>
                         @error('icon')
@@ -49,7 +49,7 @@
                     <div>
                         <label for="sort_order" class="block text-sm font-medium text-gray-700 mb-1">Sort Order</label>
                         <input type="number" id="sort_order" name="sort_order" min="0" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('sort_order', $category->sort_order) }}">
                         <p class="text-sm text-gray-500 mt-1">Lower numbers appear first</p>
                         @error('sort_order')
@@ -63,7 +63,7 @@
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
                         <textarea id="description" name="description" rows="4" 
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                   placeholder="Enter category description...">{{ old('description', $category->description) }}</textarea>
                         @error('description')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -73,7 +73,7 @@
                     <div class="flex items-center space-x-4">
                         <label class="flex items-center">
                             <input type="checkbox" name="is_active" value="1" {{ old('is_active', $category->is_active) ? 'checked' : '' }}
-                                   class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                   class="rounded border-gray-300 text-brand-green focus:ring-brand-green/30">
                             <span class="ml-2 text-sm text-gray-700">Active</span>
                         </label>
                     </div>
@@ -87,7 +87,7 @@
                     Cancel
                 </a>
                 <button type="submit" 
-                        class="w-full sm:w-auto bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-sm sm:text-base font-medium">
+                        class="w-full sm:w-auto bg-brand-green text-white px-6 py-2.5 rounded-lg hover:bg-brand-deep-green active:bg-brand-navy transition-colors text-sm sm:text-base font-medium">
                     <i class="fas fa-save mr-2"></i>Update Category
                 </button>
             </div>

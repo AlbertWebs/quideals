@@ -917,9 +917,9 @@ function showNotification(message, type = 'info') {
     notification.className = `fixed bottom-4 right-4 z-[9999] p-4 rounded-lg shadow-xl transform transition-all duration-500 translate-x-full mb-16 md:mb-4`;
     
     const colors = {
-        success: 'bg-green-500 text-white',
+        success: 'bg-brand-green text-white',
         error: 'bg-red-500 text-white',
-        info: 'bg-blue-500 text-white',
+        info: 'bg-brand-navy text-white',
         warning: 'bg-yellow-500 text-white'
     };
     
@@ -1064,13 +1064,13 @@ function initializeProductImageSwitching() {
         // Update thumbnail borders immediately
         const thumbnails = document.querySelectorAll('.thumbnail-image');
         thumbnails.forEach(thumb => {
-            thumb.classList.remove('border-blue-500');
+            thumb.classList.remove('border-brand-green');
             thumb.classList.add('border-transparent');
         });
         
         // Add active border to clicked thumbnail
         thumbnail.classList.remove('border-transparent');
-        thumbnail.classList.add('border-blue-500');
+        thumbnail.classList.add('border-brand-green');
         
         // Add loading state
         mainImage.classList.add('loading');

@@ -1,6 +1,6 @@
 @props(['product'])
 
-<article class="bg-white border border-gray-200 overflow-hidden group" data-product-id="{{ $product->id }}" itemscope itemtype="https://schema.org/Product">
+<article class="bg-white border border-gray-200 hover:border-brand-green/45 overflow-hidden group transition-colors" data-product-id="{{ $product->id }}" itemscope itemtype="https://schema.org/Product">
     <div class="relative">
         <!-- Product Image with Link - Square aspect ratio -->
         <a href="{{ route('products.show', $product->slug) }}" 
@@ -18,7 +18,7 @@
         <!-- Sale Badge -->
         @if($product->badge)
             <div class="absolute top-2 left-2">
-                <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                <span class="bg-brand-lime text-brand-navy text-xs font-bold px-2 py-1 rounded">
                     {{ $product->badge }}
                 </span>
             </div>
@@ -43,10 +43,10 @@
             </button>
             
             <!-- Add to Cart Button -->
-            <button class="bg-white rounded-full p-2 shadow-md hover:bg-blue-50 active:scale-95 transition-all duration-200 z-10 w-8 h-8 flex items-center justify-center"
+            <button class="bg-white rounded-full p-2 shadow-md hover:bg-brand-green-light active:scale-95 transition-all duration-200 z-10 w-8 h-8 flex items-center justify-center"
                     onclick="addToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->main_image_url }}')"
                     title="Add to Cart">
-                <i class="fas fa-shopping-cart text-gray-400 hover:text-blue-600 transition-colors text-sm"></i>
+                <i class="fas fa-shopping-cart text-gray-400 hover:text-brand-deep-green transition-colors text-sm"></i>
             </button>
         </div>
     </div>
@@ -55,13 +55,13 @@
     <div class="p-3 sm:p-4 flex flex-col">
         <!-- Product Name with Link -->
         <a href="{{ route('products.show', $product->slug) }}" class="">
-            <h3 class="text-xs sm:text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors line-clamp-2" itemprop="name">{{ $product->name }}</h3>
+            <h3 class="text-xs sm:text-sm font-medium text-brand-navy hover:text-brand-green transition-colors line-clamp-2" itemprop="name">{{ $product->name }}</h3>
         </a>
         
         <!-- Stock Status -->
         <div class="flex items-center">
             @if($product->stock_quantity > 0)
-                <div class="flex items-center text-green-600">
+                <div class="flex items-center text-brand-deep-green">
                     <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                     </svg>
@@ -86,13 +86,13 @@
                 @if($product->old_price)
                     <span class="text-xs sm:text-sm text-gray-500 line-through order-2 sm:order-1">{{ $product->formatted_old_price }}</span>
                 @endif
-                <span class="text-base sm:text-lg font-bold text-gray-900 order-1 sm:order-2" itemprop="price" content="{{ $product->price }}">
+                <span class="text-base sm:text-lg font-bold text-brand-green order-1 sm:order-2" itemprop="price" content="{{ $product->price }}">
                     <span itemprop="priceCurrency" content="KES">{{ $product->formatted_price }}</span>
                 </span>
             </div>
             <!-- Mobile Quick Add Button - Always Visible -->
             <button onclick="addToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->main_image_url }}')" 
-                    class="md:hidden w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold text-sm active:scale-95 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                    class="md:hidden w-full bg-gradient-to-r from-brand-green to-brand-deep-green text-white py-2 px-4 rounded-lg font-semibold text-sm active:scale-95 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Add to Cart</span>
             </button>

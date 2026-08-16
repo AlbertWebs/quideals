@@ -4,7 +4,7 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <h1 class="text-xl sm:text-3xl font-bold text-gray-900">Carousel Slides</h1>
-        <a href="{{ route('admin.carousel-slides.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
+        <a href="{{ route('admin.carousel-slides.create') }}" class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
             <i class="fas fa-plus mr-2"></i>Add New Slide
         </a>
     </div>
@@ -49,7 +49,7 @@
                                     <span class="px-2 py-1 text-xs rounded-full {{ $slide->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
                                         {{ $slide->is_active ? 'Active' : 'Inactive' }}
                                     </span>
-                                    <span class="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full">
+                                    <span class="px-2 py-1 text-xs bg-brand-green-light text-brand-navy rounded-full">
                                         Order: {{ $slide->order }}
                                     </span>
                                 </div>
@@ -65,7 +65,7 @@
 
                         <!-- Actions -->
                         <div class="flex items-center space-x-2">
-                            <a href="{{ route('admin.carousel-slides.edit', $slide) }}" class="text-blue-600 hover:text-blue-800 p-2">
+                            <a href="{{ route('admin.carousel-slides.edit', $slide) }}" class="text-brand-green hover:text-brand-navy p-2">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <a href="{{ route('admin.carousel-slides.show', $slide) }}" class="text-green-600 hover:text-green-800 p-2">
@@ -93,7 +93,7 @@
                     <i class="fas fa-images text-4xl mb-4"></i>
                     <h3 class="text-lg font-semibold mb-2">No Slides Found</h3>
                     <p class="text-sm">Create your first carousel slide to get started.</p>
-                    <a href="{{ route('admin.carousel-slides.create') }}" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <a href="{{ route('admin.carousel-slides.create') }}" class="inline-block mt-4 bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                         Create First Slide
                     </a>
                 </div>
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (data.success) {
                         // Update order numbers
                         container.querySelectorAll('.slide-item').forEach((item, index) => {
-                            const orderSpan = item.querySelector('.bg-blue-100');
+                            const orderSpan = item.querySelector('.bg-brand-green-light');
                             if (orderSpan) {
                                 orderSpan.textContent = `Order: ${index + 1}`;
                             }

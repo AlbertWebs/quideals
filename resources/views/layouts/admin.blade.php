@@ -8,7 +8,7 @@
     <title>{{ config('app.name', 'Laravel') }} - Admin</title>
 
     <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#7b2c2c">
+    <meta name="theme-color" content="#001B3D">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Admin Panel">
@@ -24,6 +24,24 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#001B3D',
+                            green: '#43C900',
+                            lime: '#9BE600',
+                            'deep-green': '#00A52A',
+                            'green-light': '#F3FFE8',
+                            'green-soft': '#E8FFD3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -47,12 +65,14 @@
 <body class="bg-gray-100">
     <div x-data="{ sidebarOpen: false }" class="flex h-screen">
         <!-- Sidebar -->
-        <div class="fixed inset-y-0 left-0 z-50 w-64 bg-black transform transition-transform duration-300 ease-in-out lg:translate-x-0"
+        <div class="fixed inset-y-0 left-0 z-50 w-64 bg-brand-navy transform transition-transform duration-300 ease-in-out lg:translate-x-0"
              :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}"
              x-show="true"
              x-cloak>
-            <div class="flex items-center justify-between h-16 px-6 bg-gray-900">
-                <h1 class="text-white font-bold text-lg">Admin Panel</h1>
+            <div class="flex items-center justify-between h-16 px-6 bg-[#002C55]">
+                <a href="{{ route('home') }}" class="flex items-center">
+                    <img src="{{ \App\Models\Setting::logoUrl('light') }}" alt="{{ \App\Models\Setting::get('site_name', 'Qui Deals') }}" class="h-8 w-auto">
+                </a>
                 <button @click="sidebarOpen = false" class="text-white lg:hidden">
                     <i class="fas fa-times"></i>
                 </button>
@@ -62,7 +82,7 @@
                 <div class="px-4 space-y-2">
                     <!-- Dashboard -->
                     <a href="{{ route('admin.dashboard') }}" 
-                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-white/20' : '' }}">
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                         <i class="fas fa-tachometer-alt w-5"></i>
                         <span class="ml-3">Dashboard</span>
                     </a>
@@ -75,49 +95,49 @@
                     </div>
                     
                     <a href="{{ route('admin.products.index') }}" 
-                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.products.*') ? 'bg-white/20' : '' }}">
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.products.*') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                         <i class="fas fa-box w-5"></i>
                         <span class="ml-3">Products</span>
                     </a>
                     
                     <a href="{{ route('admin.categories.index') }}" 
-                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.categories.*') ? 'bg-white/20' : '' }}">
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.categories.*') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                         <i class="fas fa-tags w-5"></i>
                         <span class="ml-3">Categories</span>
                     </a>
                     
                     <a href="{{ route('admin.subcategories.index') }}" 
-                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.subcategories.*') ? 'bg-white/20' : '' }}">
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.subcategories.*') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                         <i class="fas fa-layer-group w-5"></i>
                         <span class="ml-3">Subcategories</span>
                     </a>
                     
                     <a href="{{ route('admin.brands.index') }}" 
-                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.brands.*') ? 'bg-white/20' : '' }}">
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.brands.*') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                         <i class="fas fa-certificate w-5"></i>
                         <span class="ml-3">Brands</span>
                     </a>
                     
                     <a href="{{ route('admin.orders.index') }}" 
-                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.orders.*') ? 'bg-white/20' : '' }}">
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.orders.*') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                         <i class="fas fa-shopping-cart w-5"></i>
                         <span class="ml-3">Orders</span>
                     </a>
                     
                                 <a href="{{ route('admin.faqs.index') }}"
-               class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.faqs.*') ? 'bg-white/20' : '' }}">
+               class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.faqs.*') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                 <i class="fas fa-question-circle w-5"></i>
                 <span class="ml-3">FAQs</span>
             </a>
 
                                 <a href="{{ route('admin.contact-messages.index') }}"
-               class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.contact-messages.*') ? 'bg-white/20' : '' }}">
+               class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.contact-messages.*') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                 <i class="fas fa-envelope w-5"></i>
                 <span class="ml-3">Messages</span>
             </a>
 
             <a href="{{ route('admin.carousel-slides.index') }}"
-               class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.carousel-slides.*') ? 'bg-white/20' : '' }}">
+               class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.carousel-slides.*') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                 <i class="fas fa-images w-5"></i>
                 <span class="ml-3">Carousel Slides</span>
             </a>
@@ -130,13 +150,13 @@
                     </div>
                     
                     <a href="{{ route('admin.users.index') }}" 
-                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.users.*') ? 'bg-white/20' : '' }}">
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.users.*') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                         <i class="fas fa-user-shield w-5"></i>
                         <span class="ml-3">Users</span>
                     </a>
                     
                     <a href="{{ route('admin.settings') }}" 
-                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.settings') ? 'bg-white/20' : '' }}">
+                       class="flex items-center px-4 py-3 text-white rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.settings') ? 'bg-white/15 border-l-4 border-brand-lime' : '' }}">
                         <i class="fas fa-cog w-5"></i>
                         <span class="ml-3">Settings</span>
                     </a>
@@ -156,14 +176,14 @@
                         <button @click="sidebarOpen = !sidebarOpen" class="text-gray-600 hidden lg:block mr-4" title="Toggle Sidebar">
                             <i class="fas fa-bars"></i>
                         </button>
-                        <h1 class="text-lg sm:text-xl font-semibold text-gray-800 truncate">@yield('title', 'Dashboard')</h1>
+                        <h1 class="text-lg sm:text-xl font-semibold text-brand-navy truncate">@yield('title', 'Dashboard')</h1>
                     </div>
                     
                     <div class="flex items-center space-x-2 sm:space-x-4">
                         <!-- Quick Stats -->
                         <div class="hidden lg:flex items-center space-x-4 text-sm text-gray-600">
                             <div class="flex items-center">
-                                <i class="fas fa-box text-blue-500 mr-1"></i>
+                                <i class="fas fa-box text-brand-green mr-1"></i>
                                 <span>{{ \App\Models\Product::count() }} products</span>
                             </div>
                             <div class="flex items-center">
@@ -175,7 +195,7 @@
                         <!-- User Menu -->
                         <div class="relative" x-data="{ open: false }">
                             <button @click="open = !open" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-                                <div class="w-8 h-8 bg-[#7b2c2cf1] rounded-full flex items-center justify-center">
+                                <div class="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center">
                                     <span class="text-white text-sm font-semibold">{{ substr(auth()->user()->name, 0, 1) }}</span>
                                 </div>
                                 <span class="hidden lg:block text-sm">{{ auth()->user()->name }}</span>
@@ -193,6 +213,11 @@
                                 <a href="{{ route('admin.users.edit', auth()->user()->id) }}" 
                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i class="fas fa-user-edit mr-2"></i>Profile
+                                </a>
+
+                                <a href="{{ route('admin.password.edit') }}" 
+                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-key mr-2"></i>Change Password
                                 </a>
                                 
                                 <a href="{{ route('admin.settings') }}" 
@@ -221,7 +246,7 @@
                 <nav class="flex mb-6" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center">
-                            <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-[#7b2c2cf1]">
+                            <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-brand-green">
                                 <i class="fas fa-home mr-2"></i>
                                 Dashboard
                             </a>
@@ -306,38 +331,38 @@
         <nav class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-300 shadow-lg z-50 lg:hidden safe-area-bottom">
             <div class="flex items-center justify-between h-20 px-1 sm:px-2">
                 <!-- Dashboard -->
-                <a href="{{ route('admin.dashboard') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 {{ request()->routeIs('admin.dashboard') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] active:bg-gray-100 transition-all rounded-lg">
+                <a href="{{ route('admin.dashboard') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 {{ request()->routeIs('admin.dashboard') ? 'text-brand-green' : 'text-gray-600' }} hover:text-brand-green active:bg-gray-100 transition-all rounded-lg">
                     <i class="fas fa-tachometer-alt text-lg sm:text-xl mb-1"></i>
                     <span class="text-[10px] sm:text-xs font-medium truncate w-full text-center">Dashboard</span>
                 </a>
 
                 <!-- Products -->
-                <a href="{{ route('admin.products.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 {{ request()->routeIs('admin.products.*') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] active:bg-gray-100 transition-all rounded-lg">
+                <a href="{{ route('admin.products.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 {{ request()->routeIs('admin.products.*') ? 'text-brand-green' : 'text-gray-600' }} hover:text-brand-green active:bg-gray-100 transition-all rounded-lg">
                     <i class="fas fa-box text-lg sm:text-xl mb-1"></i>
                     <span class="text-[10px] sm:text-xs font-medium truncate w-full text-center">Products</span>
                 </a>
 
                 <!-- Categories -->
-                <a href="{{ route('admin.categories.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 {{ request()->routeIs('admin.categories.*') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] active:bg-gray-100 transition-all rounded-lg">
+                <a href="{{ route('admin.categories.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 {{ request()->routeIs('admin.categories.*') ? 'text-brand-green' : 'text-gray-600' }} hover:text-brand-green active:bg-gray-100 transition-all rounded-lg">
                     <i class="fas fa-tags text-lg sm:text-xl mb-1"></i>
                     <span class="text-[10px] sm:text-xs font-medium truncate w-full text-center">Categories</span>
                 </a>
 
                 <!-- Brands -->
-                <a href="{{ route('admin.brands.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 {{ request()->routeIs('admin.brands.*') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] active:bg-gray-100 transition-all rounded-lg">
+                <a href="{{ route('admin.brands.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 {{ request()->routeIs('admin.brands.*') ? 'text-brand-green' : 'text-gray-600' }} hover:text-brand-green active:bg-gray-100 transition-all rounded-lg">
                     <i class="fas fa-certificate text-lg sm:text-xl mb-1"></i>
                     <span class="text-[10px] sm:text-xs font-medium truncate w-full text-center">Brands</span>
                 </a>
 
                 <!-- Orders -->
-                <a href="{{ route('admin.orders.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 relative {{ request()->routeIs('admin.orders.*') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] active:bg-gray-100 transition-all rounded-lg">
+                <a href="{{ route('admin.orders.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-0 px-1 sm:px-2 py-2 relative {{ request()->routeIs('admin.orders.*') ? 'text-brand-green' : 'text-gray-600' }} hover:text-brand-green active:bg-gray-100 transition-all rounded-lg">
                     <i class="fas fa-shopping-cart text-lg sm:text-xl mb-1"></i>
                     <span class="text-[10px] sm:text-xs font-medium truncate w-full text-center">Orders</span>
                 </a>
 
                 <!-- More Menu -->
                 <div class="relative flex-1 min-w-0 px-1 sm:px-2" x-data="{ open: false }">
-                    <button @click="open = !open" class="flex flex-col items-center justify-center w-full py-2 {{ request()->routeIs('admin.faqs.*') || request()->routeIs('admin.contact-messages.*') || request()->routeIs('admin.carousel-slides.*') || request()->routeIs('admin.users.*') || request()->routeIs('admin.settings') ? 'text-[#7b2c2cf1]' : 'text-gray-600' }} hover:text-[#7b2c2cf1] active:bg-gray-100 transition-all rounded-lg">
+                    <button @click="open = !open" class="flex flex-col items-center justify-center w-full py-2 {{ request()->routeIs('admin.faqs.*') || request()->routeIs('admin.contact-messages.*') || request()->routeIs('admin.carousel-slides.*') || request()->routeIs('admin.users.*') || request()->routeIs('admin.settings') || request()->routeIs('admin.password.*') ? 'text-brand-green' : 'text-gray-600' }} hover:text-brand-green active:bg-gray-100 transition-all rounded-lg">
                         <i class="fas fa-ellipsis-h text-lg sm:text-xl mb-1"></i>
                         <span class="text-[10px] sm:text-xs font-medium truncate w-full text-center">More</span>
                     </button>
@@ -347,25 +372,29 @@
                          @click.away="open = false"
                          x-cloak
                          class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-56 bg-white border-2 border-gray-300 rounded-xl shadow-2xl py-2 z-50">
-                        <a href="{{ route('admin.faqs.index') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.faqs.*') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                        <a href="{{ route('admin.faqs.index') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.faqs.*') ? 'bg-gray-50 text-brand-green' : '' }}">
                             <i class="fas fa-question-circle w-5 mr-3"></i>
                             <span>FAQs</span>
                         </a>
-                        <a href="{{ route('admin.contact-messages.index') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.contact-messages.*') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                        <a href="{{ route('admin.contact-messages.index') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.contact-messages.*') ? 'bg-gray-50 text-brand-green' : '' }}">
                             <i class="fas fa-envelope w-5 mr-3"></i>
                             <span>Messages</span>
                         </a>
-                        <a href="{{ route('admin.carousel-slides.index') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.carousel-slides.*') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                        <a href="{{ route('admin.carousel-slides.index') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.carousel-slides.*') ? 'bg-gray-50 text-brand-green' : '' }}">
                             <i class="fas fa-images w-5 mr-3"></i>
                             <span>Carousel</span>
                         </a>
-                        <a href="{{ route('admin.users.index') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.users.*') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                        <a href="{{ route('admin.users.index') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.users.*') ? 'bg-gray-50 text-brand-green' : '' }}">
                             <i class="fas fa-user-shield w-5 mr-3"></i>
                             <span>Users</span>
                         </a>
-                        <a href="{{ route('admin.settings') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.settings') ? 'bg-gray-50 text-[#7b2c2cf1]' : '' }}">
+                        <a href="{{ route('admin.settings') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.settings') ? 'bg-gray-50 text-brand-green' : '' }}">
                             <i class="fas fa-cog w-5 mr-3"></i>
                             <span>Settings</span>
+                        </a>
+                        <a href="{{ route('admin.password.edit') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.password.*') ? 'bg-gray-50 text-brand-green' : '' }}">
+                            <i class="fas fa-key w-5 mr-3"></i>
+                            <span>Change Password</span>
                         </a>
                     </div>
                 </div>

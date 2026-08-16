@@ -16,7 +16,7 @@ use App\Models\Setting;
         <div class="bg-white border border-gray-200 rounded-lg p-6">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-semibold text-gray-900">Contact Information</h2>
-                <a href="{{ route('admin.settings.contact') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                <a href="{{ route('admin.settings.contact') }}" class="text-brand-green hover:text-brand-navy text-sm font-medium">
                     Edit →
                 </a>
             </div>
@@ -44,7 +44,7 @@ use App\Models\Setting;
         <div class="bg-white border border-gray-200 rounded-lg p-6">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-semibold text-gray-900">Social Media</h2>
-                <a href="{{ route('admin.settings.social') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                <a href="{{ route('admin.settings.social') }}" class="text-brand-green hover:text-brand-navy text-sm font-medium">
                     Edit →
                 </a>
             </div>
@@ -67,6 +67,46 @@ use App\Models\Setting;
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="mt-8 bg-white border border-gray-200 rounded-lg p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">Site Logo</h2>
+        <p class="text-sm text-gray-600 mb-6">Upload a transparent PNG or SVG. The header uses the main logo; the footer and admin sidebar can use a light version for dark backgrounds.</p>
+
+        <form action="{{ route('admin.settings.logo') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            @csrf
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-3">Main logo</label>
+                <div class="flex items-center justify-center h-28 mb-4 rounded-lg border border-gray-200 bg-white p-4">
+                    <img src="{{ Setting::logoUrl() }}" alt="Current logo" class="max-h-20 w-auto object-contain">
+                </div>
+                <input type="file" name="site_logo" accept="image/png,image/jpeg,image/svg+xml,image/webp"
+                       class="w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-brand-green-light file:text-brand-navy file:font-medium hover:file:bg-brand-green-soft">
+                @error('site_logo')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-3">Light logo (optional)</label>
+                <div class="flex items-center justify-center h-28 mb-4 rounded-lg border border-gray-200 bg-brand-navy p-4">
+                    <img src="{{ Setting::logoUrl('light') }}" alt="Current light logo" class="max-h-20 w-auto object-contain">
+                </div>
+                <input type="file" name="site_logo_light" accept="image/png,image/jpeg,image/svg+xml,image/webp"
+                       class="w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-brand-green-light file:text-brand-navy file:font-medium hover:file:bg-brand-green-soft">
+                <p class="mt-2 text-xs text-gray-500">Used on navy backgrounds. If empty, the main logo is used.</p>
+                @error('site_logo_light')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="md:col-span-2">
+                <button type="submit" class="bg-brand-green text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-brand-deep-green transition-colors">
+                    Save logo
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 @endsection 

@@ -7,7 +7,7 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
             <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Products</h1>
-            <a href="{{ route('admin.products.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm sm:text-base w-full sm:w-auto text-center">
+            <a href="{{ route('admin.products.create') }}" class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green text-sm sm:text-base w-full sm:w-auto text-center">
                 <i class="fas fa-plus mr-2"></i>Add Product
             </a>
         </div>
@@ -19,12 +19,12 @@
                     <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Search</label>
                     <input type="text" name="search" value="{{ request('search') }}" 
                            placeholder="Search products..." 
-                           class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                           class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                 </div>
                 
                 <div>
                     <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Category</label>
-                    <select name="category" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <select name="category" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                         <option value="">All Categories</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
@@ -36,7 +36,7 @@
                 
                 <div>
                     <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Status</label>
-                    <select name="status" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <select name="status" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                         <option value="">All Status</option>
                         <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Active</option>
                         <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inactive</option>
@@ -79,7 +79,7 @@
                 <div class="px-3 sm:px-4 lg:px-6 py-2.5 sm:py-3 lg:py-4 border-b border-gray-200">
                     <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
                         <div class="flex items-center space-x-2">
-                            <input type="checkbox" id="select-all" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4 flex-shrink-0">
+                            <input type="checkbox" id="select-all" class="rounded border-gray-300 text-brand-green focus:ring-brand-green/30 w-4 h-4 flex-shrink-0">
                             <label for="select-all" class="text-xs sm:text-sm font-medium text-gray-700">Select All</label>
                         </div>
                         
@@ -128,7 +128,7 @@
                                     <td class="px-3 lg:px-4 xl:px-6 py-4">
                                         <div class="flex items-center min-w-0">
                                             <input type="checkbox" name="selected_products[]" value="{{ $product->id }}" 
-                                                   class="product-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2 flex-shrink-0 w-4 h-4">
+                                                   class="product-checkbox rounded border-gray-300 text-brand-green focus:ring-brand-green/30 mr-2 flex-shrink-0 w-4 h-4">
                                             <img src="{{ $product->main_image_url }}" alt="{{ $product->name }}" class="w-10 h-10 object-cover rounded flex-shrink-0">
                                             <div class="ml-3 min-w-0 flex-1">
                                                 <div class="text-sm font-medium text-gray-900 truncate">{{ $product->name }}</div>
@@ -152,7 +152,7 @@
                                     </td>
                                     <td class="px-3 lg:px-4 xl:px-6 py-4 text-sm font-medium whitespace-nowrap">
                                         <div class="flex items-center gap-2">
-                                            <a href="{{ route('admin.products.edit', $product) }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                            <a href="{{ route('admin.products.edit', $product) }}" class="text-brand-green hover:text-brand-navy">Edit</a>
                                             <span class="text-gray-300">|</span>
                                             <a href="{{ route('admin.products.show', $product) }}" class="text-green-600 hover:text-green-900">View</a>
                                             <span class="text-gray-300">|</span>
@@ -184,7 +184,7 @@
                         <div class="p-3 sm:p-4 bg-white">
                             <div class="flex items-start space-x-2 sm:space-x-3 mb-2 sm:mb-3">
                                 <input type="checkbox" name="selected_products[]" value="{{ $product->id }}" 
-                                       class="product-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-0.5 w-4 h-4 flex-shrink-0">
+                                       class="product-checkbox rounded border-gray-300 text-brand-green focus:ring-brand-green/30 mt-0.5 w-4 h-4 flex-shrink-0">
                                 <img src="{{ $product->main_image_url }}" alt="{{ $product->name }}" class="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded flex-shrink-0">
                                 <div class="flex-1 min-w-0">
                                     <div class="text-sm sm:text-base font-medium text-gray-900 mb-0.5 sm:mb-1 line-clamp-1">{{ $product->name }}</div>
@@ -214,7 +214,7 @@
                             </div>
                             
                             <div class="flex flex-wrap gap-1.5 sm:gap-2 pt-2 border-t border-gray-100">
-                                <a href="{{ route('admin.products.edit', $product) }}" class="flex-1 min-w-[70px] sm:min-w-[80px] text-center text-xs px-2 sm:px-3 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 active:bg-blue-200 rounded-lg font-medium transition-colors">
+                                <a href="{{ route('admin.products.edit', $product) }}" class="flex-1 min-w-[70px] sm:min-w-[80px] text-center text-xs px-2 sm:px-3 py-2 bg-brand-green-light text-brand-green hover:bg-brand-green-soft active:bg-brand-green-soft rounded-lg font-medium transition-colors">
                                     Edit
                                 </a>
                                 <a href="{{ route('admin.products.show', $product) }}" class="flex-1 min-w-[70px] sm:min-w-[80px] text-center text-xs px-2 sm:px-3 py-2 bg-green-50 text-green-600 hover:bg-green-100 active:bg-green-200 rounded-lg font-medium transition-colors">
@@ -255,7 +255,7 @@
 
                         @foreach($products->getUrlRange(max(1, $products->currentPage() - 2), min($products->lastPage(), $products->currentPage() + 2)) as $page => $url)
                             <a href="{{ $url }}"
-                               class="px-3 py-1.5 rounded-lg border text-sm {{ $page === $products->currentPage() ? 'bg-blue-600 text-white border-blue-600' : 'text-gray-700 border-gray-300 hover:bg-gray-50' }}">
+                               class="px-3 py-1.5 rounded-lg border text-sm {{ $page === $products->currentPage() ? 'bg-brand-green text-white border-brand-green' : 'text-gray-700 border-gray-300 hover:bg-gray-50' }}">
                                 {{ $page }}
                             </a>
                         @endforeach

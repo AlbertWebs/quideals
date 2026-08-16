@@ -10,7 +10,7 @@
             <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Brands</h1>
             <p class="text-sm sm:text-base text-gray-600">Manage product brands</p>
         </div>
-        <a href="{{ route('admin.brands.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
+        <a href="{{ route('admin.brands.create') }}" class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
             <i class="fas fa-plus mr-2"></i>New Brand
         </a>
     </div>
@@ -57,7 +57,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <a href="{{ route('admin.brands.edit', $brand) }}" 
-                                   class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                   class="text-brand-green hover:text-brand-navy mr-3">Edit</a>
                                 <a href="{{ route('admin.brands.show', $brand) }}" 
                                    class="text-green-600 hover:text-green-900 mr-3">View</a>
                                 <form method="POST" action="{{ route('admin.brands.destroy', $brand) }}" class="inline">
@@ -114,7 +114,7 @@
                     
                     <div class="flex flex-wrap gap-2 pt-3 border-t border-gray-100">
                         <a href="{{ route('admin.brands.edit', $brand) }}" 
-                           class="flex-1 min-w-[70px] text-center text-xs px-3 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 active:bg-blue-200 rounded-lg font-medium transition-colors">
+                           class="flex-1 min-w-[70px] text-center text-xs px-3 py-2 bg-brand-green-light text-brand-green hover:bg-brand-green-soft active:bg-brand-green-soft rounded-lg font-medium transition-colors">
                             Edit
                         </a>
                         <a href="{{ route('admin.brands.show', $brand) }}" 

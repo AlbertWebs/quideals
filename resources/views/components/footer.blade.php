@@ -4,14 +4,14 @@ use App\Helpers\SocialMediaHelper;
 @endphp
 
 <!-- Footer Top Bar -->
-<div class="hidden md:block bg-gray-800 pt-8 pb-8">
+<div class="hidden md:block bg-brand-navy pt-8 pb-8">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-8 py-2 md:py-0">
             <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-3 text-center md:text-left space-y-1 md:space-y-0">
                 <i class="fas fa-shipping-fast text-white text-sm md:text-xl mb-0.5 md:mb-0"></i>
                 <div>
                     <h4 class="text-white font-semibold text-[10px] md:text-base leading-tight">{{ Setting::get('footer_free_delivery_title', 'FREE DELIVERY') }}</h4>
-                    <p class="text-gray-300 text-[9px] md:text-sm leading-tight mt-0.5">{{ Setting::get('footer_free_delivery_text', 'On orders over KES 5,000') }}</p>
+                    <p class="text-white/75 text-[9px] md:text-sm leading-tight mt-0.5">{{ Setting::get('footer_free_delivery_text', 'On orders over KES 5,000') }}</p>
                 </div>
             </div>
 
@@ -19,7 +19,7 @@ use App\Helpers\SocialMediaHelper;
                 <i class="fas fa-credit-card text-white text-sm md:text-xl mb-0.5 md:mb-0"></i>
                 <div>
                     <h4 class="text-white font-semibold text-[10px] md:text-base leading-tight">{{ Setting::get('footer_secure_checkout_title', 'SECURE CHECKOUT') }}</h4>
-                    <p class="text-gray-300 text-[9px] md:text-sm leading-tight mt-0.5">{{ Setting::get('footer_secure_checkout_text', 'Shop safely and confidently') }}</p>
+                    <p class="text-white/75 text-[9px] md:text-sm leading-tight mt-0.5">{{ Setting::get('footer_secure_checkout_text', 'Shop safely and confidently') }}</p>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@ use App\Helpers\SocialMediaHelper;
                 <i class="fas fa-sync-alt text-white text-sm md:text-xl mb-0.5 md:mb-0"></i>
                 <div>
                     <h4 class="text-white font-semibold text-[10px] md:text-base leading-tight">{{ Setting::get('footer_easy_returns_title', 'EASY RETURNS') }}</h4>
-                    <p class="text-gray-300 text-[9px] md:text-sm leading-tight mt-0.5">{{ Setting::get('footer_easy_returns_text', '15-day return window') }}</p>
+                    <p class="text-white/75 text-[9px] md:text-sm leading-tight mt-0.5">{{ Setting::get('footer_easy_returns_text', '15-day return window') }}</p>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@ use App\Helpers\SocialMediaHelper;
                 <i class="fas fa-headset text-white text-sm md:text-xl mb-0.5 md:mb-0"></i>
                 <div>
                     <h4 class="text-white font-semibold text-[10px] md:text-base leading-tight">{{ Setting::get('footer_customer_care_title', 'CUSTOMER CARE') }}</h4>
-                    <p class="text-gray-300 text-[9px] md:text-sm leading-tight mt-0.5">{{ Setting::get('footer_customer_care_text', 'We\'re here 24/7') }}</p>
+                    <p class="text-white/75 text-[9px] md:text-sm leading-tight mt-0.5">{{ Setting::get('footer_customer_care_text', 'We\'re here 24/7') }}</p>
                 </div>
             </div>
         </div>
@@ -43,21 +43,20 @@ use App\Helpers\SocialMediaHelper;
 </div>
 
 <!-- Main Footer -->
-<footer class="bg-gray-900 text-white">
+<footer class="bg-brand-navy text-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             <!-- Company Info -->
             <div class="col-span-2 md:col-span-1 lg:col-span-1">
-                <h3 class="text-xl md:text-2xl font-bold text-blue-500 mb-3 md:mb-4 flex items-center">
-                    <i class="fas fa-home mr-2"></i>
-                    <span class="text-sm md:text-2xl">{{ Setting::get('site_name', config('app.name', 'Home & Kitchen Appliances')) }}</span>
+                <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">
+                    <img src="{{ \App\Models\Setting::logoUrl('light') }}" alt="{{ Setting::get('site_name', 'Qui Deals') }}" class="h-10 md:h-12 w-auto mb-2">
                 </h3>
-                <p class="text-gray-400 mb-2 md:mb-4 text-sm md:text-base">{{ Setting::get('contact_address', 'Westlands, Nairobi') }}, {{ Setting::get('contact_city', 'Kenya') }}</p>
-                <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="text-gray-400 hover:text-white mb-1 md:mb-2 text-sm md:text-base transition-colors inline-flex items-center block">
+                <p class="text-white/75 mb-2 md:mb-4 text-sm md:text-base">{{ Setting::get('contact_address', 'Westlands, Nairobi') }}, {{ Setting::get('contact_city', 'Kenya') }}</p>
+                <a href="tel:{{ str_replace(' ', '', Setting::get('contact_phone', '+254 700 123 456')) }}" class="text-white/75 hover:text-brand-lime mb-1 md:mb-2 text-sm md:text-base transition-colors inline-flex items-center block">
                     <i class="fas fa-phone mr-2 text-xs"></i>
                     {{ Setting::get('contact_phone', '+254 700 123 456') }}
                 </a>
-                <a href="mailto:{{ Setting::get('contact_email', 'hello@homekitchen.com') }}" class="text-gray-400 hover:text-white mb-4 md:mb-6 text-sm md:text-base transition-colors inline-flex items-center block">
+                <a href="mailto:{{ Setting::get('contact_email', 'hello@homekitchen.com') }}" class="text-white/75 hover:text-brand-lime mb-4 md:mb-6 text-sm md:text-base transition-colors inline-flex items-center block">
                     <i class="fas fa-envelope mr-2 text-xs"></i>
                     {{ Setting::get('contact_email', 'hello@homekitchen.com') }}
                 </a>
@@ -69,19 +68,19 @@ use App\Helpers\SocialMediaHelper;
                     @endphp
 
                     @if(isset($socialUrls['facebook']))
-                        <a href="{{ $socialUrls['facebook'] }}" target="_blank" class="text-gray-400 hover:text-white text-base md:text-lg"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ $socialUrls['facebook'] }}" target="_blank" class="text-white/75 hover:text-brand-lime text-base md:text-lg"><i class="fab fa-facebook-f"></i></a>
                     @endif
 
                     @if(isset($socialUrls['twitter']))
-                        <a href="{{ $socialUrls['twitter'] }}" target="_blank" class="text-gray-400 hover:text-white text-base md:text-lg"><i class="fab fa-twitter"></i></a>
+                        <a href="{{ $socialUrls['twitter'] }}" target="_blank" class="text-white/75 hover:text-brand-lime text-base md:text-lg"><i class="fab fa-twitter"></i></a>
                     @endif
 
                     @if(isset($socialUrls['instagram']))
-                        <a href="{{ $socialUrls['instagram'] }}" target="_blank" class="text-gray-400 hover:text-white text-base md:text-lg"><i class="fab fa-instagram"></i></a>
+                        <a href="{{ $socialUrls['instagram'] }}" target="_blank" class="text-white/75 hover:text-brand-lime text-base md:text-lg"><i class="fab fa-instagram"></i></a>
                     @endif
 
                     @if(isset($socialUrls['linkedin']))
-                        <a href="{{ $socialUrls['linkedin'] }}" target="_blank" class="text-gray-400 hover:text-white text-base md:text-lg"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ $socialUrls['linkedin'] }}" target="_blank" class="text-white/75 hover:text-brand-lime text-base md:text-lg"><i class="fab fa-linkedin-in"></i></a>
                     @endif
                 </div>
             </div>
@@ -90,12 +89,12 @@ use App\Helpers\SocialMediaHelper;
             <div class="col-span-1 md:col-span-1 lg:col-span-1">
                 <h4 class="text-base md:text-lg font-semibold mb-2 md:mb-4">SUPPORT</h4>
                 <ul class="space-y-1 md:space-y-2">
-                    <li><a href="{{ route('pages.contact') }}" class="text-gray-400 hover:text-white text-sm md:text-base">Contact Us</a></li>
-                    <li><a href="{{ route('pages.about') }}" class="text-gray-400 hover:text-white text-sm md:text-base">About Us</a></li>
-                    <li><a href="{{ route('pages.technical-support') }}" class="text-gray-400 hover:text-white text-sm md:text-base">Customer Support</a></li>
-                    <li><a href="{{ route('pages.shipping-returns') }}" class="text-gray-400 hover:text-white text-sm md:text-base">Shipping & Returns</a></li>
-                    <li><a href="{{ route('pages.faq') }}" class="text-gray-400 hover:text-white text-sm md:text-base">FAQs</a></li>
-                    <li><a href="{{ route('pages.privacy') }}" class="text-gray-400 hover:text-white text-sm md:text-base">Privacy Policy</a></li>
+                    <li><a href="{{ route('pages.contact') }}" class="text-white/75 hover:text-brand-lime text-sm md:text-base">Contact Us</a></li>
+                    <li><a href="{{ route('pages.about') }}" class="text-white/75 hover:text-brand-lime text-sm md:text-base">About Us</a></li>
+                    <li><a href="{{ route('pages.technical-support') }}" class="text-white/75 hover:text-brand-lime text-sm md:text-base">Customer Support</a></li>
+                    <li><a href="{{ route('pages.shipping-returns') }}" class="text-white/75 hover:text-brand-lime text-sm md:text-base">Shipping & Returns</a></li>
+                    <li><a href="{{ route('pages.faq') }}" class="text-white/75 hover:text-brand-lime text-sm md:text-base">FAQs</a></li>
+                    <li><a href="{{ route('pages.privacy') }}" class="text-white/75 hover:text-brand-lime text-sm md:text-base">Privacy Policy</a></li>
                 </ul>
             </div>
 
@@ -107,12 +106,12 @@ use App\Helpers\SocialMediaHelper;
                         $shopCategories = \App\Models\Category::active()->ordered()->take(6)->get();
                     @endphp
                     @foreach($shopCategories as $category)
-                        <li><a href="{{ route('products.index', ['category' => $category->slug]) }}" class="text-gray-400 hover:text-white flex items-center text-sm md:text-base">
+                        <li><a href="{{ route('products.index', ['category' => $category->slug]) }}" class="text-white/75 hover:text-brand-lime flex items-center text-sm md:text-base">
                             <i class="{{ $category->icon }} mr-1 md:mr-2 text-sm md:text-base"></i>
                             {{ $category->name }}
                         </a></li>
                     @endforeach
-                    <li><a href="{{ route('products.index') }}" class="text-gray-400 hover:text-white text-sm md:text-base">View All Products</a></li>
+                    <li><a href="{{ route('products.index') }}" class="text-white/75 hover:text-brand-lime text-sm md:text-base">View All Products</a></li>
                 </ul>
             </div>
 
@@ -125,7 +124,7 @@ use App\Helpers\SocialMediaHelper;
                     @endphp
                     @forelse($brands as $brand)
                         <li>
-                            <a href="{{ route('products.index', ['brand' => $brand->slug]) }}" class="text-gray-400 hover:text-white text-sm md:text-base transition-colors flex items-center">
+                            <a href="{{ route('products.index', ['brand' => $brand->slug]) }}" class="text-white/75 hover:text-brand-lime text-sm md:text-base transition-colors flex items-center">
                                 @if($brand->logo)
                                     <img src="{{ $brand->logo }}" alt="{{ $brand->name }}" class="w-4 h-4 md:w-5 md:h-5 object-contain mr-2">
                                 @endif
@@ -137,7 +136,7 @@ use App\Helpers\SocialMediaHelper;
                     @endforelse
                     @if($brands->count() > 0)
                         <li>
-                            <a href="{{ route('products.index') }}" class="text-gray-400 hover:text-white text-sm md:text-base transition-colors">
+                            <a href="{{ route('products.index') }}" class="text-white/75 hover:text-brand-lime text-sm md:text-base transition-colors">
                                 View All Brands →
                             </a>
                         </li>

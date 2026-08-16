@@ -10,7 +10,7 @@
             <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Subcategories</h1>
             <p class="text-sm sm:text-base text-gray-600">Manage product subcategories</p>
         </div>
-        <a href="{{ route('admin.subcategories.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
+        <a href="{{ route('admin.subcategories.create') }}" class="bg-brand-green text-white px-4 py-2 rounded-lg hover:bg-brand-deep-green transition-colors text-sm sm:text-base w-full sm:w-auto text-center">
             <i class="fas fa-plus mr-2"></i>New Subcategory
         </a>
     </div>
@@ -20,7 +20,7 @@
         <form method="GET" action="{{ route('admin.subcategories.index') }}" class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                <select name="category" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="this.form.submit()">
+                <select name="category" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green" onchange="this.form.submit()">
                     <option value="">All Categories</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
@@ -31,7 +31,7 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                <select name="status" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="this.form.submit()">
+                <select name="status" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green" onchange="this.form.submit()">
                     <option value="">All Status</option>
                     <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Active</option>
                     <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inactive</option>
@@ -91,7 +91,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <a href="{{ route('admin.subcategories.edit', $subcategory->id) }}" 
-                                   class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                   class="text-brand-green hover:text-brand-navy mr-3">Edit</a>
                                 <a href="{{ route('admin.subcategories.show', $subcategory->id) }}" 
                                    class="text-green-600 hover:text-green-900 mr-3">View</a>
                                 <form method="POST" action="{{ route('admin.subcategories.destroy', $subcategory->id) }}" class="inline">
@@ -123,7 +123,7 @@
                         @endif
                         <div class="flex-1 min-w-0">
                             <div class="text-base font-medium text-gray-900 mb-1">{{ $subcategory->name }}</div>
-                            <div class="text-xs text-blue-600 mb-1">{{ $subcategory->category->name }}</div>
+                            <div class="text-xs text-brand-green mb-1">{{ $subcategory->category->name }}</div>
                             @if($subcategory->description)
                                 <div class="text-sm text-gray-500 line-clamp-2">{{ $subcategory->description }}</div>
                             @endif
@@ -149,7 +149,7 @@
                     
                     <div class="flex flex-wrap gap-2 pt-3 border-t border-gray-100">
                         <a href="{{ route('admin.subcategories.edit', $subcategory->id) }}" 
-                           class="flex-1 min-w-[70px] text-center text-xs px-3 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 active:bg-blue-200 rounded-lg font-medium transition-colors">
+                           class="flex-1 min-w-[70px] text-center text-xs px-3 py-2 bg-brand-green-light text-brand-green hover:bg-brand-green-soft active:bg-brand-green-soft rounded-lg font-medium transition-colors">
                             Edit
                         </a>
                         <a href="{{ route('admin.subcategories.show', $subcategory->id) }}" 

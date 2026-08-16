@@ -14,7 +14,7 @@
     } else {
         $ogTitle = 'Home & Kitchen Appliances - Shop Quality Products in Kenya';
         $ogDescription = 'Shop premium home and kitchen appliances in Kenya. Discover quality cookware, kitchen gadgets, home essentials and more at competitive prices.';
-        $ogImage = asset('images/logo.svg');
+        $ogImage = \App\Models\Setting::logoUrl();
         $ogImageAlt = 'Home & Kitchen Appliances';
     }
 @endphp
@@ -74,26 +74,26 @@
 
 @section('content')
     <!-- Page Header - Enhanced -->
-    <section class="bg-gradient-to-r from-blue-50 via-purple-50 to-blue-50 py-8 md:py-12 relative overflow-hidden">
+    <section class="bg-gradient-to-r from-brand-green-light via-white to-brand-green-light py-8 md:py-12 relative overflow-hidden">
         <div class="absolute inset-0 bg-grid-slate-100 opacity-30"></div>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                 <div>
                     @if($category)
                         <div class="flex items-center space-x-3 mb-3">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <div class="w-12 h-12 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-xl flex items-center justify-center shadow-lg">
                                 <i class="{{ $category->icon }} text-white text-xl"></i>
                             </div>
                             <div>
                                 <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">
-                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">{{ $category->name }}</span>
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-deep-green">{{ $category->name }}</span>
                                 </h1>
                                 <p class="text-gray-600 mt-1 font-medium">Shop our collection of {{ strtolower($category->name) }}</p>
                             </div>
                         </div>
                     @else
                         <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">All Products</span>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-deep-green">All Products</span>
                         </h1>
                         <p class="text-gray-600 font-medium">Discover our amazing collection of home and kitchen essentials</p>
                     @endif
@@ -101,9 +101,9 @@
                 <div class="mt-4 md:mt-0">
                     <div class="hidden md:block bg-white/80 backdrop-blur-sm px-6 py-3 rounded-xl shadow-lg border-2 border-white/50">
                         <p class="text-sm font-semibold text-gray-700">
-                            <span class="text-blue-600">{{ $products->firstItem() ?? 0 }}</span> - 
-                            <span class="text-blue-600">{{ $products->lastItem() ?? 0 }}</span> of 
-                            <span class="text-purple-600 font-bold">{{ $totalProducts }}</span> products
+                            <span class="text-brand-green">{{ $products->firstItem() ?? 0 }}</span> - 
+                            <span class="text-brand-green">{{ $products->lastItem() ?? 0 }}</span> of 
+                            <span class="text-brand-navy font-bold">{{ $totalProducts }}</span> products
                         </p>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
             <div class="lg:col-span-1">
                 <!-- Mobile Filter Toggle - Enhanced -->
                 <div class="hidden mb-4">
-                    <button id="mobile-filter-toggle" class="w-full flex items-center justify-between p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-xl active:shadow-lg transition-all active:scale-[0.98]">
+                    <button id="mobile-filter-toggle" class="w-full flex items-center justify-between p-4 bg-gradient-to-r from-brand-green to-brand-deep-green text-white rounded-xl shadow-xl active:shadow-lg transition-all active:scale-[0.98]">
                         <div class="flex items-center space-x-3">
                             <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                                 <i class="fas fa-filter text-lg"></i>
@@ -131,7 +131,7 @@
                                 @endif
                             </div>
                             @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))
-                                <span class="bg-white text-blue-600 text-xs font-bold rounded-full px-3 py-1 ml-2">{{ count(array_filter(request()->only(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))) }}</span>
+                                <span class="bg-white text-brand-green text-xs font-bold rounded-full px-3 py-1 ml-2">{{ count(array_filter(request()->only(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))) }}</span>
                             @endif
                         </div>
                         <i class="fas fa-chevron-down text-white text-lg transition-transform duration-300" id="filter-toggle-icon"></i>
@@ -148,7 +148,7 @@
                         <!-- Mobile Header with Close Button -->
                         <div class="lg:hidden flex items-center justify-between mb-6 pb-4 border-b-2 border-gray-200 sticky top-0 bg-white z-10 -mt-2 -mx-6 px-6 pt-4">
                             <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                                <i class="fas fa-filter text-blue-600 mr-2"></i>
+                                <i class="fas fa-filter text-brand-green mr-2"></i>
                                 Filters
                             </h3>
                             <button id="mobile-filter-close" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-all active:scale-95">
@@ -159,7 +159,7 @@
                         <!-- Desktop Header -->
                         <div class="hidden lg:flex items-center justify-between mb-6 pb-4 border-b-2 border-gray-200">
                             <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                                <i class="fas fa-filter text-blue-600 mr-2"></i>
+                                <i class="fas fa-filter text-brand-green mr-2"></i>
                                 Filters
                             </h3>
                             @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'stock', 'sort']))
@@ -182,7 +182,7 @@
                     <!-- Search - Enhanced -->
                     <div class="mb-6">
                         <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
-                            <i class="fas fa-search text-blue-600 mr-2"></i>
+                            <i class="fas fa-search text-brand-green mr-2"></i>
                             Search
                         </label>
                         <form method="GET" action="{{ route('products.index') }}">
@@ -191,7 +191,7 @@
                                        name="search"
                                        value="{{ request('search') }}"
                                        placeholder="Search products..."
-                                       class="w-full px-4 py-3 pl-11 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                       class="w-full px-4 py-3 pl-11 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green transition-all">
                                 <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                             </div>
                         </form>
@@ -200,22 +200,22 @@
                     <!-- Categories - Enhanced -->
                     <div class="mb-6">
                         <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
-                            <i class="fas fa-th-large text-purple-600 mr-2"></i>
+                            <i class="fas fa-th-large text-brand-navy mr-2"></i>
                             Categories
                         </label>
                         <div class="space-y-2">
                             <a href="{{ route('products.index') }}"
-                               class="flex items-center p-4 rounded-xl transition-all active:scale-95 {{ !request('category') ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-300 text-blue-700 font-semibold' : 'bg-gray-50 active:bg-gray-100 text-gray-700' }}">
+                               class="flex items-center p-4 rounded-xl transition-all active:scale-95 {{ !request('category') ? 'bg-gradient-to-r from-brand-green-light to-brand-green-soft border-2 border-brand-green text-brand-navy font-semibold' : 'bg-gray-50 active:bg-gray-100 text-gray-700' }}">
                                 <i class="fas fa-th text-base mr-3"></i>
                                 <span class="text-base">All Categories</span>
                             </a>
                             @foreach($categories as $cat)
                                 <a href="{{ route('products.index', ['category' => $cat->slug] + request()->except('category')) }}"
-                                   class="flex items-center p-4 rounded-xl transition-all active:scale-95 {{ request('category') == $cat->slug ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-300 text-blue-700 font-semibold' : 'bg-gray-50 active:bg-gray-100 text-gray-700' }}">
+                                   class="flex items-center p-4 rounded-xl transition-all active:scale-95 {{ request('category') == $cat->slug ? 'bg-gradient-to-r from-brand-green-light to-brand-green-soft border-2 border-brand-green text-brand-navy font-semibold' : 'bg-gray-50 active:bg-gray-100 text-gray-700' }}">
                                     <i class="{{ $cat->icon }} text-base mr-3"></i>
                                     <span class="text-base flex-1">{{ $cat->name }}</span>
                                     @if(request('category') == $cat->slug)
-                                        <i class="fas fa-check-circle text-blue-600 text-lg"></i>
+                                        <i class="fas fa-check-circle text-brand-green text-lg"></i>
                                     @endif
                                 </a>
                             @endforeach
@@ -239,10 +239,10 @@
                                        min="{{ $minPrice }}"
                                        max="{{ $maxPrice }}"
                                        value="{{ request('max_price', $maxPrice) }}"
-                                       class="w-full h-2 bg-gradient-to-r from-blue-200 to-purple-200 rounded-lg appearance-none cursor-pointer">
-                                <div class="flex justify-between items-center bg-gradient-to-r from-blue-50 to-purple-50 px-4 py-2 rounded-xl">
+                                       class="w-full h-2 bg-gradient-to-r from-brand-green-soft to-brand-green-soft rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between items-center bg-gradient-to-r from-brand-green-light to-brand-green-soft px-4 py-2 rounded-xl">
                                     <span class="text-sm font-semibold text-gray-700">KES {{ number_format($minPrice, 0) }}</span>
-                                    <span id="price-value" class="text-sm font-bold text-blue-600">KES {{ number_format(request('max_price', $maxPrice), 0) }}</span>
+                                    <span id="price-value" class="text-sm font-bold text-brand-green">KES {{ number_format(request('max_price', $maxPrice), 0) }}</span>
                                 </div>
                             </div>
                         </form>
@@ -251,7 +251,7 @@
                     <!-- Stock Availability Filter -->
                     <div class="mb-6">
                         <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center">
-                            <i class="fas fa-box text-blue-500 mr-2"></i>
+                            <i class="fas fa-box text-brand-green mr-2"></i>
                             Stock Availability
                         </label>
                         <div class="space-y-2">
@@ -286,21 +286,21 @@
 
                 <!-- Featured Products Sidebar - Enhanced -->
                 <div class="mt-6 lg:mt-8 hidden lg:block">
-                    <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border-2 border-gray-100 p-6">
+                    <div class="bg-gradient-to-br from-white to-slate-50 rounded-2xl shadow-xl border-2 border-gray-100 p-6">
                         <h3 class="text-lg font-bold mb-6 flex items-center text-gray-900">
                             <i class="fas fa-star text-yellow-500 mr-2"></i>
                             Featured Products
                         </h3>
                         <div class="space-y-4">
                             @foreach($featuredProducts as $product)
-                                <a href="{{ route('products.show', $product->slug) }}" class="group block hover:bg-white rounded-xl p-3 -m-3 transition-all transform hover:-translate-y-1 hover:shadow-lg border-2 border-transparent hover:border-blue-200">
+                                <a href="{{ route('products.show', $product->slug) }}" class="group block hover:bg-white rounded-xl p-3 -m-3 transition-all transform hover:-translate-y-1 hover:shadow-lg border-2 border-transparent hover:border-brand-green/45">
                                     <div class="flex space-x-3">
                                         <div class="w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden flex-shrink-0 shadow-md group-hover:shadow-lg transition-shadow">
                                             <img src="{{ $product->main_image_url }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <h4 class="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">{{ $product->name }}</h4>
-                                            <p class="text-sm font-bold text-blue-600">{{ $product->formatted_price }}</p>
+                                            <h4 class="text-sm font-bold text-gray-900 group-hover:text-brand-deep-green transition-colors line-clamp-2 mb-1">{{ $product->name }}</h4>
+                                            <p class="text-sm font-bold text-brand-green">{{ $product->formatted_price }}</p>
                                             @if($product->rating)
                                                 <div class="flex items-center mt-1">
                                                     @for($i = 1; $i <= 5; $i++)
@@ -326,22 +326,22 @@
                                placeholder="Search products..." 
                                class="flex-1 px-4 py-3 text-sm border-0 focus:ring-0 focus:outline-none">
                         <input type="hidden" name="category" value="{{ request('category') }}">
-                        <button type="submit" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-3">
+                        <button type="submit" class="bg-gradient-to-r from-brand-green to-brand-deep-green text-white px-5 py-3">
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
                 </div>
 
                 <!-- Sort and View Options - Enhanced -->
-                <div class="hidden md:flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border-2 border-blue-100">
+                <div class="hidden md:flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 p-4 bg-gradient-to-r from-brand-green-light to-brand-green-soft rounded-xl border-2 border-brand-green-soft">
                     <div class="flex items-center space-x-4 mb-4 sm:mb-0">
                         <span class="text-sm font-bold text-gray-700 flex items-center">
-                            <i class="fas fa-sort text-blue-600 mr-2"></i>
+                            <i class="fas fa-sort text-brand-green mr-2"></i>
                             Sort by:
                         </span>
                         <select name="sort"
                                 onchange="window.location.href='{{ route('products.index') }}?sort=' + this.value + '&' + new URLSearchParams(window.location.search).toString().replace(/sort=[^&]*&?/g, '')"
-                                class="text-sm font-semibold border-2 border-gray-200 rounded-xl px-4 py-2 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm hover:shadow-md transition-all cursor-pointer">
+                                class="text-sm font-semibold border-2 border-gray-200 rounded-xl px-4 py-2 bg-white focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green shadow-sm hover:shadow-md transition-all cursor-pointer">
                             <option value="latest" {{ request('sort', 'latest') == 'latest' ? 'selected' : '' }}>Latest</option>
                             <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Price: Low to High</option>
                             <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Price: High to Low</option>
@@ -352,12 +352,12 @@
                     </div>
 
                     <div class="hidden md:flex items-center space-x-2 bg-white rounded-xl p-1 shadow-sm">
-                        <button class="p-2 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Grid View">
+                        <button class="p-2 rounded-lg text-gray-400 hover:text-brand-deep-green hover:bg-brand-green-light transition-all" title="Grid View">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
                             </svg>
                         </button>
-                        <button class="p-2 rounded-lg text-blue-600 bg-blue-50" title="List View">
+                        <button class="p-2 rounded-lg text-brand-green bg-brand-green-light" title="List View">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
                             </svg>
@@ -384,13 +384,13 @@
                 @else
                     <!-- No Products Found - Enhanced -->
                     <div class="text-center py-16 bg-gradient-to-br from-gray-50 to-white rounded-2xl border-2 border-gray-200">
-                        <div class="w-24 h-24 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-search text-4xl text-blue-600"></i>
+                        <div class="w-24 h-24 bg-gradient-to-br from-brand-green-light to-brand-green-soft rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-search text-4xl text-brand-green"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-gray-900 mb-2">No products found</h3>
                         <p class="text-gray-600 mb-6 font-medium">Try adjusting your search or filter criteria.</p>
                         <div class="flex flex-row gap-3 justify-center items-center">
-                            <a href="{{ route('products.index') }}" class="inline-flex items-center px-5 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-base whitespace-nowrap">
+                            <a href="{{ route('products.index') }}" class="inline-flex items-center px-5 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-brand-green to-brand-deep-green text-white font-bold rounded-xl hover:from-brand-deep-green hover:to-brand-deep-green transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-base whitespace-nowrap">
                                 <i class="fas fa-times-circle mr-2 text-sm"></i>
                                 Clear Filters
                             </a>

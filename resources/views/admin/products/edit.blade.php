@@ -30,7 +30,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Product Name *</label>
                         <input type="text" id="name" name="name" required 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('name', $product->name) }}">
                         @error('name')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -40,7 +40,7 @@
                     <div>
                         <label for="short_description" class="block text-sm font-medium text-gray-700 mb-1">Short Description</label>
                         <textarea id="short_description" name="short_description" rows="3" maxlength="500"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                   placeholder="Brief product summary (max 500 characters)...">{{ old('short_description', $product->short_description) }}</textarea>
                         <p class="text-xs text-gray-500 mt-1">A brief summary that appears in product listings and at the top of product pages</p>
                         @error('short_description')
@@ -51,7 +51,7 @@
                     <div>
                         <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Category *</label>
                         <select id="category_id" name="category_id" required 
-                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
@@ -67,7 +67,7 @@
                     <div>
                         <label for="subcategory_id" class="block text-sm font-medium text-gray-700 mb-1">Subcategory (Optional)</label>
                         <select id="subcategory_id" name="subcategory_id"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                             <option value="">Select Subcategory</option>
                             @foreach($subcategories as $subcategory)
                                 <option value="{{ $subcategory->id }}" 
@@ -85,7 +85,7 @@
                     <div class="flex items-center space-x-4">
                         <label class="flex items-center">
                             <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}
-                                   class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                   class="rounded border-gray-300 text-brand-green focus:ring-brand-green/30">
                             <span class="ml-2 text-sm text-gray-700">Featured Product</span>
                         </label>
                     </div>
@@ -93,7 +93,7 @@
                     <div>
                         <label for="brand_id" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
                         <select id="brand_id" name="brand_id"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                             <option value="">Select Brand (Optional)</option>
                             @foreach($brands as $brand)
                                 <option value="{{ $brand->id }}" {{ old('brand_id', $product->brand_id) == $brand->id ? 'selected' : '' }}>
@@ -109,7 +109,7 @@
                     <div class="hidden">
                         <label for="stock_quantity" class="block text-sm font-medium text-gray-700 mb-1">Stock Quantity *</label>
                         <input type="number" id="stock_quantity" name="stock_quantity" min="0" required 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('stock_quantity', $product->stock_quantity ?? 10) }}">
                         @error('stock_quantity')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -122,7 +122,7 @@
                     <div>
                         <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price (KES) *</label>
                         <input type="number" id="price" name="price" step="0.01" min="0" required 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('price', $product->price) }}">
                         @error('price')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -132,7 +132,7 @@
                     <div>
                         <label for="old_price" class="block text-sm font-medium text-gray-700 mb-1">Old Price (KES)</label>
                         <input type="number" id="old_price" name="old_price" step="0.01" min="0" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('old_price', $product->old_price) }}">
                         @error('old_price')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -142,7 +142,7 @@
                     <div class="hidden">
                         <label for="badge" class="block text-sm font-medium text-gray-700 mb-1">Badge</label>
                         <input type="text" id="badge" name="badge" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('badge', $product->badge ?? 'New') }}" placeholder="e.g., New, Sale, Featured">
                         @error('badge')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -152,7 +152,7 @@
                     <div class="hidden">
                         <label for="rating" class="block text-sm font-medium text-gray-700 mb-1">Rating</label>
                         <input type="number" id="rating" name="rating" min="1" max="5" step="0.1"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('rating', $product->rating) }}">
                         @error('rating')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -162,7 +162,7 @@
                     <div class="hidden">
                         <label for="reviews_count" class="block text-sm font-medium text-gray-700 mb-1">Reviews Count</label>
                         <input type="number" id="reviews_count" name="reviews_count" min="0" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('reviews_count', $product->reviews_count) }}">
                         @error('reviews_count')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -172,7 +172,7 @@
                     <div class="hidden">
                         <label class="flex items-center">
                             <input type="checkbox" name="is_active" value="1" {{ old('is_active', $product->is_active ?? true) ? 'checked' : '' }}
-                                   class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                   class="rounded border-gray-300 text-brand-green focus:ring-brand-green/30">
                             <span class="ml-2 text-sm text-gray-700">Active</span>
                         </label>
                     </div>
@@ -184,18 +184,18 @@
                 <div class="flex items-center justify-between mb-1">
                     <label for="description" class="block text-sm font-medium text-gray-700">Description *</label>
                     <button type="button" id="toggleEditorMode" 
-                            class="text-xs text-blue-600 hover:text-blue-800 font-medium px-3 py-1 border border-blue-300 rounded hover:bg-blue-50 transition-colors">
+                            class="text-xs text-brand-green hover:text-brand-navy font-medium px-3 py-1 border border-brand-green rounded hover:bg-brand-green-light transition-colors">
                         <span id="editorModeText">Switch to HTML</span>
                     </button>
                 </div>
                 <div id="ckeditor-container">
                     <textarea id="description" name="description" rows="10"
-                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                               placeholder="Enter product description (HTML allowed)...">{{ old('description', $product->description) }}</textarea>
                 </div>
                 <div id="raw-html-container" class="hidden">
                     <textarea id="description-raw" rows="15" 
-                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green font-mono text-sm"
                               placeholder="Paste your HTML code here...">{{ old('description', $product->description) }}</textarea>
                 </div>
                 @error('description')
@@ -211,7 +211,7 @@
                 <div class="flex items-center justify-between">
                     <label class="block text-sm font-medium text-gray-700">Specifications</label>
                     <button type="button" onclick="addSpecificationRow()" 
-                            class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors">
+                            class="text-sm bg-brand-green text-white px-3 py-1 rounded hover:bg-brand-deep-green transition-colors">
                         Add Specification
                     </button>
                 </div>
@@ -222,10 +222,10 @@
                             <div class="specification-row flex items-center space-x-3">
                                 <input type="text" name="specifications[{{ $loop->index }}][key]" 
                                        value="{{ $key }}" placeholder="Specification name" 
-                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                                 <input type="text" name="specifications[{{ $loop->index }}][value]" 
                                        value="{{ $value }}" placeholder="Specification value" 
-                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                                 <button type="button" onclick="removeSpecificationRow(this)" 
                                         class="text-red-600 hover:text-red-800 p-2">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -237,9 +237,9 @@
                     @else
                         <div class="specification-row flex items-center space-x-3">
                             <input type="text" name="specifications[0][key]" placeholder="Specification name" 
-                                   class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                   class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                             <input type="text" name="specifications[0][value]" placeholder="Specification value" 
-                                   class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                   class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                             <button type="button" onclick="removeSpecificationRow(this)" 
                                     class="text-red-600 hover:text-red-800 p-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -358,7 +358,7 @@
                                 </svg>
                                 <div class="text-gray-600">
                                     <label for="images" class="cursor-pointer">
-                                        <span class="font-medium text-blue-600 hover:text-blue-500">Click to upload</span>
+                                        <span class="font-medium text-brand-green hover:text-brand-green">Click to upload</span>
                                         <span class="text-gray-500"> or drag and drop</span>
                                     </label>
                                 </div>
@@ -431,7 +431,7 @@
                     Cancel
                 </a>
                 <button type="submit" 
-                        class="w-full sm:w-auto bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-sm sm:text-base font-medium">
+                        class="w-full sm:w-auto bg-brand-green text-white px-6 py-2.5 rounded-lg hover:bg-brand-deep-green active:bg-brand-navy transition-colors text-sm sm:text-base font-medium">
                     <i class="fas fa-save mr-2"></i>Update Product
                 </button>
             </div>
@@ -671,9 +671,9 @@ function addSpecificationRow() {
     
     newRow.innerHTML = `
         <input type="text" name="specifications[${specificationIndex}][key]" placeholder="Specification name" 
-               class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+               class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
         <input type="text" name="specifications[${specificationIndex}][value]" placeholder="Specification value" 
-               class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+               class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
         <button type="button" onclick="removeSpecificationRow(this)" 
                 class="text-red-600 hover:text-red-800 p-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

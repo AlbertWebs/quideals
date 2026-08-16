@@ -28,7 +28,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
                         <input type="text" id="name" name="name" required 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('name', $user->name) }}" placeholder="Enter full name">
                         @error('name')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -38,7 +38,7 @@
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
                         <input type="email" id="email" name="email" required 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                value="{{ old('email', $user->email) }}" placeholder="Enter email address">
                         @error('email')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -51,7 +51,7 @@
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
                         <input type="password" id="password" name="password" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                placeholder="Leave empty to keep current password">
                         <p class="text-sm text-gray-500 mt-1">Minimum 8 characters</p>
                         @error('password')
@@ -62,14 +62,14 @@
                     <div>
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
                         <input type="password" id="password_confirmation" name="password_confirmation" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green"
                                placeholder="Confirm new password">
                     </div>
 
                     <div class="flex items-center space-x-4">
                         <label class="flex items-center">
                             <input type="checkbox" name="is_admin" value="1" {{ old('is_admin', $user->is_admin) ? 'checked' : '' }}
-                                   class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                   class="rounded border-gray-300 text-brand-green focus:ring-brand-green/30">
                             <span class="ml-2 text-sm text-gray-700">Admin User</span>
                         </label>
                     </div>
@@ -94,7 +94,7 @@
             <!-- Submit Button -->
             <div class="flex justify-end">
                 <button type="submit" 
-                        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        class="bg-brand-green text-white px-6 py-2 rounded-lg hover:bg-brand-deep-green transition-colors">
                     Update User
                 </button>
             </div>

@@ -55,8 +55,8 @@
                 </div>
 
                 <div class="border border-gray-200 rounded-lg p-6 text-center bg-gray-50">
-                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-user-friends text-blue-600 text-xl"></i>
+                    <div class="w-14 h-14 bg-brand-green-light rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-friends text-brand-green text-xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-3">Customer First</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
@@ -65,8 +65,8 @@
                 </div>
 
                 <div class="border border-gray-200 rounded-lg p-6 text-center bg-gray-50">
-                    <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-star text-purple-600 text-xl"></i>
+                    <div class="w-14 h-14 bg-brand-green-light rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-brand-navy text-xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-3">Empowerment</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
@@ -78,24 +78,24 @@
 
         <!-- Stats -->
         <div class="mb-16">
-            <div class="bg-gradient-to-r from-pink-700 to-pink-600 rounded-lg p-8 text-white">
+            <div class="bg-brand-navy rounded-lg p-8 text-white">
                 <h2 class="text-3xl font-bold text-center mb-8">Our Numbers</h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
                     <div>
                         <div class="text-3xl font-bold mb-2">15,000+</div>
-                        <div class="text-pink-200 text-sm">Happy Customers</div>
+                        <div class="text-white/70 text-sm">Happy Customers</div>
                     </div>
                     <div>
                         <div class="text-3xl font-bold mb-2">800+</div>
-                        <div class="text-pink-200 text-sm">Fashion & Beauty Products</div>
+                        <div class="text-white/70 text-sm">Fashion & Beauty Products</div>
                     </div>
                     <div>
                         <div class="text-3xl font-bold mb-2">5+</div>
-                        <div class="text-pink-200 text-sm">Years of Style</div>
+                        <div class="text-white/70 text-sm">Years of Style</div>
                     </div>
                     <div>
                         <div class="text-3xl font-bold mb-2">24/7</div>
-                        <div class="text-pink-200 text-sm">Support</div>
+                        <div class="text-white/70 text-sm">Support</div>
                     </div>
                 </div>
             </div>
@@ -122,16 +122,16 @@
                 </div>
 
                 <div class="text-center">
-                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-headset text-blue-600 text-lg"></i>
+                    <div class="w-14 h-14 bg-brand-green-light rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headset text-brand-green text-lg"></i>
                     </div>
                     <h3 class="text-base font-semibold text-gray-900 mb-2">24/7 Support</h3>
                     <p class="text-gray-600 text-sm">We're always here to help</p>
                 </div>
 
                 <div class="text-center">
-                    <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-hand-holding-heart text-purple-600 text-lg"></i>
+                    <div class="w-14 h-14 bg-brand-green-light rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-hand-holding-heart text-brand-navy text-lg"></i>
                     </div>
                     <h3 class="text-base font-semibold text-gray-900 mb-2">Trusted Brand</h3>
                     <p class="text-gray-600 text-sm">Thousands of loyal customers across Kenya</p>

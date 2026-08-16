@@ -10,7 +10,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
 @section('content')
 <div class="container mx-auto px-6 py-8">
     <div class="mb-6">
-        <a href="{{ route('admin.settings') }}" class="text-blue-600 hover:text-blue-800 mb-4 inline-flex items-center">
+        <a href="{{ route('admin.settings') }}" class="text-brand-green hover:text-brand-navy mb-4 inline-flex items-center">
             <i class="fas fa-arrow-left mr-2"></i>
             Back to Settings
         </a>
@@ -33,7 +33,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                     <input type="text" id="site_name" name="settings[site_name]" 
                            value="{{ Setting::get('site_name', config('app.name', 'Home & Kitchen Appliances')) }}" 
                            placeholder="Home & Kitchen Appliances"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     <p class="mt-1 text-sm text-gray-500">The name of your website/business</p>
                 </div>
                     
@@ -42,7 +42,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="text" id="contact_phone" name="settings[contact_phone]" 
                                value="{{ Setting::get('contact_phone') }}" 
                            placeholder="+254 700 123 456"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
 
                     <div>
@@ -50,7 +50,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="email" id="contact_email" name="settings[contact_email]" 
                                value="{{ Setting::get('contact_email') }}" 
                            placeholder="hello@example.com"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
 
                     <div>
@@ -58,7 +58,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="text" id="whatsapp_number" name="settings[whatsapp_number]" 
                                value="{{ Setting::get('whatsapp_number') }}" 
                                placeholder="+254700123456"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     <p class="mt-1 text-sm text-gray-500">Include country code (e.g., +254700123456)</p>
                     </div>
 
@@ -67,7 +67,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                     <input type="text" id="contact_address" name="settings[contact_address]" 
                            value="{{ Setting::get('contact_address') }}" 
                            placeholder="Westlands, Nairobi"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                 </div>
 
                 <div>
@@ -75,7 +75,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                     <input type="text" id="contact_city" name="settings[contact_city]" 
                            value="{{ Setting::get('contact_city') }}" 
                            placeholder="Kenya"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="text" id="business_hours_weekdays" name="settings[business_hours_weekdays]" 
                                value="{{ Setting::get('business_hours_weekdays') }}" 
                                placeholder="Monday - Friday: 8:00 AM - 6:00 PM"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
 
                     <div>
@@ -97,7 +97,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="text" id="business_hours_saturday" name="settings[business_hours_saturday]" 
                                value="{{ Setting::get('business_hours_saturday') }}" 
                                placeholder="Saturday: 9:00 AM - 4:00 PM"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
 
                     <div>
@@ -105,7 +105,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="text" id="business_hours_sunday" name="settings[business_hours_sunday]" 
                                value="{{ Setting::get('business_hours_sunday') }}" 
                                placeholder="Sunday: Closed"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                 <!-- Free Delivery -->
                 <div class="space-y-4 p-4 bg-gray-50 rounded-lg">
                     <h3 class="text-sm font-semibold text-gray-700 flex items-center">
-                        <i class="fas fa-shipping-fast text-blue-600 mr-2"></i>
+                        <i class="fas fa-shipping-fast text-brand-green mr-2"></i>
                         Free Delivery
                     </h3>
                     <div>
@@ -125,14 +125,14 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="text" id="footer_free_delivery_title" name="settings[footer_free_delivery_title]" 
                                value="{{ Setting::get('footer_free_delivery_title', 'FREE DELIVERY') }}" 
                                placeholder="FREE DELIVERY"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
                     <div>
                         <label for="footer_free_delivery_text" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                         <input type="text" id="footer_free_delivery_text" name="settings[footer_free_delivery_text]" 
                                value="{{ Setting::get('footer_free_delivery_text', 'On orders over KES 5,000') }}" 
                                placeholder="On orders over KES 5,000"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
                 </div>
 
@@ -147,21 +147,21 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="text" id="footer_secure_checkout_title" name="settings[footer_secure_checkout_title]" 
                                value="{{ Setting::get('footer_secure_checkout_title', 'SECURE CHECKOUT') }}" 
                                placeholder="SECURE CHECKOUT"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
                     <div>
                         <label for="footer_secure_checkout_text" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                         <input type="text" id="footer_secure_checkout_text" name="settings[footer_secure_checkout_text]" 
                                value="{{ Setting::get('footer_secure_checkout_text', 'Shop safely and confidently') }}" 
                                placeholder="Shop safely and confidently"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
                 </div>
 
                 <!-- Easy Returns -->
                 <div class="space-y-4 p-4 bg-gray-50 rounded-lg">
                     <h3 class="text-sm font-semibold text-gray-700 flex items-center">
-                        <i class="fas fa-sync-alt text-purple-600 mr-2"></i>
+                        <i class="fas fa-sync-alt text-brand-navy mr-2"></i>
                         Easy Returns
                     </h3>
                     <div>
@@ -169,14 +169,14 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="text" id="footer_easy_returns_title" name="settings[footer_easy_returns_title]" 
                                value="{{ Setting::get('footer_easy_returns_title', 'EASY RETURNS') }}" 
                                placeholder="EASY RETURNS"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
                     <div>
                         <label for="footer_easy_returns_text" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                         <input type="text" id="footer_easy_returns_text" name="settings[footer_easy_returns_text]" 
                                value="{{ Setting::get('footer_easy_returns_text', '15-day return window') }}" 
                                placeholder="15-day return window"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
                 </div>
 
@@ -191,14 +191,14 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                         <input type="text" id="footer_customer_care_title" name="settings[footer_customer_care_title]" 
                                value="{{ Setting::get('footer_customer_care_title', 'CUSTOMER CARE') }}" 
                                placeholder="CUSTOMER CARE"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
                     <div>
                         <label for="footer_customer_care_text" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                         <input type="text" id="footer_customer_care_text" name="settings[footer_customer_care_text]" 
                                value="{{ Setting::get('footer_customer_care_text', 'We\'re here 24/7') }}" 
                                placeholder="We're here 24/7"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                     </div>
                 </div>
             </div>
@@ -213,7 +213,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                     <input type="text" id="footer_subscribe_title" name="settings[footer_subscribe_title]" 
                            value="{{ Setting::get('footer_subscribe_title', 'SUBSCRIBE') }}" 
                            placeholder="SUBSCRIBE"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                 </div>
 
                 <div>
@@ -221,7 +221,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                     <input type="text" id="footer_subscribe_text" name="settings[footer_subscribe_text]" 
                            value="{{ Setting::get('footer_subscribe_text', 'Get the latest deals, product updates, and exclusive offers delivered to your inbox.') }}" 
                            placeholder="Get the latest deals..."
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">
                 </div>
 
                 <div class="md:col-span-2">
@@ -229,7 +229,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
                     <textarea id="footer_copyright" name="settings[footer_copyright]" 
                               rows="3"
                               placeholder="© 2024 Home & Kitchen Appliances. All rights reserved."
-                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('settings.footer_copyright', Setting::get('footer_copyright', $defaultCopyright)) }}</textarea>
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green">{{ old('settings.footer_copyright', Setting::get('footer_copyright', $defaultCopyright)) }}</textarea>
                     <p class="mt-1 text-sm text-gray-500">HTML is allowed. Use the unescaped output syntax in blade template to render HTML.</p>
                 </div>
             </div>
@@ -237,7 +237,7 @@ $defaultCopyright = "© {$currentYear} {$appName}. All rights reserved.";
 
         <!-- Submit Button -->
         <div class="flex justify-end">
-            <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg">
+            <button type="submit" class="bg-brand-green text-white px-8 py-3 rounded-lg hover:bg-brand-deep-green transition-colors font-semibold shadow-lg">
                 <i class="fas fa-save mr-2"></i>
                 Save All Changes
                 </button>

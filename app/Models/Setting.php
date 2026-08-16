@@ -53,4 +53,25 @@ class Setting extends Model
     {
         return static::pluck('value', 'key')->toArray();
     }
+
+    public static function logoUrl(string $variant = 'default'): string
+    {
+        $key = $variant === 'light' ? 'site_logo_light' : 'site_logo';
+        $path = static::get($key);
+
+        if ($path) {
+            return asset('storage/' . ltrim($path, '/'));
+        }
+
+        if ($variant === 'light') {
+            $fallbackPath = static::get('site_logo');
+            if ($fallbackPath) {
+                return asset('storage/' . ltrim($fallbackPath, '/'));
+            }
+
+            return asset('images/logo-white.svg');
+        }
+
+        return asset('images/logo.svg');
+    }
 }

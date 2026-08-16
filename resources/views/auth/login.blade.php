@@ -26,7 +26,7 @@
                        autofocus 
                        autocomplete="username"
                        placeholder="Enter your email"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green transition-colors text-base"
                        />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
@@ -43,7 +43,7 @@
                            required 
                            autocomplete="current-password"
                            placeholder="Enter your password"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base pr-12"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green transition-colors text-base pr-12"
                            />
                     <button type="button" 
                             onclick="togglePassword()" 
@@ -60,13 +60,13 @@
                     <input id="remember_me" 
                            type="checkbox" 
                            name="remember" 
-                           class="rounded border-gray-300 text-blue-600 shadow-sm focus:ring-blue-500 w-4 h-4"
+                           class="rounded border-gray-300 text-brand-green shadow-sm focus:ring-brand-green/30 w-4 h-4"
                            />
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
 
                 @if (Route::has('password.request'))
-                    <a class="text-sm text-blue-600 hover:text-blue-700 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1" 
+                    <a class="text-sm text-brand-green hover:text-brand-deep-green hover:underline focus:outline-none focus:ring-2 focus:ring-brand-green/30 focus:ring-offset-2 rounded px-2 py-1" 
                        href="{{ route('password.request') }}">
                         {{ __('Forgot password?') }}
                     </a>
@@ -76,19 +76,11 @@
             <!-- Submit Button -->
             <div>
                 <button type="submit" 
-                        class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold text-base hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors shadow-md hover:shadow-lg">
+                        class="w-full bg-brand-green text-white py-3 px-4 rounded-lg font-semibold text-base hover:bg-brand-deep-green active:bg-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-green/30 focus:ring-offset-2 transition-colors shadow-md hover:shadow-lg">
                     <i class="fas fa-sign-in-alt mr-2"></i>{{ __('Log in') }}
                 </button>
             </div>
         </form>
-
-        <!-- Admin Credentials Info -->
-        <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p class="text-xs text-blue-800 text-center">
-                <i class="fas fa-info-circle mr-1"></i>
-                <strong>Admin Credentials:</strong> admin@quideals.co.ke / Password@123
-            </p>
-        </div>
     </div>
 
     <script>
