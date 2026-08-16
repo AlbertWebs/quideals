@@ -53,8 +53,18 @@
     <!-- Category Pages -->
     @foreach($categories as $category)
     <url>
-        <loc>{{ url('/products?category=' . $category->slug) }}</loc>
+        <loc>{{ url('/products/' . $category->slug) }}</loc>
         <lastmod>{{ $category->updated_at->format('Y-m-d') }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    @endforeach
+
+    <!-- Brand Pages -->
+    @foreach($brands ?? [] as $brand)
+    <url>
+        <loc>{{ url('/products/' . $brand->slug) }}</loc>
+        <lastmod>{{ $brand->updated_at->format('Y-m-d') }}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>

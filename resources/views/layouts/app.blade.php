@@ -6,22 +6,22 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- SEO Meta Tags -->
-    <title>@yield('title', config('app.name', 'Home & Kitchen Appliances') . ' - Quality Products for Your Home')</title>
-    <meta name="description" content="@yield('description', 'Shop premium home and kitchen appliances in Kenya. Discover quality cookware, kitchen gadgets, home essentials and more at competitive prices.')">
-    <meta name="keywords" content="@yield('keywords', 'home appliances, kitchen appliances, cookware, kitchen gadgets, home essentials, kitchenware, Kenya')">
-    <meta name="author" content="Home & Kitchen Appliances">
-    <meta name="robots" content="index, follow">
+    <title>@yield('title', \App\Helpers\SeoHelper::siteName() . ' - Quality Home & Kitchen Appliances in Kenya')</title>
+    <meta name="description" content="@yield('description', 'Shop premium home and kitchen appliances in Kenya. Discover quality cookware, kitchen gadgets, and home essentials at competitive prices.')">
+    <meta name="keywords" content="@yield('keywords', 'home appliances Kenya, kitchen appliances, cookware, Qui Deals')">
+    <meta name="author" content="{{ \App\Helpers\SeoHelper::siteName() }}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="@yield('og_title', config('app.name', 'Home & Kitchen Appliances'))">
-    <meta property="og:description" content="@yield('og_description', 'Shop premium home and kitchen appliances in Kenya. Discover quality cookware, kitchen gadgets, home essentials and more.')">
+    <meta property="og:title" content="@yield('og_title', \App\Helpers\SeoHelper::siteName())">
+    <meta property="og:description" content="@yield('og_description', 'Shop premium home and kitchen appliances in Kenya.')">
     <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:url" content="@yield('og_url', request()->url())">
+    <meta property="og:url" content="@yield('og_url', url()->current())">
     <meta property="og:image" content="@yield('og_image', \App\Models\Setting::logoUrl())">
     <meta property="og:image:width" content="@yield('og_image_width', '1200')">
     <meta property="og:image:height" content="@yield('og_image_height', '630')">
-    <meta property="og:image:alt" content="@yield('og_image_alt', config('app.name', 'Home & Kitchen Appliances'))">
-    <meta property="og:site_name" content="Home & Kitchen Appliances">
+    <meta property="og:image:alt" content="@yield('og_image_alt', \App\Helpers\SeoHelper::siteName())">
+    <meta property="og:site_name" content="{{ \App\Helpers\SeoHelper::siteName() }}">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
     @hasSection('og_price_amount')
     <meta property="product:price:amount" content="@yield('og_price_amount')">
@@ -31,12 +31,19 @@
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('twitter_title', config('app.name', 'Home & Kitchen Appliances'))">
-    <meta name="twitter:description" content="@yield('twitter_description', 'Shop premium home and kitchen appliances in Kenya. Discover quality cookware, kitchen gadgets, home essentials and more.')">
+    <meta name="twitter:title" content="@yield('twitter_title', \App\Helpers\SeoHelper::siteName())">
+    <meta name="twitter:description" content="@yield('twitter_description', 'Shop premium home and kitchen appliances in Kenya.')">
     <meta name="twitter:image" content="@yield('twitter_image', \App\Models\Setting::logoUrl())">
+    <meta name="twitter:image:alt" content="@yield('twitter_image_alt', \App\Helpers\SeoHelper::siteName())">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ request()->url() }}">
+    <link rel="canonical" href="@yield('canonical', url()->current())">
+    @hasSection('prev_url')
+    <link rel="prev" href="@yield('prev_url')">
+    @endif
+    @hasSection('next_url')
+    <link rel="next" href="@yield('next_url')">
+    @endif
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Http\Response;
 
 class SitemapController extends Controller
@@ -13,6 +14,7 @@ class SitemapController extends Controller
         $content = view('sitemap.index', [
             'products' => Product::active()->get(),
             'categories' => Category::active()->get(),
+            'brands' => Brand::active()->get(),
         ])->render();
 
         return response($content, 200)
@@ -24,7 +26,9 @@ class SitemapController extends Controller
         $products = Product::active()->get();
         
         $content = view('sitemap.products', [
-            'products' => $products
+            'products' => $products,
+            'categories' => Category::active()->get(),
+            'brands' => Brand::active()->get(),
         ])->render();
 
         return response($content, 200)

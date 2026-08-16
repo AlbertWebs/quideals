@@ -11,7 +11,7 @@ class ProductsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::with('category')->active()->inStock();
+        $query = Product::with(['category', 'brand'])->active()->inStock();
         
         // Category filter
         if ($request->filled('category')) {
@@ -94,12 +94,14 @@ class ProductsController extends Controller
             ->limit(4)
             ->get();
         
-        // Get representative product for category or brand (for OG tags)
+        $category = null;
+        $brand = null;
         $representativeProduct = null;
+
         if ($request->filled('category')) {
             $category = Category::where('slug', $request->category)->first();
             if ($category) {
-                $representativeProduct = Product::with('category')
+                $representativeProduct = Product::with(['category', 'brand'])
                     ->active()
                     ->inStock()
                     ->where('category_id', $category->id)
@@ -108,10 +110,12 @@ class ProductsController extends Controller
                     ->orderBy('stock_quantity', 'desc')
                     ->first();
             }
-        } elseif ($request->filled('brand')) {
+        }
+
+        if ($request->filled('brand')) {
             $brand = Brand::where('slug', $request->brand)->first();
             if ($brand) {
-                $representativeProduct = Product::with('brand')
+                $representativeProduct = $representativeProduct ?: Product::with(['category', 'brand'])
                     ->active()
                     ->inStock()
                     ->where('brand_id', $brand->id)
@@ -138,26 +142,41 @@ class ProductsController extends Controller
             'totalProducts',
             'minPrice',
             'maxPrice',
-            'representativeProduct'
+            'representativeProduct',
+            'category',
+            'brand'
         ));
     }
     
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
-        $product = Product::with('category')
+        $product = Product::with(['category', 'brand'])
             ->active()
             ->where('slug', $slug)
-            ->firstOrFail();
-            
-        // Get related products
-        $relatedProducts = Product::with('category')
-            ->active()
-            ->inStock()
-            ->where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)
-            ->limit(4)
-            ->get();
-            
-        return view('products.show', compact('product', 'relatedProducts'));
+            ->first();
+
+        if ($product) {
+            $relatedProducts = Product::with(['category', 'brand'])
+                ->active()
+                ->inStock()
+                ->where('category_id', $product->category_id)
+                ->where('id', '!=', $product->id)
+                ->limit(4)
+                ->get();
+
+            return view('products.show', compact('product', 'relatedProducts'));
+        }
+
+        if (Brand::active()->where('slug', $slug)->exists()) {
+            $request->merge(['brand' => $slug]);
+            return $this->index($request);
+        }
+
+        if (Category::active()->where('slug', $slug)->exists()) {
+            $request->merge(['category' => $slug]);
+            return $this->index($request);
+        }
+
+        abort(404);
     }
 } 

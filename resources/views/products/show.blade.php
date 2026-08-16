@@ -1,57 +1,155 @@
 @extends('layouts.app')
 
 @php
-use Illuminate\Support\Str;
+    use App\Helpers\SeoHelper;
+    use Illuminate\Support\Str;
+    $siteName = SeoHelper::siteName();
+    $inStock = $product->stock_quantity > 0;
+    $brandName = SeoHelper::brandName($product);
+    $categoryName = $product->category->name ?? 'Home & Kitchen';
+    $metaDescription = SeoHelper::description(
+        ($product->short_description ?: $product->description) ?:
+        "Buy {$product->name} online in Kenya from {$siteName}. {$brandName} {$categoryName} with fast delivery, stock updates, and competitive KES pricing."
+    );
+    $pageTitle = Str::limit($product->name, 45, '') . ' | ' . $siteName . ' Kenya';
+    $images = $product->all_images_urls ?: [$product->main_image_url];
+    $canonical = route('products.show', $product->slug);
 @endphp
 
-@section('title', $product->name . ' - ' . $product->category->name . ' | Quideals')
-@section('description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices. Fast delivery and excellent customer service from Quideals.')
-@section('keywords', $product->name . ', ' . $product->category->name . ', Home & Kitchen Appliances Kenya, Quideals, buy online Kenya')
-@section('og_title', $product->name . ' - ' . $product->category->name . ' | Quideals')
-@section('og_description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices.')
+@section('title', $pageTitle)
+@section('description', $metaDescription)
+@section('keywords', implode(', ', array_filter([
+    $product->name,
+    $brandName,
+    $categoryName,
+    $brandName . ' Kenya',
+    $categoryName . ' Kenya',
+    'buy ' . $product->name . ' online',
+    'Qui Deals',
+    'home appliances Kenya',
+])))
+@section('canonical', $canonical)
+@section('og_title', $pageTitle)
+@section('og_description', $metaDescription)
 @section('og_type', 'product')
 @section('og_image', $product->main_image_url)
 @section('og_image_width', '1200')
 @section('og_image_height', '1200')
-@section('og_image_alt', $product->name)
-@section('og_url', request()->url())
+@section('og_image_alt', $product->name . ' - ' . $brandName)
+@section('og_url', $canonical)
 @section('og_price_amount', $product->price)
 @section('og_price_currency', 'KES')
-@section('og_product_availability', $product->stock > 0 ? 'in stock' : 'out of stock')
-@section('twitter_title', $product->name . ' - ' . $product->category->name . ' | Quideals')
-@section('twitter_description', $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices.')
+@section('og_product_availability', $inStock ? 'in stock' : 'out of stock')
+@section('twitter_title', $pageTitle)
+@section('twitter_description', $metaDescription)
 @section('twitter_image', $product->main_image_url)
+@section('twitter_image_alt', $product->name)
 
 @section('structured_data')
 @php
-    $description = $product->description ?: 'Buy ' . $product->name . ' in Kenya. Quality ' . $product->category->name . ' at competitive prices.';
-@endphp
-{!! '<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "' . addslashes($product->name) . '",
-    "description": "' . addslashes($description) . '",
-    "image": "' . $product->main_image_url . '",
-    "url": "' . request()->url() . '",
-    "category": "' . addslashes($product->category->name) . '",
-    "brand": {
-        "@type": "Brand",
-        "name": "' . addslashes($product->getAttribute('brand') ?: 'Quideals') . '"
-    },
-    "offers": {
-        "@type": "Offer",
-        "price": "' . $product->price . '",
-        "priceCurrency": "KES",
-        "availability": "' . ($product->stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock') . '",
-        "url": "' . request()->url() . '",
-        "seller": {
-            "@type": "Organization",
-            "name": "Quideals"
-        }
+    $productSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        'name' => $product->name,
+        'sku' => (string) $product->id,
+        'mpn' => $product->slug,
+        'description' => $metaDescription,
+        'image' => array_values($images),
+        'url' => $canonical,
+        'category' => $categoryName,
+        'brand' => [
+            '@type' => 'Brand',
+            'name' => $brandName,
+        ],
+        'offers' => [
+            '@type' => 'Offer',
+            'url' => $canonical,
+            'priceCurrency' => 'KES',
+            'price' => (string) $product->price,
+            'priceValidUntil' => now()->addYear()->toDateString(),
+            'itemCondition' => 'https://schema.org/NewCondition',
+            'availability' => $inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            'seller' => [
+                '@type' => 'Organization',
+                'name' => $siteName,
+                'url' => url('/'),
+            ],
+            'shippingDetails' => [
+                '@type' => 'OfferShippingDetails',
+                'shippingDestination' => [
+                    '@type' => 'DefinedRegion',
+                    'addressCountry' => 'KE',
+                ],
+                'deliveryTime' => [
+                    '@type' => 'ShippingDeliveryTime',
+                    'handlingTime' => [
+                        '@type' => 'QuantitativeValue',
+                        'minValue' => 0,
+                        'maxValue' => 2,
+                        'unitCode' => 'DAY',
+                    ],
+                    'transitTime' => [
+                        '@type' => 'QuantitativeValue',
+                        'minValue' => 1,
+                        'maxValue' => 5,
+                        'unitCode' => 'DAY',
+                    ],
+                ],
+            ],
+            'hasMerchantReturnPolicy' => [
+                '@type' => 'MerchantReturnPolicy',
+                'applicableCountry' => 'KE',
+                'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                'merchantReturnDays' => 15,
+                'returnMethod' => 'https://schema.org/ReturnByMail',
+                'returnFees' => 'https://schema.org/FreeReturn',
+            ],
+        ],
+    ];
+
+    if ($product->reviews_count > 0 && $product->rating) {
+        $productSchema['aggregateRating'] = [
+            '@type' => 'AggregateRating',
+            'ratingValue' => (string) $product->rating,
+            'reviewCount' => (string) $product->reviews_count,
+            'bestRating' => '5',
+            'worstRating' => '1',
+        ];
     }
-}
-</script>' !!}
+
+    $breadcrumbSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => url('/'),
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Products',
+                'item' => route('products.index'),
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 3,
+                'name' => $categoryName,
+                'item' => route('products.index', ['category' => $product->category->slug ?? null]),
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 4,
+                'name' => $product->name,
+                'item' => $canonical,
+            ],
+        ],
+    ];
+@endphp
+{!! SeoHelper::jsonLd($productSchema) !!}
+{!! SeoHelper::jsonLd($breadcrumbSchema) !!}
 @endsection
 
 @section('content')
@@ -179,7 +277,7 @@ use Illuminate\Support\Str;
             <!-- Product Info -->
             <div class="space-y-3 md:space-y-6">
                 <div>
-                    <h1 class="text-xl md:text-3xl font-bold text-gray-900 leading-tight">{{ $product->name }}</h1>
+                    <h1 class="text-xl md:text-3xl font-bold text-brand-navy leading-tight">{{ $product->name }}</h1>
                     <div class="flex items-center flex-wrap gap-2 mt-1 md:mt-2">
                         <p class="text-gray-500 text-xs md:text-base">{{ $product->category->name }}</p>
                         @php

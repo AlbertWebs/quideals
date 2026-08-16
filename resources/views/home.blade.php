@@ -174,11 +174,19 @@
     <!-- Featured Products Section - Enhanced -->
     <section class="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50 relative">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-brand-navy mb-2">
-                    Featured Products
-                </h2>
-                <p class="text-xl text-gray-600 font-medium">Handpicked premium selections for you</p>
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 md:mb-10">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-brand-navy">
+                        Featured Products
+                    </h2>
+                    <p class="text-sm md:text-base text-gray-600 mt-1">Handpicked premium selections for you</p>
+                </div>
+                @if($featuredProducts->count() > 0)
+                    <a href="{{ route('products.index', ['sort' => 'featured']) }}" class="inline-flex items-center self-start sm:self-auto px-5 py-2.5 bg-transparent text-brand-navy font-semibold rounded-xl border border-brand-green hover:bg-brand-green-light transition-colors text-sm">
+                        View All Featured
+                        <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </a>
+                @endif
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
@@ -188,15 +196,6 @@
                     </div>
                 @endforeach
             </div>
-
-            @if($featuredProducts->count() > 0)
-                <div class="text-center mt-8 sm:mt-12">
-                    <a href="{{ route('products.index', ['sort' => 'featured']) }}" class="inline-flex items-center px-6 py-3 sm:px-10 sm:py-4 bg-brand-green text-white font-bold rounded-xl hover:bg-brand-deep-green transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-lg">
-                        <span>View All Featured</span>
-                        <i class="fas fa-arrow-right ml-2 sm:ml-3 text-sm sm:text-base"></i>
-                    </a>
-                </div>
-            @endif
         </div>
     </section>
 
@@ -227,16 +226,21 @@
     <!-- Trending Products - Enhanced -->
     <section class="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white relative">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <div class="inline-block mb-4">
-                    <span class="px-4 py-2 bg-gradient-to-r from-orange-400 to-red-500 text-white rounded-full text-sm font-bold shadow-lg">
-                        🔥 HOT DEALS
-                    </span>
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 md:mb-10">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-wide text-brand-navy mb-1">
+                        <span class="inline-block w-2 h-2 rounded-full bg-brand-lime mr-1.5 align-middle"></span>
+                        Trending now
+                    </p>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-brand-green">
+                        Trending Products
+                    </h2>
+                    <p class="text-sm md:text-base text-gray-600 mt-1">Most popular items this week</p>
                 </div>
-                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-5">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-red-600 to-pink-600">Trending Products</span>
-                </h2>
-                <p class="text-xl text-gray-600 font-medium">Most popular items this week</p>
+                <a href="{{ route('products.index') }}" class="inline-flex items-center self-start sm:self-auto px-5 py-2.5 bg-transparent text-brand-navy font-semibold rounded-xl border border-brand-green hover:bg-brand-green-light transition-colors text-sm">
+                    View All Products
+                    <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </a>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
@@ -245,13 +249,6 @@
                         <x-product-card :product="$product" />
                     </div>
                 @endforeach
-            </div>
-
-            <div class="text-center mt-8 sm:mt-12">
-                <a href="{{ route('products.index') }}" class="inline-flex items-center px-6 py-3 sm:px-10 sm:py-4 bg-gradient-to-r from-brand-green to-brand-deep-green text-white font-bold rounded-xl hover:from-brand-deep-green hover:to-brand-deep-green transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-lg">
-                    <span>View All Products</span>
-                    <i class="fas fa-arrow-right ml-2 sm:ml-3 text-sm sm:text-base"></i>
-                </a>
             </div>
         </div>
     </section>
@@ -300,7 +297,7 @@
                         Top Sellers
                     </h3>
                     <div class="space-y-5">
-                        @foreach($topSellers as $product)
+                        @foreach($topSellers->take(3) as $product)
                             <div class="transform hover:scale-105 transition-transform duration-300">
                                 <x-product-card :product="$product" />
                             </div>
@@ -317,7 +314,7 @@
                         Featured Products
                     </h3>
                     <div class="space-y-5">
-                        @foreach($featuredProducts as $product)
+                        @foreach($featuredProducts->take(3) as $product)
                             <div class="transform hover:scale-105 transition-transform duration-300">
                                 <x-product-card :product="$product" />
                             </div>
@@ -334,7 +331,7 @@
                         New Arrivals
                     </h3>
                     <div class="space-y-5">
-                        @foreach($recentProducts as $product)
+                        @foreach($recentProducts->take(3) as $product)
                             <div class="transform hover:scale-105 transition-transform duration-300">
                                 <x-product-card :product="$product" />
                             </div>

@@ -1,75 +1,139 @@
 @extends('layouts.app')
 
 @php
-    $category = null;
-    if (request()->filled('category')) {
-        $category = \App\Models\Category::where('slug', request()->category)->first();
-    }
-    
-    if ($category && $representativeProduct) {
-        $ogTitle = $category->name . ' - Shop ' . $category->name . ' Products | Home & Kitchen Appliances';
-        $ogDescription = 'Shop ' . $category->name . ' products in Kenya. Quality ' . $category->name . ' at competitive prices. Fast delivery from Home & Kitchen Appliances.';
-        $ogImage = $representativeProduct->main_image_url;
-        $ogImageAlt = $category->name . ' - ' . $representativeProduct->name;
+    use App\Helpers\SeoHelper;
+    use Illuminate\Support\Str;
+
+    $siteName = SeoHelper::siteName();
+    $category = $category ?? null;
+    $brand = $brand ?? null;
+    $listingName = $brand?->name ?? $category?->name;
+    $pageCount = $products->currentPage() > 1 ? ' | Page ' . $products->currentPage() : '';
+
+    if ($brand) {
+        $ogTitle = $brand->name . ' appliances in Kenya | Buy ' . $brand->name . ' online | ' . $siteName;
+        $ogDescription = SeoHelper::description(
+            $brand->description ?:
+            "Shop genuine {$brand->name} home and kitchen appliances in Kenya at {$siteName}. Compare {$brand->name} prices, check live stock, and get fast nationwide delivery."
+        );
+        $ogImage = $representativeProduct->main_image_url ?? \App\Models\Setting::logoUrl();
+        $ogImageAlt = $brand->name . ' appliances at ' . $siteName;
+        $pageTitle = $brand->name . ' in Kenya' . $pageCount . ' | ' . $siteName;
+        $keywords = $brand->name . ', ' . $brand->name . ' Kenya, buy ' . $brand->name . ' online, ' . $brand->name . ' prices, home appliances Kenya, ' . $siteName;
+        $canonical = url('/products/' . $brand->slug);
+        if ($products->currentPage() > 1) {
+            $canonical .= '?page=' . $products->currentPage();
+        }
+        $h1 = $brand->name . ' Products';
+        $intro = $brand->description ?: "Explore {$brand->name} appliances at {$siteName}. Shop authentic {$brand->name} kitchen and home products with competitive Kenyan prices and fast delivery.";
+    } elseif ($category) {
+        $ogTitle = 'Shop ' . $category->name . ' in Kenya | ' . $category->name . ' deals | ' . $siteName;
+        $ogDescription = SeoHelper::description(
+            $category->description ?:
+            "Shop {$category->name} in Kenya at {$siteName}. Browse quality {$category->name} with clear prices, in-stock items, and fast delivery nationwide."
+        );
+        $ogImage = $representativeProduct->main_image_url ?? \App\Models\Setting::logoUrl();
+        $ogImageAlt = $category->name . ' for sale in Kenya';
+        $pageTitle = $category->name . ' in Kenya' . $pageCount . ' | ' . $siteName;
+        $keywords = $category->name . ', ' . $category->name . ' Kenya, buy ' . $category->name . ' online, kitchen appliances Kenya, ' . $siteName;
+        $canonical = url('/products/' . $category->slug);
+        if (request()->filled('category') && request()->path() === 'products') {
+            $canonical = request()->url() . (request()->getQueryString() ? '?' . http_build_query(request()->only(['category', 'page'])) : '');
+        }
+        if ($products->currentPage() > 1 && !str_contains($canonical, 'page=')) {
+            $canonical .= (str_contains($canonical, '?') ? '&' : '?') . 'page=' . $products->currentPage();
+        }
+        $h1 = $category->name;
+        $intro = $category->description ?: "Shop our collection of {$category->name} in Kenya. Compare prices, check availability, and order with fast delivery from {$siteName}.";
     } else {
-        $ogTitle = 'Home & Kitchen Appliances - Shop Quality Products in Kenya';
-        $ogDescription = 'Shop premium home and kitchen appliances in Kenya. Discover quality cookware, kitchen gadgets, home essentials and more at competitive prices.';
+        $ogTitle = 'Shop home & kitchen appliances in Kenya | ' . $siteName;
+        $ogDescription = SeoHelper::description("Shop premium home and kitchen appliances in Kenya at {$siteName}. Discover cookware, gadgets, and home essentials at competitive prices.");
         $ogImage = \App\Models\Setting::logoUrl();
-        $ogImageAlt = 'Home & Kitchen Appliances';
+        $ogImageAlt = $siteName . ' home and kitchen appliances';
+        $pageTitle = 'Shop All Products' . $pageCount . ' | ' . $siteName;
+        $keywords = 'home appliances Kenya, kitchen appliances, cookware, kitchen gadgets, buy appliances online Kenya, ' . $siteName;
+        $canonical = route('products.index');
+        if ($products->currentPage() > 1) {
+            $canonical .= '?page=' . $products->currentPage();
+        }
+        $h1 = 'All Products';
+        $intro = "Discover home and kitchen essentials at {$siteName}. Filter by category or brand, compare KES prices, and shop in-stock deals.";
     }
 @endphp
 
-@section('title', $category ? $category->name . ' - Shop ' . $category->name . ' Products' : 'Shop All Products - Home & Kitchen Appliances')
-@section('description', $category ? 'Shop ' . $category->name . ' products in Kenya. Quality ' . $category->name . ' at competitive prices. Fast delivery and excellent customer service.' : 'Shop premium home and kitchen appliances in Kenya. Discover quality cookware, kitchen gadgets, home essentials and more.')
-@section('keywords', $category ? $category->name . ', ' . $category->name . ' Kenya, home appliances Kenya, kitchen appliances' : 'home appliances Kenya, kitchen appliances, cookware, kitchen gadgets, home essentials')
+@section('title', $pageTitle)
+@section('description', $ogDescription)
+@section('keywords', $keywords)
+@section('canonical', $canonical)
 @section('og_title', $ogTitle)
 @section('og_description', $ogDescription)
 @section('og_type', 'website')
+@section('og_url', $canonical)
 @section('og_image', $ogImage)
 @section('og_image_alt', $ogImageAlt)
 @section('twitter_title', $ogTitle)
 @section('twitter_description', $ogDescription)
 @section('twitter_image', $ogImage)
+@section('twitter_image_alt', $ogImageAlt)
+@if (!$products->onFirstPage())
+@section('prev_url', $products->previousPageUrl())
+@endif
+@if ($products->hasMorePages())
+@section('next_url', $products->nextPageUrl())
+@endif
 
 @section('structured_data')
 @php
     $itemListElements = [];
-    foreach($products as $index => $product) {
-        $itemListElements[] = '{
-            "@type": "ListItem",
-            "position": ' . ($index + 1) . ',
-            "item": {
-                "@type": "Product",
-                "name": "' . addslashes($product->name) . '",
-                "url": "' . route('products.show', $product->slug) . '",
-                "image": "' . $product->main_image_url . '",
-                "description": "' . addslashes($product->description) . '",
-                "category": "' . addslashes($product->category->name ?? 'Home & Kitchen') . '",
-                "brand": "' . addslashes($product->brand ?? 'Home & Kitchen Appliances') . '",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "' . $product->price . '",
-                    "priceCurrency": "KES",
-                    "availability": "' . ($product->stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock') . '"
-                }
-            }
-        }';
+    foreach ($products as $index => $product) {
+        $itemListElements[] = [
+            '@type' => 'ListItem',
+            'position' => ($products->firstItem() ?? 1) + $index,
+            'url' => route('products.show', $product->slug),
+            'name' => $product->name,
+        ];
     }
-    $itemListJson = implode(',', $itemListElements);
+
+    $collectionSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => $brand ? 'CollectionPage' : 'CollectionPage',
+        'name' => $h1,
+        'description' => $ogDescription,
+        'url' => $canonical,
+        'isPartOf' => [
+            '@type' => 'WebSite',
+            'name' => $siteName,
+            'url' => url('/'),
+        ],
+        'mainEntity' => [
+            '@type' => 'ItemList',
+            'numberOfItems' => $products->total(),
+            'itemListElement' => $itemListElements,
+        ],
+    ];
+
+    if ($brand) {
+        $collectionSchema['about'] = [
+            '@type' => 'Brand',
+            'name' => $brand->name,
+        ];
+    }
+
+    $crumbs = [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Products', 'item' => route('products.index')],
+    ];
+    if ($listingName) {
+        $crumbs[] = ['@type' => 'ListItem', 'position' => 3, 'name' => $listingName, 'item' => $canonical];
+    }
+    $breadcrumbSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => $crumbs,
+    ];
 @endphp
-{!! '<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Home & Kitchen Products",
-    "description": "Premium home and kitchen appliances in Kenya",
-    "url": "' . request()->url() . '",
-    "numberOfItems": ' . $products->count() . ',
-    "itemListElement": [
-        ' . $itemListJson . '
-    ]
-}
-</script>' !!}
+{!! SeoHelper::jsonLd($collectionSchema) !!}
+{!! SeoHelper::jsonLd($breadcrumbSchema) !!}
 @endsection
 
 @section('content')
@@ -79,23 +143,22 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                 <div>
-                    @if($category)
+                    @if($brand)
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-brand-navy">{{ $h1 }}</h1>
+                        <p class="text-gray-600 mt-2 max-w-2xl">{{ $intro }}</p>
+                    @elseif($category)
                         <div class="flex items-center space-x-3 mb-3">
-                            <div class="w-12 h-12 bg-gradient-to-br from-brand-green to-brand-deep-green rounded-xl flex items-center justify-center shadow-lg">
+                            <div class="w-12 h-12 bg-brand-green rounded-xl flex items-center justify-center">
                                 <i class="{{ $category->icon }} text-white text-xl"></i>
                             </div>
                             <div>
-                                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">
-                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-deep-green">{{ $category->name }}</span>
-                                </h1>
-                                <p class="text-gray-600 mt-1 font-medium">Shop our collection of {{ strtolower($category->name) }}</p>
+                                <h1 class="text-3xl md:text-4xl font-extrabold text-brand-navy">{{ $h1 }}</h1>
+                                <p class="text-gray-600 mt-1">{{ $intro }}</p>
                             </div>
                         </div>
                     @else
-                        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-deep-green">All Products</span>
-                        </h1>
-                        <p class="text-gray-600 font-medium">Discover our amazing collection of home and kitchen essentials</p>
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-brand-navy mb-3">{{ $h1 }}</h1>
+                        <p class="text-gray-600">{{ $intro }}</p>
                     @endif
                 </div>
                 <div class="mt-4 md:mt-0">
